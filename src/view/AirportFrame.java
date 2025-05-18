@@ -1,13 +1,15 @@
+package view;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view;
 
-import model.Flight;
+
+import model.Plane;
 import model.Location;
 import model.Passenger;
-import model.Plane;
+import model.Flight;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
 import java.time.LocalDate;
@@ -1436,6 +1438,7 @@ public class AirportFrame extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
+        // Registra a un nuevo pasajero
         long id = Long.parseLong(jTextField2.getText());
         String firstname = jTextField7.getText();
         String lastname = jTextField6.getText();
