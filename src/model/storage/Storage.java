@@ -40,7 +40,7 @@ public class Storage {
         return true;
     }
     
-    public Passenger  getPassenger(int id) {
+    public Passenger  getPassenger(long id) {
         for (Passenger pass : this.passengers) {
             if (pass.getId() == id) {
                 return pass;
@@ -49,7 +49,7 @@ public class Storage {
         return null;
     }
     
-    public boolean delPassenger(int id) {
+    public boolean delPassenger(long id) {
         for (Passenger pass : this.passengers) {
             if (pass.getId() == id) {
                 this.passengers.remove(pass);
@@ -58,5 +58,11 @@ public class Storage {
         }
         return false;
     }
+
+    public ArrayList<Passenger> getPassengers() {
+        return passengers;
+    }
+    
+    
     
 }
