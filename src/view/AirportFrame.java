@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+import model.storage.Storage;
 
 /**
  *
@@ -1656,9 +1657,15 @@ public class AirportFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         model.setRowCount(0);
+        Storage storage = Storage.getInstance();
+        for (Passenger pass : storage.getPassengers()){
+            model.addRow(new Object[]{pass.getId(), pass.getFullname(), pass.getBirthDate(), pass.calculateAge(), pass.generateFullPhone(), pass.getCountry(), pass.getNumFlights()});
+        }
+            /*
         for (Passenger passenger : this.passengers) {
             model.addRow(new Object[]{passenger.getId(), passenger.getFullname(), passenger.getBirthDate(), passenger.calculateAge(), passenger.generateFullPhone(), passenger.getCountry(), passenger.getNumFlights()});
         }
+            */
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
