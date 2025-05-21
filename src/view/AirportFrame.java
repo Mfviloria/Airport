@@ -1499,7 +1499,7 @@ public class AirportFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
+        // Airplane registration
         String id = jTextField13.getText();
         String name = jTextField14.getText();
         String city = jTextField15.getText();
