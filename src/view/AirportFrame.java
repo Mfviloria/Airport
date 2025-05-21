@@ -4,15 +4,15 @@ package view;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
-
 import model.Plane;
 import model.Location;
 import model.Passenger;
 import model.Flight;
 import com.formdev.flatlaf.FlatDarkLaf;
 import controllers.PassengerController;
+import controllers.PlaneControllers;
 import controllers.utils.Response;
+import controllers.utils.Status;
 import java.awt.Color;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -162,36 +162,6 @@ public class AirportFrame extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jTextField18 = new javax.swing.JTextField();
         jButton10 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel22 = new javax.swing.JLabel();
-        jTextField19 = new javax.swing.JTextField();
-        jLabel23 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel24 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jTextField21 = new javax.swing.JTextField();
-        jLabel30 = new javax.swing.JLabel();
-        MONTH1 = new javax.swing.JComboBox<>();
-        jLabel31 = new javax.swing.JLabel();
-        DAY1 = new javax.swing.JComboBox<>();
-        jLabel32 = new javax.swing.JLabel();
-        MONTH2 = new javax.swing.JComboBox<>();
-        jLabel33 = new javax.swing.JLabel();
-        DAY2 = new javax.swing.JComboBox<>();
-        MONTH3 = new javax.swing.JComboBox<>();
-        jLabel34 = new javax.swing.JLabel();
-        DAY3 = new javax.swing.JComboBox<>();
-        jLabel35 = new javax.swing.JLabel();
-        MONTH4 = new javax.swing.JComboBox<>();
-        DAY4 = new javax.swing.JComboBox<>();
-        jButton11 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel36 = new javax.swing.JLabel();
         jTextField20 = new javax.swing.JTextField();
@@ -245,6 +215,36 @@ public class AirportFrame extends javax.swing.JFrame {
         jLabel48 = new javax.swing.JLabel();
         jComboBox8 = new javax.swing.JComboBox<>();
         jButton7 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        jTextField19 = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel24 = new javax.swing.JLabel();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jComboBox4 = new javax.swing.JComboBox<>();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jTextField21 = new javax.swing.JTextField();
+        jLabel30 = new javax.swing.JLabel();
+        MONTH1 = new javax.swing.JComboBox<>();
+        jLabel31 = new javax.swing.JLabel();
+        DAY1 = new javax.swing.JComboBox<>();
+        jLabel32 = new javax.swing.JLabel();
+        MONTH2 = new javax.swing.JComboBox<>();
+        jLabel33 = new javax.swing.JLabel();
+        DAY2 = new javax.swing.JComboBox<>();
+        MONTH3 = new javax.swing.JComboBox<>();
+        jLabel34 = new javax.swing.JLabel();
+        DAY3 = new javax.swing.JComboBox<>();
+        jLabel35 = new javax.swing.JLabel();
+        MONTH4 = new javax.swing.JComboBox<>();
+        DAY4 = new javax.swing.JComboBox<>();
+        jButton11 = new javax.swing.JButton();
         panelRound3 = new model.PanelRound();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -413,47 +413,47 @@ public class AirportFrame extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel11.setText("ID:");
         jPanel3.add(jLabel11);
-        jLabel11.setBounds(53, 96, 24, 22);
+        jLabel11.setBounds(53, 96, 22, 25);
 
         jTextField8.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jPanel3.add(jTextField8);
-        jTextField8.setBounds(180, 93, 130, 28);
+        jTextField8.setBounds(180, 93, 130, 35);
 
         jLabel12.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel12.setText("Brand:");
         jPanel3.add(jLabel12);
-        jLabel12.setBounds(53, 157, 55, 22);
+        jLabel12.setBounds(53, 157, 50, 25);
 
         jTextField9.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jPanel3.add(jTextField9);
-        jTextField9.setBounds(180, 154, 130, 28);
+        jTextField9.setBounds(180, 154, 130, 35);
 
         jTextField10.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jPanel3.add(jTextField10);
-        jTextField10.setBounds(180, 213, 130, 28);
+        jTextField10.setBounds(180, 213, 130, 35);
 
         jLabel13.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel13.setText("Model:");
         jPanel3.add(jLabel13);
-        jLabel13.setBounds(53, 216, 59, 22);
+        jLabel13.setBounds(53, 216, 55, 25);
 
         jTextField11.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jPanel3.add(jTextField11);
-        jTextField11.setBounds(180, 273, 130, 28);
+        jTextField11.setBounds(180, 273, 130, 35);
 
         jLabel14.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel14.setText("Max Capacity:");
         jPanel3.add(jLabel14);
-        jLabel14.setBounds(53, 276, 122, 22);
+        jLabel14.setBounds(53, 276, 109, 25);
 
         jTextField12.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jPanel3.add(jTextField12);
-        jTextField12.setBounds(180, 333, 130, 28);
+        jTextField12.setBounds(180, 333, 130, 35);
 
         jLabel15.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel15.setText("Airline:");
         jPanel3.add(jLabel15);
-        jLabel15.setBounds(53, 336, 70, 22);
+        jLabel15.setBounds(53, 336, 70, 25);
 
         jButton9.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jButton9.setText("Create");
@@ -568,236 +568,6 @@ public class AirportFrame extends javax.swing.JFrame {
         );
 
         Tabbed.addTab("Location registration", jPanel13);
-
-        jLabel22.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jLabel22.setText("ID:");
-
-        jTextField19.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-
-        jLabel23.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jLabel23.setText("Plane:");
-
-        jComboBox1.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Plane" }));
-
-        jComboBox2.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Location" }));
-
-        jLabel24.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jLabel24.setText("Departure location:");
-
-        jComboBox3.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Location" }));
-
-        jLabel25.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jLabel25.setText("Arrival location:");
-
-        jLabel26.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jLabel26.setText("Scale location:");
-
-        jComboBox4.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Location" }));
-
-        jLabel27.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jLabel27.setText("Duration:");
-
-        jLabel28.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jLabel28.setText("Duration:");
-
-        jLabel29.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jLabel29.setText("Departure date:");
-
-        jTextField21.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-
-        jLabel30.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jLabel30.setText("-");
-
-        MONTH1.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        MONTH1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month" }));
-
-        jLabel31.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jLabel31.setText("-");
-
-        DAY1.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        DAY1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Day" }));
-
-        jLabel32.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jLabel32.setText("-");
-
-        MONTH2.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        MONTH2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hour" }));
-
-        jLabel33.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jLabel33.setText("-");
-
-        DAY2.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        DAY2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Minute" }));
-
-        MONTH3.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        MONTH3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hour" }));
-
-        jLabel34.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jLabel34.setText("-");
-
-        DAY3.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        DAY3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Minute" }));
-
-        jLabel35.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jLabel35.setText("-");
-
-        MONTH4.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        MONTH4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hour" }));
-
-        DAY4.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        DAY4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Minute" }));
-
-        jButton11.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jButton11.setText("Create");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(73, 73, 73)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel26)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel25)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel24)
-                        .addGap(46, 46, 46)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel22)
-                            .addComponent(jLabel23))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField19)
-                            .addComponent(jComboBox1, 0, 130, Short.MAX_VALUE))))
-                .addGap(45, 45, 45)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel27)
-                    .addComponent(jLabel28)
-                    .addComponent(jLabel29))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(MONTH1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(14, 14, 14)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(DAY1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(MONTH2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(14, 14, 14)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(DAY2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(30, 30, 30))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(MONTH3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(14, 14, 14)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addGap(20, 20, 20)
-                                        .addComponent(DAY3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(MONTH4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(14, 14, 14)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addGap(20, 20, 20)
-                                        .addComponent(DAY4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(530, 530, 530))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jLabel22))
-                    .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(MONTH2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel32)
-                    .addComponent(jLabel33)
-                    .addComponent(DAY2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel24)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel29))
-                            .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(MONTH1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel30)
-                            .addComponent(jLabel31)
-                            .addComponent(DAY1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel25)
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel28))
-                            .addComponent(MONTH3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel34)
-                            .addComponent(DAY3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(MONTH4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel35)
-                            .addComponent(DAY4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel26)
-                                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel27)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
-                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
-        );
-
-        Tabbed.addTab("Flight registration", jPanel4);
 
         jLabel36.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel36.setText("ID:");
@@ -933,7 +703,7 @@ public class AirportFrame extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel43)
                     .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(113, 113, 113))
         );
@@ -1372,6 +1142,236 @@ public class AirportFrame extends javax.swing.JFrame {
 
         Tabbed.addTab("Delay flight", jPanel12);
 
+        jLabel22.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        jLabel22.setText("ID:");
+
+        jTextField19.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+
+        jLabel23.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        jLabel23.setText("Plane:");
+
+        jComboBox1.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Plane" }));
+
+        jComboBox2.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Location" }));
+
+        jLabel24.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        jLabel24.setText("Departure location:");
+
+        jComboBox3.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Location" }));
+
+        jLabel25.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        jLabel25.setText("Arrival location:");
+
+        jLabel26.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        jLabel26.setText("Scale location:");
+
+        jComboBox4.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Location" }));
+
+        jLabel27.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        jLabel27.setText("Duration:");
+
+        jLabel28.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        jLabel28.setText("Duration:");
+
+        jLabel29.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        jLabel29.setText("Departure date:");
+
+        jTextField21.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+
+        jLabel30.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        jLabel30.setText("-");
+
+        MONTH1.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        MONTH1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month" }));
+
+        jLabel31.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        jLabel31.setText("-");
+
+        DAY1.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        DAY1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Day" }));
+
+        jLabel32.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        jLabel32.setText("-");
+
+        MONTH2.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        MONTH2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hour" }));
+
+        jLabel33.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        jLabel33.setText("-");
+
+        DAY2.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        DAY2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Minute" }));
+
+        MONTH3.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        MONTH3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hour" }));
+
+        jLabel34.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        jLabel34.setText("-");
+
+        DAY3.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        DAY3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Minute" }));
+
+        jLabel35.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        jLabel35.setText("-");
+
+        MONTH4.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        MONTH4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hour" }));
+
+        DAY4.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        DAY4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Minute" }));
+
+        jButton11.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        jButton11.setText("Create");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel26)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel25)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel24)
+                        .addGap(46, 46, 46)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel22)
+                            .addComponent(jLabel23))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField19)
+                            .addComponent(jComboBox1, 0, 130, Short.MAX_VALUE))))
+                .addGap(45, 45, 45)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel27)
+                    .addComponent(jLabel28)
+                    .addComponent(jLabel29))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(MONTH1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(14, 14, 14)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(DAY1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(MONTH2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(14, 14, 14)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(DAY2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(30, 30, 30))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(MONTH3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(14, 14, 14)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addComponent(DAY3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(MONTH4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(14, 14, 14)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addComponent(DAY4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(530, 530, 530))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel22))
+                    .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(MONTH2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel32)
+                    .addComponent(jLabel33)
+                    .addComponent(DAY2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel24)
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel29))
+                            .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(MONTH1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel30)
+                            .addComponent(jLabel31)
+                            .addComponent(DAY1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel25)
+                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel28))
+                            .addComponent(MONTH3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel34)
+                            .addComponent(DAY3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(MONTH4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel35)
+                            .addComponent(DAY4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel26)
+                                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel27)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
+                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
+        );
+
+        Tabbed.addTab("Flight registration", jPanel4);
+
         panelRound1.add(Tabbed, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 41, 1150, 620));
 
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
@@ -1418,7 +1418,7 @@ public class AirportFrame extends javax.swing.JFrame {
 
         }
         for (int i = 1; i < Tabbed.getTabCount(); i++) {
-                Tabbed.setEnabledAt(i, true);
+            Tabbed.setEnabledAt(i, true);
         }
         Tabbed.setEnabledAt(5, false);
         Tabbed.setEnabledAt(6, false);
@@ -1430,9 +1430,7 @@ public class AirportFrame extends javax.swing.JFrame {
             administrator.setSelected(false);
         }
         for (int i = 1; i < Tabbed.getTabCount(); i++) {
-
             Tabbed.setEnabledAt(i, false);
-
         }
         Tabbed.setEnabledAt(9, true);
         Tabbed.setEnabledAt(5, true);
@@ -1447,25 +1445,24 @@ public class AirportFrame extends javax.swing.JFrame {
         String id = IDPassengerRegis.getText();
         String firstname = FirstNamePassengerRegis.getText();
         String lastname = LastNamePassengerregis.getText();
-        String year =  jTextField3.getText();
+        String year = jTextField3.getText();
         String month = MONTH.getItemAt(MONTH.getSelectedIndex());
         String day = DAY.getItemAt(DAY.getSelectedIndex());
         String phoneCode = jTextField1.getText();
         String phone = jTextField5.getText();
         String country = jTextField4.getText();
-        
-        
-        Response response  = PassengerController.createPassenger(id, firstname, lastname, year, month, day, phoneCode, phone, country);
-       
+
+        Response response = PassengerController.createPassenger(id, firstname, lastname, year, month, day, phoneCode, phone, country);
+
         if (response.getStatus() >= 500) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         } else if (response.getStatus() >= 400) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
-        } 
-        
-        if(response.getStatus() <= 200){
+        }
+
+        if (response.getStatus() <= 200) {
             IDPassengerRegis.setText("");
             FirstNamePassengerRegis.setText("");
             LastNamePassengerregis.setText("");
@@ -1476,27 +1473,57 @@ public class AirportFrame extends javax.swing.JFrame {
             MONTH.setSelectedIndex(0);
             DAY.setSelectedIndex(0);
         }
-        
-        
+
         /*
         LocalDate birthDate = LocalDate.of(year, month, day);
 
         this.passengers.add(new Passenger(id, firstname, lastname, birthDate, phoneCode, phone, country));
         this.userSelect.addItem("" + id);
-        */
+         */
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-        String id = jTextField8.getText();
-        String brand = jTextField9.getText();
-        String model = jTextField10.getText();
-        int maxCapacity = Integer.parseInt(jTextField11.getText());
-        String airline = jTextField12.getText();
+        String id = jTextField8.getText().trim();
+        String brand = jTextField9.getText().trim();
+        String model = jTextField10.getText().trim();
+        String maxCapacityStr = jTextField11.getText().trim();
+        String airline = jTextField12.getText().trim();
 
-        this.planes.add(new Plane(id, brand, model, maxCapacity, airline));
+        if (id.isEmpty() || brand.isEmpty() || model.isEmpty() || maxCapacityStr.isEmpty() || airline.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, completa todos los campos.");
+            return;
+        }
 
-        this.jComboBox1.addItem(id);
+        int maxCapacity;
+
+        try {
+            maxCapacity = Integer.parseInt(maxCapacityStr);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "La capacidad máxima debe ser un número entero válido.");
+            return;
+        }
+
+        Response response = PlaneControllers.createPlane(id, brand, model, maxCapacity, airline);
+
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Avión creado", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        if (response.getStatus() <= 200) {
+            jTextField8.setText("");
+            jTextField9.setText("");
+            jTextField10.setText("");
+            jTextField11.setText("");
+            jTextField12.setText("");
+
+            this.jComboBox1.addItem(id); // Agrega el ID del avión al combobox de selección
+        }
+
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -1517,20 +1544,57 @@ public class AirportFrame extends javax.swing.JFrame {
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
-        String id = jTextField19.getText();
-        String planeId = jComboBox1.getItemAt(jComboBox1.getSelectedIndex());
-        String departureLocationId = jComboBox2.getItemAt(jComboBox2.getSelectedIndex());
-        String arrivalLocationId = jComboBox3.getItemAt(jComboBox3.getSelectedIndex());
-        String scaleLocationId = jComboBox4.getItemAt(jComboBox4.getSelectedIndex());
-        int year = Integer.parseInt(jTextField21.getText());
-        int month = Integer.parseInt(MONTH1.getItemAt(MONTH1.getSelectedIndex()));
-        int day = Integer.parseInt(DAY1.getItemAt(DAY1.getSelectedIndex()));
-        int hour = Integer.parseInt(MONTH2.getItemAt(MONTH2.getSelectedIndex()));
-        int minutes = Integer.parseInt(DAY2.getItemAt(DAY2.getSelectedIndex()));
-        int hoursDurationsArrival = Integer.parseInt(MONTH3.getItemAt(MONTH3.getSelectedIndex()));
-        int minutesDurationsArrival = Integer.parseInt(DAY3.getItemAt(DAY3.getSelectedIndex()));
-        int hoursDurationsScale = Integer.parseInt(MONTH4.getItemAt(MONTH4.getSelectedIndex()));
-        int minutesDurationsScale = Integer.parseInt(DAY4.getItemAt(DAY4.getSelectedIndex()));
+        String id = jTextField19.getText().trim();
+        String planeId = jComboBox1.getItemAt(jComboBox1.getSelectedIndex()).trim();
+        String departureLocationId = jComboBox2.getItemAt(jComboBox2.getSelectedIndex()).trim();
+        String arrivalLocationId = jComboBox3.getItemAt(jComboBox3.getSelectedIndex()).trim();
+        String scaleLocationId = jComboBox4.getItemAt(jComboBox4.getSelectedIndex()).trim();
+
+// Validación del avión seleccionado
+        if (planeId.isEmpty() || planeId.equalsIgnoreCase("Selecciona un avión")) {
+            JOptionPane.showMessageDialog(null, "Por favor, selecciona un avión válido.");
+            return;
+        }
+
+        String yearStr = jTextField21.getText().trim();
+        String monthStr = MONTH1.getItemAt(MONTH1.getSelectedIndex()).trim();
+        String dayStr = DAY1.getItemAt(DAY1.getSelectedIndex()).trim();
+        String hourStr = MONTH2.getItemAt(MONTH2.getSelectedIndex()).trim();
+        String minutesStr = DAY2.getItemAt(DAY2.getSelectedIndex()).trim();
+
+        String hoursDurationsArrivalStr = MONTH3.getItemAt(MONTH3.getSelectedIndex()).trim();
+        String minutesDurationsArrivalStr = DAY3.getItemAt(DAY3.getSelectedIndex()).trim();
+        String hoursDurationsScaleStr = MONTH4.getItemAt(MONTH4.getSelectedIndex()).trim();
+        String minutesDurationsScaleStr = DAY4.getItemAt(DAY4.getSelectedIndex()).trim();
+
+        if (id.isEmpty() || yearStr.isEmpty() || monthStr.isEmpty() || dayStr.isEmpty()
+                || hourStr.isEmpty() || minutesStr.isEmpty()
+                || hoursDurationsArrivalStr.isEmpty() || minutesDurationsArrivalStr.isEmpty()
+                || hoursDurationsScaleStr.isEmpty() || minutesDurationsScaleStr.isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "Por favor, completa todos los campos obligatorios.");
+            return;
+        }
+
+        int year, month, day, hour, minutes;
+        int hoursDurationsArrival, minutesDurationsArrival;
+        int hoursDurationsScale, minutesDurationsScale;
+
+        try {
+            year = Integer.parseInt(yearStr);
+            month = Integer.parseInt(monthStr);
+            day = Integer.parseInt(dayStr);
+            hour = Integer.parseInt(hourStr);
+            minutes = Integer.parseInt(minutesStr);
+
+            hoursDurationsArrival = Integer.parseInt(hoursDurationsArrivalStr);
+            minutesDurationsArrival = Integer.parseInt(minutesDurationsArrivalStr);
+            hoursDurationsScale = Integer.parseInt(hoursDurationsScaleStr);
+            minutesDurationsScale = Integer.parseInt(minutesDurationsScaleStr);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Todos los campos deben contener números válidos.");
+            return;
+        }
 
         LocalDateTime departureDate = LocalDateTime.of(year, month, day, hour, minutes);
 
@@ -1538,12 +1602,20 @@ public class AirportFrame extends javax.swing.JFrame {
         for (Plane p : this.planes) {
             if (planeId.equals(p.getId())) {
                 plane = p;
+                break;
             }
+        }
+
+// Validar si se encontró el avión
+        if (plane == null) {
+            JOptionPane.showMessageDialog(null, "El avión seleccionado no es válido o no se encuentra en el sistema.");
+            return;
         }
 
         Location departure = null;
         Location arrival = null;
         Location scale = null;
+
         for (Location location : this.locations) {
             if (departureLocationId.equals(location.getAirportId())) {
                 departure = location;
@@ -1556,13 +1628,42 @@ public class AirportFrame extends javax.swing.JFrame {
             }
         }
 
+        Response response;
+
         if (scale == null) {
-            this.flights.add(new Flight(id, plane, departure, arrival, departureDate, hoursDurationsArrival, minutesDurationsArrival));
+            response = PlaneControllers.createPlaneFlight(id, plane, departure, arrival, departureDate, hoursDurationsArrival, minutesDurationsArrival);
         } else {
-            this.flights.add(new Flight(id, plane, departure, scale, arrival, departureDate, hoursDurationsArrival, minutesDurationsArrival, hoursDurationsScale, minutesDurationsScale));
+            response = PlaneControllers.createPlaneFlightWithScale(id, plane, departure, scale, arrival, departureDate,
+                    hoursDurationsArrival, minutesDurationsArrival, hoursDurationsScale, minutesDurationsScale);
         }
 
-        this.jComboBox5.addItem(id);
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Respuesta", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        if (response.getStatus() <= 200) {
+            jTextField19.setText("");
+            jTextField21.setText("");
+            jComboBox1.setSelectedIndex(0);  // Plane
+            jComboBox2.setSelectedIndex(0);  // Departure
+            jComboBox3.setSelectedIndex(0);  // Arrival
+            jComboBox4.setSelectedIndex(0);  // Scale
+            MONTH1.setSelectedIndex(0);
+            DAY1.setSelectedIndex(0);
+            MONTH2.setSelectedIndex(0);
+            DAY2.setSelectedIndex(0);
+            MONTH3.setSelectedIndex(0);
+            DAY3.setSelectedIndex(0);
+            MONTH4.setSelectedIndex(0);
+            DAY4.setSelectedIndex(0);
+
+            jComboBox5.addItem(id); // Añadir ID del vuelo creado
+        }
+
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -1702,11 +1803,10 @@ public class AirportFrame extends javax.swing.JFrame {
     private void userSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userSelectActionPerformed
         try {
             String id = userSelect.getSelectedItem().toString();
-            if (! id.equals(userSelect.getItemAt(0))) {
+            if (!id.equals(userSelect.getItemAt(0))) {
                 jTextField20.setText(id);
                 jTextField28.setText(id);
-            }
-            else{
+            } else {
                 jTextField20.setText("");
                 jTextField28.setText("");
             }
