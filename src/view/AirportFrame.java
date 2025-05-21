@@ -1539,7 +1539,7 @@ public class AirportFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Por favor, completa todos los campos obligatorios.");
             return;
         }
-
+// hola
 
         int year, month, day, hour, minutes;
         int hoursDurationsArrival, minutesDurationsArrival;
