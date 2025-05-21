@@ -7,7 +7,7 @@ import model.storage.Storage;
 
 public class AirportController {
 
-    public static Response createAirport(String id, String name, String city, String country, long latitude, long longitude) {
+    public static Response createAirport(String id, String name, String city, String country, String latitude, String longitude) {
         Storage storage = Storage.getInstance();
 
         // Validar campos vacíos
@@ -19,6 +19,10 @@ public class AirportController {
             return new Response("City must not be empty", Status.BAD_REQUEST);
         } else if (country == null || country.trim().isEmpty()) {
             return new Response("Country must not be empty", Status.BAD_REQUEST);
+        } else if (latitude.isEmpty()){
+            return new Response("Latitude must not be empty", Status.BAD_REQUEST);
+        }else if (longitude.isEmpty()){
+            return new Response("Longitude must not be empty", Status.BAD_REQUEST);
         }
 
         id = id.trim();
@@ -34,12 +38,12 @@ public class AirportController {
         }
 
         // Validar latitud
-        if (latitude < -90 || latitude > 90) {
+        if (Long.parseLong(latitude) < -90 || Long.parseLong(latitude) > 90) {
             return new Response("Latitude must be between -90 and 90", Status.BAD_REQUEST);
         }
 
         // Validar longitud
-        if (longitude < -180 || longitude > 180) {
+        if (Long.parseLong(longitude) < -180 || Long.parseLong(longitude) > 180) {
             return new Response("Longitude must be between -180 and 180", Status.BAD_REQUEST);
         }
 
@@ -53,7 +57,7 @@ public class AirportController {
         }
 
         // Crear aeropuerto y agregar al storage
-        Location airport = new Location(id, name, city, country, latitude, longitude);
+        Location airport = new Location(id, name, city, country, Long.parseLong(latitude), Long.parseLong(longitude));
         storage.addLocation(airport);
 
         return new Response("Airport added successfully", Status.OK);

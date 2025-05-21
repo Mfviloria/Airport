@@ -127,12 +127,20 @@ public class PlaneControllers {
         }
     }
 
-    public static Response createPlane(String id, String brand, String model, int maxCapacity, String airline) {
+    public static Response createPlane(String id, String brand, String model, String maxCapacity, String airline) {
         Storage storage = Storage.getInstance();
 
-        if (id.isEmpty()) {
-            return new Response("Id must not be empty", Status.BAD_REQUEST);
+         if (id.isEmpty() || brand.isEmpty() || model.isEmpty() || maxCapacity.isEmpty() || airline.isEmpty()) {
+            return new Response("Por favor, completa todos los campos.", Status.BAD_REQUEST);
+           
         }
+            int maxCapacityInt;
+        try {
+             maxCapacityInt = Integer.parseInt(maxCapacity);
+        } catch (NumberFormatException e) {
+            return new Response("La capacidad máxima debe ser un número válido.", Status.BAD_REQUEST);
+        }
+
         if (!id.matches("^[A-Z]{2}[0-9]{5}$")) {
             return new Response("Plane id must match the format XXYYYYY (2 letters + 5 digits)", Status.BAD_REQUEST);
         }
@@ -150,11 +158,11 @@ public class PlaneControllers {
             return new Response("Airline must not be empty", Status.BAD_REQUEST);
         }
 
-        if (maxCapacity <= 0) {
+        if (maxCapacityInt <= 0) {
             return new Response("Max capacity must be positive", Status.BAD_REQUEST);
         }
 
-        Plane newPlane = new Plane(id, brand, model, maxCapacity, airline);
+        Plane newPlane = new Plane(id, brand, model, maxCapacityInt, airline);
         storage.addPlane(id, newPlane);
         return new Response("Plane added successfully", Status.OK);
     }
