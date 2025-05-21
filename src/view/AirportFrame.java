@@ -4,15 +4,15 @@ package view;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
-
 import model.Plane;
 import model.Location;
 import model.Passenger;
 import model.Flight;
 import com.formdev.flatlaf.FlatDarkLaf;
 import controllers.PassengerController;
+import controllers.PlaneControllers;
 import controllers.utils.Response;
+import controllers.utils.Status;
 import java.awt.Color;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -412,47 +412,47 @@ public class AirportFrame extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel11.setText("ID:");
         jPanel3.add(jLabel11);
-        jLabel11.setBounds(53, 96, 24, 22);
+        jLabel11.setBounds(53, 96, 22, 25);
 
         jTextField8.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jPanel3.add(jTextField8);
-        jTextField8.setBounds(180, 93, 130, 28);
+        jTextField8.setBounds(180, 93, 130, 35);
 
         jLabel12.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel12.setText("Brand:");
         jPanel3.add(jLabel12);
-        jLabel12.setBounds(53, 157, 55, 22);
+        jLabel12.setBounds(53, 157, 50, 25);
 
         jTextField9.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jPanel3.add(jTextField9);
-        jTextField9.setBounds(180, 154, 130, 28);
+        jTextField9.setBounds(180, 154, 130, 35);
 
         jTextField10.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jPanel3.add(jTextField10);
-        jTextField10.setBounds(180, 213, 130, 28);
+        jTextField10.setBounds(180, 213, 130, 35);
 
         jLabel13.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel13.setText("Model:");
         jPanel3.add(jLabel13);
-        jLabel13.setBounds(53, 216, 59, 22);
+        jLabel13.setBounds(53, 216, 55, 25);
 
         jTextField11.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jPanel3.add(jTextField11);
-        jTextField11.setBounds(180, 273, 130, 28);
+        jTextField11.setBounds(180, 273, 130, 35);
 
         jLabel14.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel14.setText("Max Capacity:");
         jPanel3.add(jLabel14);
-        jLabel14.setBounds(53, 276, 122, 22);
+        jLabel14.setBounds(53, 276, 109, 25);
 
         jTextField12.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jPanel3.add(jTextField12);
-        jTextField12.setBounds(180, 333, 130, 28);
+        jTextField12.setBounds(180, 333, 130, 35);
 
         jLabel15.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel15.setText("Airline:");
         jPanel3.add(jLabel15);
-        jLabel15.setBounds(53, 336, 70, 22);
+        jLabel15.setBounds(53, 336, 70, 25);
 
         jButton9.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jButton9.setText("Create");
@@ -932,7 +932,7 @@ public class AirportFrame extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel43)
                     .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(113, 113, 113))
         );
@@ -1417,7 +1417,7 @@ public class AirportFrame extends javax.swing.JFrame {
 
         }
         for (int i = 1; i < Tabbed.getTabCount(); i++) {
-                Tabbed.setEnabledAt(i, true);
+            Tabbed.setEnabledAt(i, true);
         }
         Tabbed.setEnabledAt(5, false);
         Tabbed.setEnabledAt(6, false);
@@ -1429,9 +1429,7 @@ public class AirportFrame extends javax.swing.JFrame {
             administrator.setSelected(false);
         }
         for (int i = 1; i < Tabbed.getTabCount(); i++) {
-
             Tabbed.setEnabledAt(i, false);
-
         }
         Tabbed.setEnabledAt(9, true);
         Tabbed.setEnabledAt(5, true);
@@ -1446,25 +1444,24 @@ public class AirportFrame extends javax.swing.JFrame {
         String id = IDPassengerRegis.getText();
         String firstname = FirstNamePassengerRegis.getText();
         String lastname = LastNamePassengerregis.getText();
-        String year =  jTextField3.getText();
+        String year = jTextField3.getText();
         String month = MONTH.getItemAt(MONTH.getSelectedIndex());
         String day = DAY.getItemAt(DAY.getSelectedIndex());
         String phoneCode = jTextField1.getText();
         String phone = jTextField5.getText();
         String country = jTextField4.getText();
-        
-        
-        Response response  = PassengerController.createPassenger(id, firstname, lastname, year, month, day, phoneCode, phone, country);
-       
+
+        Response response = PassengerController.createPassenger(id, firstname, lastname, year, month, day, phoneCode, phone, country);
+
         if (response.getStatus() >= 500) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         } else if (response.getStatus() >= 400) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
-        } 
-        
-        if(response.getStatus() <= 200){
+        }
+
+        if (response.getStatus() <= 200) {
             IDPassengerRegis.setText("");
             FirstNamePassengerRegis.setText("");
             LastNamePassengerregis.setText("");
@@ -1475,14 +1472,13 @@ public class AirportFrame extends javax.swing.JFrame {
             MONTH.setSelectedIndex(0);
             DAY.setSelectedIndex(0);
         }
-        
-        
+
         /*
         LocalDate birthDate = LocalDate.of(year, month, day);
 
         this.passengers.add(new Passenger(id, firstname, lastname, birthDate, phoneCode, phone, country));
         this.userSelect.addItem("" + id);
-        */
+         */
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -1516,20 +1512,54 @@ public class AirportFrame extends javax.swing.JFrame {
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
-        String id = jTextField19.getText();
-        String planeId = jComboBox1.getItemAt(jComboBox1.getSelectedIndex());
-        String departureLocationId = jComboBox2.getItemAt(jComboBox2.getSelectedIndex());
-        String arrivalLocationId = jComboBox3.getItemAt(jComboBox3.getSelectedIndex());
-        String scaleLocationId = jComboBox4.getItemAt(jComboBox4.getSelectedIndex());
-        int year = Integer.parseInt(jTextField21.getText());
-        int month = Integer.parseInt(MONTH1.getItemAt(MONTH1.getSelectedIndex()));
-        int day = Integer.parseInt(DAY1.getItemAt(DAY1.getSelectedIndex()));
-        int hour = Integer.parseInt(MONTH2.getItemAt(MONTH2.getSelectedIndex()));
-        int minutes = Integer.parseInt(DAY2.getItemAt(DAY2.getSelectedIndex()));
-        int hoursDurationsArrival = Integer.parseInt(MONTH3.getItemAt(MONTH3.getSelectedIndex()));
-        int minutesDurationsArrival = Integer.parseInt(DAY3.getItemAt(DAY3.getSelectedIndex()));
-        int hoursDurationsScale = Integer.parseInt(MONTH4.getItemAt(MONTH4.getSelectedIndex()));
-        int minutesDurationsScale = Integer.parseInt(DAY4.getItemAt(DAY4.getSelectedIndex()));
+        // Obtener valores de los campos de texto y combo boxes
+        String id = jTextField19.getText().trim();
+        String planeId = jComboBox1.getItemAt(jComboBox1.getSelectedIndex()).trim();
+        String departureLocationId = jComboBox2.getItemAt(jComboBox2.getSelectedIndex()).trim();
+        String arrivalLocationId = jComboBox3.getItemAt(jComboBox3.getSelectedIndex()).trim();
+        String scaleLocationId = jComboBox4.getItemAt(jComboBox4.getSelectedIndex()).trim();
+
+        String yearStr = jTextField21.getText().trim();
+        String monthStr = MONTH1.getItemAt(MONTH1.getSelectedIndex()).trim();
+        String dayStr = DAY1.getItemAt(DAY1.getSelectedIndex()).trim();
+        String hourStr = MONTH2.getItemAt(MONTH2.getSelectedIndex()).trim();
+        String minutesStr = DAY2.getItemAt(DAY2.getSelectedIndex()).trim();
+
+        String hoursDurationsArrivalStr = MONTH3.getItemAt(MONTH3.getSelectedIndex()).trim();
+        String minutesDurationsArrivalStr = DAY3.getItemAt(DAY3.getSelectedIndex()).trim();
+        String hoursDurationsScaleStr = MONTH4.getItemAt(MONTH4.getSelectedIndex()).trim();
+        String minutesDurationsScaleStr = DAY4.getItemAt(DAY4.getSelectedIndex()).trim();
+
+
+        if (id.isEmpty() || yearStr.isEmpty() || monthStr.isEmpty() || dayStr.isEmpty()
+                || hourStr.isEmpty() || minutesStr.isEmpty()
+                || hoursDurationsArrivalStr.isEmpty() || minutesDurationsArrivalStr.isEmpty()
+                || hoursDurationsScaleStr.isEmpty() || minutesDurationsScaleStr.isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "Por favor, completa todos los campos obligatorios.");
+            return;
+        }
+
+
+        int year, month, day, hour, minutes;
+        int hoursDurationsArrival, minutesDurationsArrival;
+        int hoursDurationsScale, minutesDurationsScale;
+
+        try {
+            year = Integer.parseInt(yearStr);
+            month = Integer.parseInt(monthStr);
+            day = Integer.parseInt(dayStr);
+            hour = Integer.parseInt(hourStr);
+            minutes = Integer.parseInt(minutesStr);
+
+            hoursDurationsArrival = Integer.parseInt(hoursDurationsArrivalStr);
+            minutesDurationsArrival = Integer.parseInt(minutesDurationsArrivalStr);
+            hoursDurationsScale = Integer.parseInt(hoursDurationsScaleStr);
+            minutesDurationsScale = Integer.parseInt(minutesDurationsScaleStr);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Todos los campos deben contener números válidos.");
+            return;
+        }
 
         LocalDateTime departureDate = LocalDateTime.of(year, month, day, hour, minutes);
 
@@ -1537,12 +1567,14 @@ public class AirportFrame extends javax.swing.JFrame {
         for (Plane p : this.planes) {
             if (planeId.equals(p.getId())) {
                 plane = p;
+                break;
             }
         }
 
         Location departure = null;
         Location arrival = null;
         Location scale = null;
+
         for (Location location : this.locations) {
             if (departureLocationId.equals(location.getAirportId())) {
                 departure = location;
@@ -1555,13 +1587,43 @@ public class AirportFrame extends javax.swing.JFrame {
             }
         }
 
+        Response response;
+
         if (scale == null) {
-            this.flights.add(new Flight(id, plane, departure, arrival, departureDate, hoursDurationsArrival, minutesDurationsArrival));
+            response = PlaneControllers.createPlaneFlight(id, plane, departure, arrival, departureDate, hoursDurationsArrival, minutesDurationsArrival);
         } else {
-            this.flights.add(new Flight(id, plane, departure, scale, arrival, departureDate, hoursDurationsArrival, minutesDurationsArrival, hoursDurationsScale, minutesDurationsScale));
+            response = PlaneControllers.createPlaneFlightWithScale(id, plane, departure, scale, arrival, departureDate,
+                    hoursDurationsArrival, minutesDurationsArrival, hoursDurationsScale, minutesDurationsScale);
         }
 
-        this.jComboBox5.addItem(id);
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Respuesta", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        if (response.getStatus() <= 200) {
+            jTextField19.setText("");
+            jTextField21.setText("");
+            jComboBox1.setSelectedIndex(0);  // Plane
+            jComboBox2.setSelectedIndex(0);  // Departure
+            jComboBox3.setSelectedIndex(0);  // Arrival
+            jComboBox4.setSelectedIndex(0);  // Scale
+            MONTH1.setSelectedIndex(0);
+            DAY1.setSelectedIndex(0);
+            MONTH2.setSelectedIndex(0);
+            DAY2.setSelectedIndex(0);
+            MONTH3.setSelectedIndex(0);
+            DAY3.setSelectedIndex(0);
+            MONTH4.setSelectedIndex(0);
+            DAY4.setSelectedIndex(0);
+
+            jComboBox5.addItem(id); // Añadir ID del vuelo creado
+        }
+
+
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -1695,11 +1757,10 @@ public class AirportFrame extends javax.swing.JFrame {
     private void userSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userSelectActionPerformed
         try {
             String id = userSelect.getSelectedItem().toString();
-            if (! id.equals(userSelect.getItemAt(0))) {
+            if (!id.equals(userSelect.getItemAt(0))) {
                 jTextField20.setText(id);
                 jTextField28.setText(id);
-            }
-            else{
+            } else {
                 jTextField20.setText("");
                 jTextField28.setText("");
             }

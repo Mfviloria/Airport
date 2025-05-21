@@ -6,6 +6,7 @@ package model.storage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import model.Flight;
 import model.Location;
 import model.Passenger;
 import model.Plane;
@@ -22,11 +23,13 @@ public class Storage {
     private ArrayList<Passenger> passengers;
     private HashMap<String, Plane> planes;
     private HashMap<String, Location> locations;
+    private HashMap<String, Flight> flights;
 
     private Storage() {
         this.passengers = new ArrayList<>();
         this.planes = new HashMap<>();
         this.locations = new HashMap<>();
+        this.flights = new HashMap<>();
 
     }
 
@@ -82,6 +85,7 @@ public class Storage {
     public Plane getPlane(String id) {
         return planes.get(id);
     }
+
     public boolean addLocation(Location location) {
         if (locations.containsKey(location.getAirportId())) {
             return false;
@@ -92,6 +96,22 @@ public class Storage {
 
     public Location getLocation(String id) {
         return locations.get(id);
+    }
+
+    public boolean addFlight(String id, Flight flight) {
+        if (flights.containsKey(id)) {
+            return false;
+        }
+        flights.put(id, flight);
+        return true;
+    }
+
+    public Flight getFlight(String id) {
+        return flights.get(id);
+    }
+
+    public ArrayList<Flight> getAllFlights() {
+        return new ArrayList<>(flights.values());
     }
 
 }

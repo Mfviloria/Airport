@@ -10,9 +10,9 @@ import controllers.utils.Response;
  *
  * @author mariafernandaviloriazapata
  */
-public class AirplaneRegistration {
+public class AirportController {
 
-    public static Response createAirplane(String id, String name, String city, String country, long latitude, long longitude){
+    public static Response createAirport(String id, String name, String city, String country, long latitude, long longitude){
         
         return null;
     }
