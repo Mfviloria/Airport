@@ -11,7 +11,7 @@ import model.storage.Storage;
 public class PlaneControllers {
 
     public static Response createPlaneFlight(String id, Plane plane, Location departure, Location arrival,
-                                             LocalDateTime departureDate, int hoursArrival, int minutesArrival) {
+            LocalDateTime departureDate, int hoursArrival, int minutesArrival) {
         Storage storage = Storage.getInstance();
         try {
             // Validaciones básicas de campos
@@ -66,8 +66,8 @@ public class PlaneControllers {
     }
 
     public static Response createPlaneFlightWithScale(String id, Plane plane, Location departure, Location scale, Location arrival,
-                                                      LocalDateTime departureDate, int hoursArrival, int minutesArrival,
-                                                      int hoursScale, int minutesScale) {
+            LocalDateTime departureDate, int hoursArrival, int minutesArrival,
+            int hoursScale, int minutesScale) {
         Storage storage = Storage.getInstance();
         try {
             // Validaciones básicas de campos
@@ -95,8 +95,8 @@ public class PlaneControllers {
                 return new Response("Departure date must not be null", Status.BAD_REQUEST);
             }
 
-            if ((hoursArrival < 0 || minutesArrival < 0 || (hoursArrival == 0 && minutesArrival == 0)) ||
-                (hoursScale < 0 || minutesScale < 0 || (hoursScale == 0 && minutesScale == 0))) {
+            if ((hoursArrival < 0 || minutesArrival < 0 || (hoursArrival == 0 && minutesArrival == 0))
+                    || (hoursScale < 0 || minutesScale < 0 || (hoursScale == 0 && minutesScale == 0))) {
                 return new Response("Both arrival and scale durations must be greater than 00:00", Status.BAD_REQUEST);
             }
 
@@ -126,4 +126,37 @@ public class PlaneControllers {
             return new Response("Unexpected error: " + ex.getMessage(), Status.INTERNAL_SERVER_ERROR);
         }
     }
+
+    public static Response createPlane(String id, String brand, String model, int maxCapacity, String airline) {
+        Storage storage = Storage.getInstance();
+
+        if (id.isEmpty()) {
+            return new Response("Id must not be empty", Status.BAD_REQUEST);
+        }
+        if (!id.matches("^[A-Z]{2}[0-9]{5}$")) {
+            return new Response("Plane id must match the format XXYYYYY (2 letters + 5 digits)", Status.BAD_REQUEST);
+        }
+        if (storage.getPlane(id) != null) {
+            return new Response("A plane with that id already exists", Status.BAD_REQUEST);
+        }
+
+        if (brand.isEmpty()) {
+            return new Response("Brand must not be empty", Status.BAD_REQUEST);
+        }
+        if (model.isEmpty()) {
+            return new Response("Model must not be empty", Status.BAD_REQUEST);
+        }
+        if (airline.isEmpty()) {
+            return new Response("Airline must not be empty", Status.BAD_REQUEST);
+        }
+
+        if (maxCapacity <= 0) {
+            return new Response("Max capacity must be positive", Status.BAD_REQUEST);
+        }
+
+        Plane newPlane = new Plane(id, brand, model, maxCapacity, airline);
+        storage.addPlane(id, newPlane);
+        return new Response("Plane added successfully", Status.OK);
+    }
+
 }

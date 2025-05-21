@@ -76,10 +76,10 @@ public class Storage {
 
     public boolean addPlane(String id, Plane plane) {
         if (planes.containsKey(id)) {
-            return false;
+            return false; // ya existe un avión con ese id
         }
         planes.put(id, plane);
-        return true;
+        return true; // avión agregado exitosamente
     }
 
     public Plane getPlane(String id) {
