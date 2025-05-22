@@ -56,5 +56,6 @@ public class Location {
     public double getAirportLongitude() {
         return airportLongitude;
     }
-    
+
+
 }

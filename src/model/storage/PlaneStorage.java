@@ -57,7 +57,14 @@ public class PlaneStorage {
         return null;
     }
 
-   
+   public HashMap<String, Plane> getAllPlanesMap() {
+    HashMap<String, Plane> map = new HashMap<>();
+    for (Plane plane : this.planes) {
+        map.put(plane.getId(), plane);
+    }
+    return map;
+}
+
 
     
 }
