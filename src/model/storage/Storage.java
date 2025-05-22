@@ -77,10 +77,10 @@ public class Storage {
 
 
     public ArrayList<Plane> getPlanes() {
-        return new ArrayList<>(planes.values());
+        return  planes;
     }    
     public ArrayList<Location> getLocations() {
-        return new ArrayList<>(locations.values());
+        return locations;
     }
 
     public boolean addPlane(Plane plane) {
@@ -142,12 +142,5 @@ public class Storage {
         return flights;
     }
 
-    public ArrayList<Plane> getPlanes() {
-        return planes;
-    }
-
-    public ArrayList<Location> getLocations() {
-        return locations;
-    }
     
 }

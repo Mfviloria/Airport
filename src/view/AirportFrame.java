@@ -419,47 +419,47 @@ public class AirportFrame extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel11.setText("ID:");
         jPanel3.add(jLabel11);
-        jLabel11.setBounds(53, 96, 22, 25);
+        jLabel11.setBounds(53, 96, 24, 22);
 
         jTextField8.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jPanel3.add(jTextField8);
-        jTextField8.setBounds(210, 90, 130, 35);
+        jTextField8.setBounds(220, 90, 130, 28);
 
         jLabel12.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel12.setText("Brand:");
         jPanel3.add(jLabel12);
-        jLabel12.setBounds(53, 157, 50, 25);
+        jLabel12.setBounds(53, 157, 55, 22);
 
         jTextField9.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jPanel3.add(jTextField9);
-        jTextField9.setBounds(210, 150, 130, 35);
+        jTextField9.setBounds(220, 150, 130, 28);
 
         jTextField10.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jPanel3.add(jTextField10);
-        jTextField10.setBounds(210, 210, 130, 35);
+        jTextField10.setBounds(220, 210, 130, 28);
 
         jLabel13.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel13.setText("Model:");
         jPanel3.add(jLabel13);
-        jLabel13.setBounds(53, 216, 55, 25);
+        jLabel13.setBounds(53, 216, 59, 22);
 
         jTextField11.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jPanel3.add(jTextField11);
-        jTextField11.setBounds(210, 270, 130, 35);
+        jTextField11.setBounds(220, 270, 130, 28);
 
         jLabel14.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel14.setText("Max Capacity:");
         jPanel3.add(jLabel14);
-        jLabel14.setBounds(53, 276, 109, 25);
+        jLabel14.setBounds(53, 276, 122, 22);
 
         jTextField12.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jPanel3.add(jTextField12);
-        jTextField12.setBounds(210, 330, 130, 35);
+        jTextField12.setBounds(220, 330, 130, 28);
 
         jLabel15.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel15.setText("Airline:");
         jPanel3.add(jLabel15);
-        jLabel15.setBounds(53, 336, 70, 25);
+        jLabel15.setBounds(53, 336, 70, 22);
 
         jButton9.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jButton9.setText("Create");
@@ -1520,7 +1520,7 @@ public class AirportFrame extends javax.swing.JFrame {
             jTextField10.setText("");
             jTextField11.setText("");
             jTextField12.setText("");
-            this.jComboBox1.addItem(id); // Agrega el ID del avión al combobox de selección
+            this.jComboBox1.addItem(id); 
         }
 
     }//GEN-LAST:event_jButton9ActionPerformed
@@ -1558,19 +1558,7 @@ public class AirportFrame extends javax.swing.JFrame {
             jComboBox3.addItem(id);
             jComboBox4.addItem(id);
         }
-        //this.locations.add(new Location(id, name, city, country, latitude, longitude));
-        if (response.getStatus() <=200){
-            jTextField13.setText(" ");
-            jTextField14.setText(" ");
-            jTextField15.setText(" ");
-            jTextField16.setText(" ");
-            jTextField17.setText(" ");
-            jTextField18.setText(" ");
-            this.jComboBox2.addItem(id);
-            this.jComboBox3.addItem(id);
-            this.jComboBox4.addItem(id);
-        }
-        
+
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
