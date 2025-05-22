@@ -22,15 +22,15 @@ public class Storage {
     private static Storage instance;
 
     private ArrayList<Passenger> passengers;
-    private HashMap<String, Plane> planes;
-    private HashMap<String, Location> locations;
-    private HashMap<String, Flight> flights;
+    private ArrayList< Plane> planes;
+    private ArrayList<Location> locations;
+    private ArrayList< Flight> flights;
 
     private Storage() {
         this.passengers = new ArrayList<>();
-        this.planes = new HashMap<>();
-        this.locations = new HashMap<>();
-        this.flights = new HashMap<>();
+        this.planes = new ArrayList<>();
+        this.locations = new ArrayList<>();
+        this.flights = new ArrayList<>();
 
     }
 
@@ -75,6 +75,7 @@ public class Storage {
         return passengers;
     }
 
+
     public ArrayList<Plane> getPlanes() {
         return new ArrayList<>(planes.values());
     }    
@@ -82,44 +83,63 @@ public class Storage {
         return new ArrayList<>(locations.values());
     }
 
-    public boolean addPlane(String id, Plane plane) {
-        if (planes.containsKey(id)) {
-            return false; // ya existe un avión con ese id
+    public boolean addPlane(Plane plane) {
+        if (this.getPlane(plane.getId()) != null){
+            return false;
+        } else{
+            this.planes.add(plane);
         }
-        planes.put(id, plane);
-        return true; // avión agregado exitosamente
+        return true;
     }
 
     public Plane getPlane(String id) {
-        return planes.get(id);
+        for (Plane plane : this.planes){
+            if (plane.getId().equals(id)){
+                return plane;
+            }
+        }
+        return null;
     }
 
     public boolean addLocation(Location location) {
-        if (locations.containsKey(location.getAirportId())) {
+        if (this.getLocation(location.getAirportId() )!= null){
             return false;
+        }else{
+            this.locations.add(location);
         }
-        locations.put(location.getAirportId(), location);
         return true;
     }
 
     public Location getLocation(String id) {
-        return locations.get(id);
+        for (Location loc: this.locations){
+            if(loc.getAirportId().equals(id)){
+                return loc;
+            }
+        }
+        return null;
     }
 
-    public boolean addFlight(String id, Flight flight) {
-        if (flights.containsKey(id)) {
+    public boolean addFlight(Flight flight) {
+        if (this.getLocation(flight.getId() )!= null){
             return false;
+        }else{
+            this.flights.add(flight);
         }
-        flights.put(id, flight);
         return true;
     }
 
     public Flight getFlight(String id) {
-        return flights.get(id);
+        for (Flight flight: this.flights){
+            if(flight.getId().equals(id)){
+                return flight;
+            }
+        }
+        return null;
+
     }
 
     public ArrayList<Flight> getAllFlights() {
-        return new ArrayList<>(flights.values());
+        return flights;
     }
 
 }
