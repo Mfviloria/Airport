@@ -1,36 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model.storage;
 
-import java.awt.List;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.HashMap;
-import model.Flight;
 import model.Location;
-import model.Passenger;
-import model.Plane;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-/**
- *
- * @author edangulo
- */
 public class LocationStorage {
 
     // Instancia Singleton
     private static LocationStorage instance;
     private ArrayList<Location> locations;
-    private final String FILE_PATH = "locations.json"; // Ruta del archivo JSON
 
     private LocationStorage() {
         this.locations = new ArrayList<>();
-        loadFromFile();  // Cargar locations al crear la instancia
+        loadFromJson("C:\\Users\\samuel\\Documents\\GitHub\\Airport\\json\\locations.json");
     }
 
     public static LocationStorage getInstance() {
@@ -45,9 +32,7 @@ public class LocationStorage {
     }
 
     public void addLocation(Location location) {
-        // Agrega y guarda en archivo
         this.locations.add(location);
-        saveToFile();
     }
 
     public Location getLocation(String id) {
@@ -67,10 +52,10 @@ public class LocationStorage {
         return map;
     }
 
-    // Leer JSON desde archivo y cargar a la lista locations
-    private void loadFromFile() {
+    // ✅ Carga desde archivo JSON con path recibido por parámetro
+    public void loadFromJson(String filename) {
         try {
-            String content = new String(Files.readAllBytes(Paths.get(FILE_PATH)));
+            String content = new String(Files.readAllBytes(Paths.get(filename)));
             JSONArray array = new JSONArray(content);
 
             for (int i = 0; i < array.length(); i++) {
@@ -85,18 +70,17 @@ public class LocationStorage {
                         obj.getDouble("airportLongitude")
                 );
 
-                this.locations.add(loc);
+                this.addLocation(loc);
             }
 
         } catch (Exception e) {
-            System.out.println("No se pudo cargar archivo JSON de locations o archivo no existe, se inicia vacío.");
-            // Si no existe archivo o error, inicia lista vacía
+            System.err.println("Error al cargar archivo JSON de locations: " + e.getMessage());
             this.locations = new ArrayList<>();
         }
     }
 
-    // Guardar lista locations en archivo JSON (sobrescribir)
-    private void saveToFile() {
+    // ✅ Guardar lista de locations a un archivo JSON
+    public void saveToJson(String filename) {
         try {
             JSONArray array = new JSONArray();
 
@@ -111,12 +95,9 @@ public class LocationStorage {
                 array.put(obj);
             }
 
-            Files.write(Paths.get(FILE_PATH), array.toString(4).getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+            Files.write(Paths.get(filename), array.toString(4).getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error al guardar locations en JSON.");
+            System.err.println("Error al guardar locations en JSON: " + e.getMessage());
         }
-
     }
-
 }
