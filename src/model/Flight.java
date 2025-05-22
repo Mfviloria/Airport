@@ -116,5 +116,11 @@ public class Flight {
     public int getNumPassengers() {
         return passengers.size();
     }
+
+    @Override
+    public String toString() {
+        return "Flight{" + "id=" + id + ", passengers=" + passengers + ", plane=" + plane + ", departureLocation=" + departureLocation + ", scaleLocation=" + scaleLocation + ", arrivalLocation=" + arrivalLocation + ", departureDate=" + departureDate + ", hoursDurationArrival=" + hoursDurationArrival + ", minutesDurationArrival=" + minutesDurationArrival + ", hoursDurationScale=" + hoursDurationScale + ", minutesDurationScale=" + minutesDurationScale + '}';
+    }
+    
     
 }

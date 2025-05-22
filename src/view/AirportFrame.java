@@ -1515,12 +1515,13 @@ public class AirportFrame extends javax.swing.JFrame {
         }
 
         if (response.getStatus() <= 200) {
+            this.jComboBox1.addItem(id); 
             jTextField8.setText("");
             jTextField9.setText("");
             jTextField10.setText("");
             jTextField11.setText("");
             jTextField12.setText("");
-            this.jComboBox1.addItem(id); 
+            
         }
 
     }//GEN-LAST:event_jButton9ActionPerformed
@@ -1547,6 +1548,10 @@ public class AirportFrame extends javax.swing.JFrame {
         }
 
        if (response.getStatus() <= 200) {
+           jComboBox2.addItem(id);
+            jComboBox3.addItem(id);
+            jComboBox4.addItem(id);
+            
             jTextField13.setText("");
             jTextField14.setText("");
             jTextField15.setText("");
@@ -1554,9 +1559,7 @@ public class AirportFrame extends javax.swing.JFrame {
             jTextField17.setText("");
             jTextField18.setText("");
 
-            jComboBox2.addItem(id);
-            jComboBox3.addItem(id);
-            jComboBox4.addItem(id);
+            
         }
 
     }//GEN-LAST:event_jButton10ActionPerformed
@@ -1568,6 +1571,9 @@ public class AirportFrame extends javax.swing.JFrame {
         String departureLocationId = jComboBox2.getItemAt(jComboBox2.getSelectedIndex()).trim();
         String arrivalLocationId = jComboBox3.getItemAt(jComboBox3.getSelectedIndex()).trim();
         String scaleLocationId = jComboBox4.getItemAt(jComboBox4.getSelectedIndex()).trim();
+        System.out.println("Departure: " + departureLocationId);
+        System.out.println("Arrival: " + arrivalLocationId);
+        System.out.println("Scale: " + scaleLocationId);
         String year = jTextField21.getText().trim();
         String month = MONTH1.getItemAt(MONTH1.getSelectedIndex()).trim();
         String day= DAY1.getItemAt(DAY1.getSelectedIndex()).trim();
@@ -1581,9 +1587,9 @@ public class AirportFrame extends javax.swing.JFrame {
         Response response;
        
             if (scaleLocationId.equals("Location")){
-                response = FlightController.createPlaneFlight(id, planeId, year, day, year, month, day, hour, minutes, hoursDurationsArrival, minutesDurationsArrival);
+                response = FlightController.createPlaneFlight(id, planeId, departureLocationId, arrivalLocationId, year, month, day, hour, minutes, hoursDurationsArrival, minutesDurationsArrival);
             }else{
-                response = FlightController.createPlaneFlight(id, planeId, departureLocationId,arrivalLocationId,scaleLocationId , year, month, day, hour, minutes, hoursDurationsArrival, minutesDurationsArrival, hoursDurationsScale, minutesDurationsScale);
+                response = FlightController.createPlaneFlight(id, planeId, departureLocationId,arrivalLocationId, scaleLocationId , year, month, day, hour, minutes, hoursDurationsArrival, minutesDurationsArrival, hoursDurationsScale, minutesDurationsScale);
             }
             
 
@@ -1596,6 +1602,8 @@ public class AirportFrame extends javax.swing.JFrame {
         }
 
         if (response.getStatus() <= 200) {
+            jComboBox5.addItem(id);
+            
             jTextField19.setText("");
             jTextField21.setText("");
             jComboBox1.setSelectedIndex(0);  // Plane
@@ -1611,7 +1619,7 @@ public class AirportFrame extends javax.swing.JFrame {
             MONTH4.setSelectedIndex(0);
             DAY4.setSelectedIndex(0);
 
-            jComboBox5.addItem(id); // Añadir ID del vuelo creado
+            ; // Añadir ID del vuelo creado
         }
 
     }//GEN-LAST:event_jButton11ActionPerformed
@@ -1725,8 +1733,11 @@ public class AirportFrame extends javax.swing.JFrame {
         model.setRowCount(0);
         Storage storage = Storage.getInstance();
         for (Flight flight : storage.getAllFlights()){
+            System.out.println("Flight: " + flight.toString());
             // Ver porque el flight.getDepartureLocation() = Null
+            //model.addRow(new Object[]{flight.getId(), flight.getDepartureLocation().getAirportId(), flight.getArrivalLocation().getAirportId(), (flight.getScaleLocation() == null ? "-" : flight.getScaleLocation().getAirportId()), flight.getDepartureDate(), flight.calculateArrivalDate(), flight.getPlane().getId(), flight.getNumPassengers()});
             model.addRow(new Object[]{flight.getId(), flight.getDepartureLocation().getAirportId(), flight.getArrivalLocation().getAirportId(), (flight.getScaleLocation() == null ? "-" : flight.getScaleLocation().getAirportId()), flight.getDepartureDate(), flight.calculateArrivalDate(), flight.getPlane().getId(), flight.getNumPassengers()});
+        
         }
         /*
         for (Flight flight : this.flights) {

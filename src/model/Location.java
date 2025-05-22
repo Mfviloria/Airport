@@ -28,6 +28,11 @@ public class Location {
         this.airportLongitude = airportLongitude;
     }
 
+    @Override
+    public String toString() {
+        return "Location{" + "airportId=" + airportId + ", airportName=" + airportName + ", airportCity=" + airportCity + ", airportCountry=" + airportCountry + ", airportLatitude=" + airportLatitude + ", airportLongitude=" + airportLongitude + '}';
+    }
+
     public String getAirportId() {
         return airportId;
     }

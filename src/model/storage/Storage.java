@@ -101,13 +101,9 @@ public class Storage {
         return null;
     }
 
-    public boolean addLocation(Location location) {
-        if (this.getLocation(location.getAirportId() )!= null){
-            return false;
-        }else{
+    public void addLocation(Location location) {
+            System.out.println(location.toString());
             this.locations.add(location);
-        }
-        return true;
     }
 
     public Location getLocation(String id) {
@@ -120,6 +116,7 @@ public class Storage {
     }
 
     public boolean addFlight(Flight flight) {
+        System.out.println(flight.toString());
         if (this.getLocation(flight.getId() )!= null){
             return false;
         }else{
