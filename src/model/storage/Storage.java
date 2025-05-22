@@ -4,6 +4,7 @@
  */
 package model.storage;
 
+import java.awt.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import model.Flight;
@@ -72,6 +73,13 @@ public class Storage {
 
     public ArrayList<Passenger> getPassengers() {
         return passengers;
+    }
+
+    public ArrayList<Plane> getPlanes() {
+        return new ArrayList<>(planes.values());
+    }    
+    public ArrayList<Location> getLocations() {
+        return new ArrayList<>(locations.values());
     }
 
     public boolean addPlane(String id, Plane plane) {
