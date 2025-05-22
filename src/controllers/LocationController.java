@@ -3,6 +3,7 @@ package controllers;
 import controllers.utils.Response;
 import controllers.utils.Status;
 import model.Location;
+import model.storage.LocationStorage;
 import model.storage.Storage;
 
 /**
@@ -12,7 +13,7 @@ import model.storage.Storage;
 public class LocationController {
 
     public static Response createLocation(String id, String name, String city, String country, String latitudeStr, String longitudeStr) {
-        Storage storage = Storage.getInstance();
+        LocationStorage storage = LocationStorage.getInstance();
 
         // Validaciones de campos vacíos
         if (id == null || id.trim().isEmpty()) {

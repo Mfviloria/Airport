@@ -10,6 +10,9 @@ import java.time.LocalDateTime;
 import model.Flight;
 import model.Location;
 import model.Plane;
+import model.storage.FlightStorage;
+import model.storage.LocationStorage;
+import model.storage.PlaneStorage;
 import model.storage.Storage;
 
 /**
@@ -18,7 +21,9 @@ import model.storage.Storage;
  */
 public class FlightController {
     public static Response createPlaneFlight(String id, String  plane, String departure, String  arrival, String scaleLocation, String year, String month, String days, String hours, String minutes, String hoursDurationArrival, String minutesDurationArrival, String hoursDurationScale, String minutesDurationScale) {
-        Storage storage = Storage.getInstance();
+        FlightStorage storage = FlightStorage.getInstance();
+        PlaneStorage storagep = PlaneStorage.getInstance();
+        LocationStorage storagel = LocationStorage.getInstance();
         try {
             // Validaciones básicas de campos
             if (id.trim().isEmpty()) {
@@ -61,7 +66,7 @@ public class FlightController {
             }
             LocalDateTime departureDate = LocalDateTime.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(days), Integer.parseInt(hours), Integer.parseInt(minutes));
             // Crear y guardar vuelo
-            Flight flight = new Flight(id, storage.getPlane(plane), storage.getLocation(departure), storage.getLocation(arrival),  storage.getLocation(arrival), departureDate, hoursArrival, minutesArrival, hoursScale, minutesScale);
+            Flight flight = new Flight(id, storagep.getPlane(plane), storagel.getLocation(departure), storagel.getLocation(arrival),  storagel.getLocation(arrival), departureDate, hoursArrival, minutesArrival, hoursScale, minutesScale);
             storage.addFlight(flight);
             System.out.println(flight);
             
@@ -76,7 +81,9 @@ public class FlightController {
 
     public static Response createPlaneFlight(String id, String plane, String departure, String arrival,
             String year, String month, String days, String hours, String minutes, String hoursArrival, String minutesArrival) {
-        Storage storage = Storage.getInstance();
+        FlightStorage storage = FlightStorage.getInstance();
+        PlaneStorage storagep = PlaneStorage.getInstance();
+        LocationStorage storagel = LocationStorage.getInstance();
         try {
             // Validaciones básicas de campos
             if (id.trim().isEmpty()) {
@@ -110,7 +117,7 @@ public class FlightController {
             
             LocalDateTime departureDate = LocalDateTime.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(days), Integer.parseInt(hours), Integer.parseInt(minutes));
             // Crear y guardar vuelo
-            Flight flight = new Flight(id, storage.getPlane(plane), storage.getLocation(departure), storage.getLocation(arrival), departureDate,
+            Flight flight = new Flight(id, storagep.getPlane(plane), storagel.getLocation(departure), storagel.getLocation(arrival), departureDate,
                     hoursa, minutesa);
             storage.addFlight(flight);
 

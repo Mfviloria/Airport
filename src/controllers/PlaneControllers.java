@@ -6,12 +6,13 @@ import java.time.LocalDateTime;
 import model.Flight;
 import model.Location;
 import model.Plane;
+import model.storage.PlaneStorage;
 import model.storage.Storage;
 
 public class PlaneControllers {
 
     public static Response createPlane(String id, String brand, String model, String maxCapacity, String airline) {
-        Storage storage = Storage.getInstance();
+        PlaneStorage storage = PlaneStorage.getInstance();
 
          if (id.isEmpty() || brand.isEmpty() || model.isEmpty() || maxCapacity.isEmpty() || airline.isEmpty()) {
             return new Response("Por favor, completa todos los campos.", Status.BAD_REQUEST);

@@ -24,6 +24,10 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+import model.storage.FlightStorage;
+import model.storage.LocationStorage;
+import model.storage.PassengerStorage;
+import model.storage.PlaneStorage;
 import model.storage.Storage;
 
 /**
@@ -1476,6 +1480,7 @@ public class AirportFrame extends javax.swing.JFrame {
         }
 
         if (response.getStatus() <= 200) {
+            userSelect.addItem(id);
             IDPassengerRegis.setText("");
             FirstNamePassengerRegis.setText("");
             LastNamePassengerregis.setText("");
@@ -1716,7 +1721,7 @@ public class AirportFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         model.setRowCount(0);
-        Storage storage = Storage.getInstance();
+        PassengerStorage storage = PassengerStorage.getInstance();
         for (Passenger pass : storage.getPassengers()) {
             model.addRow(new Object[]{pass.getId(), pass.getFullname(), pass.getBirthDate(), pass.calculateAge(), pass.generateFullPhone(), pass.getCountry(), pass.getNumFlights()});
         }
@@ -1731,7 +1736,7 @@ public class AirportFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
         model.setRowCount(0);
-        Storage storage = Storage.getInstance();
+        FlightStorage storage = FlightStorage.getInstance();
         for (Flight flight : storage.getAllFlights()){
             System.out.println("Flight: " + flight.toString());
             // Ver porque el flight.getDepartureLocation() = Null
@@ -1749,7 +1754,7 @@ public class AirportFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
         model.setRowCount(0);
-        Storage storage = Storage.getInstance();
+        PlaneStorage storage = PlaneStorage.getInstance();
         for (Plane plane : storage.getPlanes()) {
             model.addRow(new Object[]{plane.getId(), plane.getBrand(), plane.getModel(), plane.getMaxCapacity(), plane.getAirline(), plane.getNumFlights()});
         }
@@ -1763,7 +1768,7 @@ public class AirportFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
         model.setRowCount(0);
-        Storage storage = Storage.getInstance();
+        LocationStorage storage = LocationStorage.getInstance();
         for (Location location: storage.getLocations()){
             model.addRow(new Object[]{location.getAirportId(), location.getAirportName(), location.getAirportCity(), location.getAirportCountry()});
         }

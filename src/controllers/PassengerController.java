@@ -8,6 +8,7 @@ import controllers.utils.Response;
 import controllers.utils.Status;
 import java.time.LocalDate;
 import model.Passenger;
+import model.storage.PassengerStorage;
 import model.storage.Storage;
 /**
  *
@@ -16,7 +17,7 @@ import model.storage.Storage;
 public class PassengerController {
     
     public static Response createPassenger(String id, String firstname, String lastname,  String year, String month, String day, String phoneCode, String phone, String country){
-        Storage storage = Storage.getInstance();
+        PassengerStorage storage = PassengerStorage.getInstance();
         try{
             if (id.isEmpty()){
                 return new Response("Id must be not empty", Status.BAD_REQUEST);
