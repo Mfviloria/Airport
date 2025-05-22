@@ -34,7 +34,7 @@ public class PassengerController {
                 return new Response("Country must be not empty", Status.BAD_REQUEST);
             }
             //Id verification
-            if (id.length() < 0  ){
+            if (Integer.parseInt(id) < 0  ){
                 return new Response("Id must be positive", Status.BAD_REQUEST);
             } else if (id.length() >15){
                 return new Response("Id must have at least 15 digits", Status.BAD_REQUEST);

@@ -133,4 +133,12 @@ public class Storage {
         return flights;
     }
 
+    public ArrayList<Plane> getPlanes() {
+        return planes;
+    }
+
+    public ArrayList<Location> getLocations() {
+        return locations;
+    }
+    
 }

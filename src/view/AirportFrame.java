@@ -671,7 +671,7 @@ public class AirportFrame extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(507, 507, 507)
                         .addComponent(jButton1)))
-                .addContainerGap(555, Short.MAX_VALUE))
+                .addContainerGap(611, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -745,7 +745,7 @@ public class AirportFrame extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(829, Short.MAX_VALUE))
+                .addContainerGap(881, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -815,7 +815,7 @@ public class AirportFrame extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(269, 269, 269)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(291, Short.MAX_VALUE))
+                .addContainerGap(350, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
@@ -879,7 +879,7 @@ public class AirportFrame extends javax.swing.JFrame {
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1078, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -939,7 +939,7 @@ public class AirportFrame extends javax.swing.JFrame {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(521, 521, 521)
                         .addComponent(jButton4)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -998,7 +998,7 @@ public class AirportFrame extends javax.swing.JFrame {
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(145, 145, 145)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 816, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap(248, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1057,7 +1057,7 @@ public class AirportFrame extends javax.swing.JFrame {
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGap(226, 226, 226)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(272, Short.MAX_VALUE))
+                .addContainerGap(331, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1114,7 +1114,7 @@ public class AirportFrame extends javax.swing.JFrame {
                             .addComponent(jLabel46))
                         .addGap(79, 79, 79)
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox6, 0, 105, Short.MAX_VALUE)
+                            .addComponent(jComboBox6, 0, 159, Short.MAX_VALUE)
                             .addComponent(jComboBox7, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(820, 820, 820))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
@@ -1157,6 +1157,11 @@ public class AirportFrame extends javax.swing.JFrame {
 
         jComboBox2.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Location" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         jLabel24.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel24.setText("Departure location:");
@@ -1367,7 +1372,7 @@ public class AirportFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel26)
                                 .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel27)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
                 .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50))
         );
@@ -1512,7 +1517,6 @@ public class AirportFrame extends javax.swing.JFrame {
             jTextField10.setText("");
             jTextField11.setText("");
             jTextField12.setText("");
-
             this.jComboBox1.addItem(id); // Agrega el ID del avión al combobox de selección
         }
 
@@ -1536,10 +1540,18 @@ public class AirportFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Airport creado", JOptionPane.INFORMATION_MESSAGE);
         }
         //this.locations.add(new Location(id, name, city, country, latitude, longitude));
-
-        this.jComboBox2.addItem(id);
-        this.jComboBox3.addItem(id);
-        this.jComboBox4.addItem(id);
+        if (response.getStatus() <=200){
+            jTextField13.setText(" ");
+            jTextField14.setText(" ");
+            jTextField15.setText(" ");
+            jTextField16.setText(" ");
+            jTextField17.setText(" ");
+            jTextField18.setText(" ");
+            this.jComboBox2.addItem(id);
+            this.jComboBox3.addItem(id);
+            this.jComboBox4.addItem(id);
+        }
+        
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -1549,93 +1561,24 @@ public class AirportFrame extends javax.swing.JFrame {
         String departureLocationId = jComboBox2.getItemAt(jComboBox2.getSelectedIndex()).trim();
         String arrivalLocationId = jComboBox3.getItemAt(jComboBox3.getSelectedIndex()).trim();
         String scaleLocationId = jComboBox4.getItemAt(jComboBox4.getSelectedIndex()).trim();
-
-// Validación del avión seleccionado // Mejorar
-        if (planeId.isEmpty() || planeId.equalsIgnoreCase("Plane")) {
-            JOptionPane.showMessageDialog(null, "Por favor, selecciona un avión válido.");
-            return;
-        }
-
-        String yearStr = jTextField21.getText().trim();
-        String monthStr = MONTH1.getItemAt(MONTH1.getSelectedIndex()).trim();
-        String dayStr = DAY1.getItemAt(DAY1.getSelectedIndex()).trim();
-        String hourStr = MONTH2.getItemAt(MONTH2.getSelectedIndex()).trim();
-        String minutesStr = DAY2.getItemAt(DAY2.getSelectedIndex()).trim();
-
-        String hoursDurationsArrivalStr = MONTH3.getItemAt(MONTH3.getSelectedIndex()).trim();
-        String minutesDurationsArrivalStr = DAY3.getItemAt(DAY3.getSelectedIndex()).trim();
-        String hoursDurationsScaleStr = MONTH4.getItemAt(MONTH4.getSelectedIndex()).trim();
-        String minutesDurationsScaleStr = DAY4.getItemAt(DAY4.getSelectedIndex()).trim();
-
-        if (id.isEmpty() || yearStr.isEmpty() || monthStr.isEmpty() || dayStr.isEmpty()
-                || hourStr.isEmpty() || minutesStr.isEmpty()
-                || hoursDurationsArrivalStr.isEmpty() || minutesDurationsArrivalStr.isEmpty()
-                || hoursDurationsScaleStr.isEmpty() || minutesDurationsScaleStr.isEmpty()) {
-
-            JOptionPane.showMessageDialog(null, "Por favor, completa todos los campos obligatorios.");
-            return;
-        }
-
-        int year, month, day, hour, minutes;
-        int hoursDurationsArrival, minutesDurationsArrival;
-        int hoursDurationsScale, minutesDurationsScale;
-
-        try {
-            year = Integer.parseInt(yearStr);
-            month = Integer.parseInt(monthStr);
-            day = Integer.parseInt(dayStr);
-            hour = Integer.parseInt(hourStr);
-            minutes = Integer.parseInt(minutesStr);
-
-            hoursDurationsArrival = Integer.parseInt(hoursDurationsArrivalStr);
-            minutesDurationsArrival = Integer.parseInt(minutesDurationsArrivalStr);
-            hoursDurationsScale = Integer.parseInt(hoursDurationsScaleStr);
-            minutesDurationsScale = Integer.parseInt(minutesDurationsScaleStr);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Todos los campos deben contener números válidos.");
-            return;
-        }
-
-        LocalDateTime departureDate = LocalDateTime.of(year, month, day, hour, minutes);
-
-        Plane plane = null;
-        for (Plane p : this.planes) {
-            if (planeId.equals(p.getId())) {
-                plane = p;
-                break;
-            }
-        }
-
-// Validar si se encontró el avión
-        if (plane == null) {
-            JOptionPane.showMessageDialog(null, "El avión seleccionado no es válido o no se encuentra en el sistema.");
-            return;
-        }
-
-        Location departure = null;
-        Location arrival = null;
-        Location scale = null;
-
-        for (Location location : this.locations) {
-            if (departureLocationId.equals(location.getAirportId())) {
-                departure = location;
-            }
-            if (arrivalLocationId.equals(location.getAirportId())) {
-                arrival = location;
-            }
-            if (scaleLocationId.equals(location.getAirportId())) {
-                scale = location;
-            }
-        }
-
+        String year = jTextField21.getText().trim();
+        String month = MONTH1.getItemAt(MONTH1.getSelectedIndex()).trim();
+        String day= DAY1.getItemAt(DAY1.getSelectedIndex()).trim();
+        String hour = MONTH2.getItemAt(MONTH2.getSelectedIndex()).trim();
+        String minutes= DAY2.getItemAt(DAY2.getSelectedIndex()).trim();
+        String hoursDurationsArrival = MONTH3.getItemAt(MONTH3.getSelectedIndex()).trim();
+        String minutesDurationsArrival= DAY3.getItemAt(DAY3.getSelectedIndex()).trim();
+        String hoursDurationsScale = MONTH4.getItemAt(MONTH4.getSelectedIndex()).trim();
+        String minutesDurationsScale = DAY4.getItemAt(DAY4.getSelectedIndex()).trim();
+        
         Response response;
-
-        if (scale == null) {
-            response = FlightController.createPlaneFlight(id, plane, departure, arrival, departureDate, hoursDurationsArrival, minutesDurationsArrival);
-        } else {
-            response = FlightController.createPlaneFlightWithScale(id, plane, departure, scale, arrival, departureDate,
-                    hoursDurationsArrival, minutesDurationsArrival, hoursDurationsScale, minutesDurationsScale);
-        }
+       
+            if (scaleLocationId.equals("Location")){
+                response = FlightController.createPlaneFlight(id, planeId, year, day, year, month, day, hour, minutes, hoursDurationsArrival, minutesDurationsArrival);
+            }else{
+                response = FlightController.createPlaneFlight(id, planeId, departureLocationId,arrivalLocationId,scaleLocationId , year, month, day, hour, minutes, hoursDurationsArrival, minutesDurationsArrival, hoursDurationsScale, minutesDurationsScale);
+            }
+            
 
         if (response.getStatus() >= 500) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
@@ -1773,27 +1716,43 @@ public class AirportFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
         model.setRowCount(0);
-        for (Flight flight : this.flights) {
+        Storage storage = Storage.getInstance();
+        for (Flight flight : storage.getAllFlights()){
+            // Ver porque el flight.getDepartureLocation() = Null
             model.addRow(new Object[]{flight.getId(), flight.getDepartureLocation().getAirportId(), flight.getArrivalLocation().getAirportId(), (flight.getScaleLocation() == null ? "-" : flight.getScaleLocation().getAirportId()), flight.getDepartureDate(), flight.calculateArrivalDate(), flight.getPlane().getId(), flight.getNumPassengers()});
         }
+        /*
+        for (Flight flight : this.flights) {
+            model.addRow(new Object[]{flight.getId(), flight.getDepartureLocation().getAirportId(), flight.getArrivalLocation().getAirportId(), (flight.getScaleLocation() == null ? "-" : flight.getScaleLocation().getAirportId()), flight.getDepartureDate(), flight.calculateArrivalDate(), flight.getPlane().getId(), flight.getNumPassengers()});
+        }*/
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
         model.setRowCount(0);
-        for (Plane plane : this.planes) {
+        Storage storage = Storage.getInstance();
+        for (Plane plane : storage.getPlanes()) {
             model.addRow(new Object[]{plane.getId(), plane.getBrand(), plane.getModel(), plane.getMaxCapacity(), plane.getAirline(), plane.getNumFlights()});
         }
+        /*
+        for (Plane plane : this.planes) {
+            model.addRow(new Object[]{plane.getId(), plane.getBrand(), plane.getModel(), plane.getMaxCapacity(), plane.getAirline(), plane.getNumFlights()});
+        }*/
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
         model.setRowCount(0);
-        for (Location location : this.locations) {
+        Storage storage = Storage.getInstance();
+        for (Location location: storage.getLocations()){
             model.addRow(new Object[]{location.getAirportId(), location.getAirportName(), location.getAirportCity(), location.getAirportCountry()});
         }
+        /*
+        for (Location location : this.locations) {
+            model.addRow(new Object[]{location.getAirportId(), location.getAirportName(), location.getAirportCity(), location.getAirportCountry()});
+        }*/
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
@@ -1813,6 +1772,10 @@ public class AirportFrame extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_userSelectActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
     /**
      * @param args the command line arguments

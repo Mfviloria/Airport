@@ -17,14 +17,27 @@ import model.storage.Storage;
  * @author mariafernandaviloriazapata
  */
 public class FlightController {
-    public static Response createPlaneFlight(String id, Plane plane, Location departure, Location arrival,
-            LocalDateTime departureDate, int hoursArrival, int minutesArrival) {
+    public static Response createPlaneFlight(String id, String  plane, String departure, String  arrival, String scaleLocation, String year, String month, String days, String hours, String minutes, String hoursDurationArrival, String minutesDurationArrival, String hoursDurationScale, String minutesDurationScale) {
         Storage storage = Storage.getInstance();
         try {
             // Validaciones básicas de campos
-            if (id == null || id.trim().isEmpty()) {
+            if (id.trim().isEmpty()) {
                 return new Response("Flight ID must not be empty", Status.BAD_REQUEST);
-            }
+            } else if (plane.equals("Plane")){
+                return new Response("Plane must not be empty", Status.BAD_REQUEST);
+            } else if (departure.equals("Location")){
+                return new Response("Departure Location must not be empty", Status.BAD_REQUEST);
+            } else if (arrival.equals("Location")){
+                return new Response("Arrival Location must not be empty", Status.BAD_REQUEST);
+            } else if (scaleLocation.equals("Location")){
+                return new Response("Scale Location must not be empty", Status.BAD_REQUEST);
+            } else if (year.isEmpty() || month.equals("Month") || days.equals("Day") || hours.equals("Hour") || minutes.equals("Minute")){
+                return new Response("Departure date must not be empty", Status.BAD_REQUEST);
+            } else if (hoursDurationArrival.equals("Hour") || minutesDurationArrival.equals("Minute")){
+                return new Response("Arrival duration must not be empty", Status.BAD_REQUEST);
+            } else if (hoursDurationScale.equals("Hour") || minutesDurationScale.equals("Minute")){
+                return new Response("Scale duration must not be empty", Status.BAD_REQUEST);
+            } 
 
             if (!id.matches("^[A-Z]{2}\\d{5}$")) {
                 return new Response("Flight ID must follow the format: 2 uppercase letters followed by 5 digits (e.g., AB12345)", Status.BAD_REQUEST);
@@ -33,37 +46,20 @@ public class FlightController {
             if (storage.getFlight(id) != null) {
                 return new Response("A flight with this ID already exists", Status.BAD_REQUEST);
             }
-
-            if (plane == null) {
-                return new Response("Plane must not be null", Status.BAD_REQUEST);
-            }
-
-            if (departure == null || arrival == null) {
-                return new Response("Both departure and arrival locations must be provided", Status.BAD_REQUEST);
-            }
-
-            if (departureDate == null) {
-                return new Response("Departure date must not be null", Status.BAD_REQUEST);
-            }
+            
+            int hoursArrival = Integer.parseInt(hoursDurationArrival);
+            int minutesArrival = Integer.parseInt(minutesDurationArrival);
 
             if (hoursArrival < 0 || minutesArrival < 0 || (hoursArrival == 0 && minutesArrival == 0)) {
                 return new Response("Arrival duration must be greater than 00:00", Status.BAD_REQUEST);
             }
-
-            // Verificar que las ubicaciones existan en almacenamiento
-            if (storage.getLocation(departure.getAirportId()) == null) {
-                return new Response("Departure location does not exist in system", Status.BAD_REQUEST);
-            }
-
-            if (storage.getLocation(arrival.getAirportId()) == null) {
-                return new Response("Arrival location does not exist in system", Status.BAD_REQUEST);
-            }
-
+            
+            LocalDateTime departureDate = LocalDateTime.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(days), Integer.parseInt(hours), Integer.parseInt(minutes));
             // Crear y guardar vuelo
-            Flight flight = new Flight(id, plane, departure, arrival, departureDate, hoursArrival, minutesArrival);
+            Flight flight = new Flight(id, storage.getPlane(plane), storage.getLocation(departure), storage.getLocation(arrival), departureDate, hoursArrival, minutesArrival);
             storage.addFlight(flight);
 
-            return new Response("Flight successfully added (no scale)", Status.OK);
+            return new Response("Flight successfully added (With scale)", Status.OK);
 
         } catch (NumberFormatException ex) {
             return new Response("Numeric value expected in time fields: " + ex.getMessage(), Status.BAD_REQUEST);
@@ -72,16 +68,25 @@ public class FlightController {
         }
     }
 
-    public static Response createPlaneFlightWithScale(String id, Plane plane, Location departure, Location scale, Location arrival,
-            LocalDateTime departureDate, int hoursArrival, int minutesArrival,
-            int hoursScale, int minutesScale) {
+    public static Response createPlaneFlight(String id, String plane, String departure, String arrival,
+            String year, String month, String days, String hours, String minutes, String hoursArrival, String minutesArrival) {
         Storage storage = Storage.getInstance();
         try {
             // Validaciones básicas de campos
-            if (id == null || id.trim().isEmpty()) {
+            if (id.trim().isEmpty()) {
                 return new Response("Flight ID must not be empty", Status.BAD_REQUEST);
-            }
-
+            } else if (plane.equals("Plane")){
+                return new Response("Plane must not be empty", Status.BAD_REQUEST);
+            } else if (departure.equals("Location")){
+                return new Response("Departure Location must not be empty", Status.BAD_REQUEST);
+            } else if (arrival.equals("Location")){
+                return new Response("Arrival Location must not be empty", Status.BAD_REQUEST);
+            } else if (year.isEmpty() || month.equals("Month") || days.equals("Day") || hours.equals("Hour") || minutes.equals("Minute")){
+                return new Response("Departure date must not be empty", Status.BAD_REQUEST);
+            } else if (hoursArrival.equals("Hour") || minutesArrival.equals("Minute")){
+                return new Response("Arrival duration must not be empty", Status.BAD_REQUEST);
+            } 
+            
             if (!id.matches("^[A-Z]{2}\\d{5}$")) {
                 return new Response("Flight ID must follow the format: 2 uppercase letters followed by 5 digits (e.g., AB12345)", Status.BAD_REQUEST);
             }
@@ -89,43 +94,21 @@ public class FlightController {
             if (storage.getFlight(id) != null) {
                 return new Response("A flight with this ID already exists", Status.BAD_REQUEST);
             }
+            
+            int hoursa = Integer.parseInt(hoursArrival);
+            int minutesa = Integer.parseInt(minutesArrival);
 
-            if (plane == null) {
-                return new Response("Plane must not be null", Status.BAD_REQUEST);
+            if (hoursa < 0 || minutesa < 0 || (hoursa == 0 && minutesa == 0)) {
+                return new Response("Arrival duration must be greater than 00:00", Status.BAD_REQUEST);
             }
-
-            if (departure == null || scale == null || arrival == null) {
-                return new Response("Departure, scale, and arrival locations must be provided", Status.BAD_REQUEST);
-            }
-
-            if (departureDate == null) {
-                return new Response("Departure date must not be null", Status.BAD_REQUEST);
-            }
-
-            if ((hoursArrival < 0 || minutesArrival < 0 || (hoursArrival == 0 && minutesArrival == 0))
-                    || (hoursScale < 0 || minutesScale < 0 || (hoursScale == 0 && minutesScale == 0))) {
-                return new Response("Both arrival and scale durations must be greater than 00:00", Status.BAD_REQUEST);
-            }
-
-            // Verificar existencia de ubicaciones
-            if (storage.getLocation(departure.getAirportId()) == null) {
-                return new Response("Departure location does not exist in system", Status.BAD_REQUEST);
-            }
-
-            if (storage.getLocation(scale.getAirportId()) == null) {
-                return new Response("Scale location does not exist in system", Status.BAD_REQUEST);
-            }
-
-            if (storage.getLocation(arrival.getAirportId()) == null) {
-                return new Response("Arrival location does not exist in system", Status.BAD_REQUEST);
-            }
-
-            // Crear y guardar vuelo con escala
-            Flight flight = new Flight(id, plane, departure, scale, arrival, departureDate,
-                    hoursArrival, minutesArrival, hoursScale, minutesScale);
+            
+            LocalDateTime departureDate = LocalDateTime.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(days), Integer.parseInt(hours), Integer.parseInt(minutes));
+            // Crear y guardar vuelo
+            Flight flight = new Flight(id, storage.getPlane(plane), storage.getLocation(departure), storage.getLocation(arrival), departureDate,
+                    hoursa, minutesa);
             storage.addFlight(flight);
 
-            return new Response("Flight successfully added (with scale)", Status.OK);
+            return new Response("Flight successfully added (No scale)", Status.OK);
 
         } catch (NumberFormatException ex) {
             return new Response("Numeric value expected in time fields: " + ex.getMessage(), Status.BAD_REQUEST);
