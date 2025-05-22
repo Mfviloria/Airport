@@ -3,12 +3,13 @@ package controllers;
 import controllers.utils.Response;
 import controllers.utils.Status;
 import model.Location;
-import model.storage.Storage;
+import model.storage.LocationStorage;
+
 
 public class AirportController {
 
     public static Response createAirport(String id, String name, String city, String country, String latitude, String longitude) {
-        Storage storage = Storage.getInstance();
+        LocationStorage storage = LocationStorage.getInstance();
 
         // Validar campos vacíos
         if (id == null || id.trim().isEmpty()) {

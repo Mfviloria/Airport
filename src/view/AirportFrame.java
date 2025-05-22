@@ -4,6 +4,7 @@ package view;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+
 import model.Plane;
 import model.Location;
 import model.Passenger;
@@ -28,7 +29,6 @@ import model.storage.FlightStorage;
 import model.storage.LocationStorage;
 import model.storage.PassengerStorage;
 import model.storage.PlaneStorage;
-import model.storage.Storage;
 
 /**
  *
@@ -44,7 +44,6 @@ public class AirportFrame extends javax.swing.JFrame {
     private ArrayList<Plane> planes;
     private ArrayList<Location> locations;
     private ArrayList<Flight> flights;
-    private Storage storage;
     
     public AirportFrame() {
         initComponents();
@@ -53,8 +52,7 @@ public class AirportFrame extends javax.swing.JFrame {
         this.planes = new ArrayList<>();
         this.locations = new ArrayList<>();
         this.flights = new ArrayList<>();
-        this.storage = Storage.getInstance();
-        
+    
         this.setBackground(new Color(0, 0, 0, 0));
         this.setLocationRelativeTo(null);
 
@@ -1516,7 +1514,7 @@ public class AirportFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Avión creado", JOptionPane.INFORMATION_MESSAGE);
-            this.planes= storage.getPlanes();
+            
         }
 
         if (response.getStatus() <= 200) {
@@ -1549,7 +1547,7 @@ public class AirportFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Airport creado", JOptionPane.INFORMATION_MESSAGE);
-            this.locations = storage.getLocations();
+           
         }
 
        if (response.getStatus() <= 200) {
