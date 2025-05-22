@@ -22,6 +22,10 @@
             <file>file:/C:/Users/samuel/Documents/GitHub/Airport-main/Airport/src/model/storage/PassengerStorage.java</file>
             <file>file:/C:/Users/samuel/Documents/GitHub/Airport-main/Airport/src/model/storage/LocationStorage.java</file>
             <file>file:/C:/Users/samuel/Documents/GitHub/Airport-main/Airport/src/model/storage/PlaneStorage.java</file>
+            <file>file:/C:/Users/samuel/Documents/GitHub/Airport-main/Airport/src/model/storage/flights.json</file>
+            <file>file:/C:/Users/samuel/Documents/GitHub/Airport-main/Airport/src/model/storage/FlightData.java</file>
+            <file>file:/C:/Users/samuel/Documents/GitHub/Airport-main/Airport/src/model/storage/locations.json</file>
+            <file>file:/C:/Users/samuel/Documents/GitHub/Airport-main/Airport/src/model/storage/planes.json</file>
         </group>
     </open-files>
 </project-private>

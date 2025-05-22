@@ -34,10 +34,10 @@ public class FlightStorage {
         PlaneStorage planes = PlaneStorage.getInstance();
         LocationStorage locations = LocationStorage.getInstance();
 
-        HashMap<String, Plane> planesMap = planes.getAllPlanesMap(); // Asegúrate que exista este método
-        HashMap<String, Location> locationsMap = locations.getAllLocationsMap(); // Asegúrate que exista este método
+        HashMap<String, Plane> planesMap = planes.getAllPlanesMap(); 
+        HashMap<String, Location> locationsMap = locations.getAllLocationsMap();
 
-        this.loadFlightsFromJson("data/flights.json", planesMap, locationsMap); // Ruta relativa o absoluta
+        this.loadFlightsFromJson("json\\flights.json\"", planesMap, locationsMap); 
     }
 
     public void loadFlightsFromJson(String filePath, HashMap<String, Plane> planesMap, HashMap<String, Location> locationsMap) {
