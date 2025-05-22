@@ -10,6 +10,7 @@ import model.Passenger;
 import model.Flight;
 import com.formdev.flatlaf.FlatDarkLaf;
 import controllers.AirportController;
+import controllers.FlightController;
 import controllers.PassengerController;
 import controllers.PlaneControllers;
 import controllers.utils.Response;
@@ -1550,7 +1551,7 @@ public class AirportFrame extends javax.swing.JFrame {
         String scaleLocationId = jComboBox4.getItemAt(jComboBox4.getSelectedIndex()).trim();
 
 // Validación del avión seleccionado // Mejorar
-        if (planeId.isEmpty() || planeId.equalsIgnoreCase("Selecciona un avión")) {
+        if (planeId.isEmpty() || planeId.equalsIgnoreCase("Plane")) {
             JOptionPane.showMessageDialog(null, "Por favor, selecciona un avión válido.");
             return;
         }
@@ -1630,9 +1631,9 @@ public class AirportFrame extends javax.swing.JFrame {
         Response response;
 
         if (scale == null) {
-            response = PlaneControllers.createPlaneFlight(id, plane, departure, arrival, departureDate, hoursDurationsArrival, minutesDurationsArrival);
+            response = FlightController.createPlaneFlight(id, plane, departure, arrival, departureDate, hoursDurationsArrival, minutesDurationsArrival);
         } else {
-            response = PlaneControllers.createPlaneFlightWithScale(id, plane, departure, scale, arrival, departureDate,
+            response = FlightController.createPlaneFlightWithScale(id, plane, departure, scale, arrival, departureDate,
                     hoursDurationsArrival, minutesDurationsArrival, hoursDurationsScale, minutesDurationsScale);
         }
 
