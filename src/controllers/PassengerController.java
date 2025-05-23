@@ -86,5 +86,4 @@ public class PassengerController {
         System.out.println(storage.getPassengers());
         return  new Response("Passenger added succesfully", Status.OK);
     }
-    }
 }
