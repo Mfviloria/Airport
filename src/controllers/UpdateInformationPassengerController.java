@@ -14,10 +14,9 @@ import model.storage.PassengerStorage;
  *
  * @author mariafernandaviloriazapata
  */
-public class PassengerController {
-    
-    public static Response createPassenger(String id, String firstname, String lastname,  String year, String month, String day, String phoneCode, String phone, String country){
-        PassengerStorage storage = PassengerStorage.getInstance();
+public class UpdateInformationPassengerController {
+    public static Response Updateinfo(String id, String firstname, String lastname,  String year, String month, String day, String phoneCode, String phone, String country){
+       PassengerStorage storage = PassengerStorage.getInstance();
         try{
             if (id.isEmpty()){
                 return new Response("Id must be not empty", Status.BAD_REQUEST);
@@ -81,10 +80,26 @@ public class PassengerController {
             return new Response("Phone must be numeric", Status.BAD_REQUEST);
         }
         
-        LocalDate birthDate = LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
-        storage.addPerson(new Passenger(Long.parseLong(id), firstname, lastname, birthDate, Integer.parseInt(phoneCode), Long.parseLong(phone), country));
-        System.out.println(storage.getPassengers());
-        return  new Response("Passenger added succesfully", Status.OK);
+       LocalDate birthDate = LocalDate.of(Integer.parseInt(year), Integer.parseInt(month),Integer.parseInt( day));
+
+        Passenger passenger = null;
+        for (Passenger p : storage.getPassengers()) {
+            if (p.getId() == Long.parseLong(id)) {
+                passenger = p;
+            }
+        }
+
+        passenger.setFirstname(firstname);
+        passenger.setLastname(lastname);
+        passenger.setBirthDate(birthDate);
+        passenger.setCountryPhoneCode(Integer.parseInt(phoneCode));
+        passenger.setPhone(Long.parseLong(phone));
+        passenger.setCountry(country);
+        System.out.println(passenger.toString());
+        return  new Response("Information updated succesfully", Status.OK);
     }
+    
+        
+        
     }
-}
+

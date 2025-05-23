@@ -27,6 +27,10 @@ import javax.swing.table.DefaultTableModel;
 import model.storage.FlightStorage;
 import model.storage.LoadJson;
 import model.storage.LocationStorage;
+import static model.storage.OrganizeLists.organizeList;
+import static model.storage.OrganizeLists.organizeListFlight;
+import static model.storage.OrganizeLists.organizeListLoc;
+import static model.storage.OrganizeLists.organizeListPlane;
 import model.storage.PassengerStorage;
 import model.storage.PlaneStorage;
 
@@ -1665,21 +1669,7 @@ public class AirportFrame extends javax.swing.JFrame {
         long phone = Long.parseLong(jTextField25.getText());
         String country = jTextField27.getText();
 
-        LocalDate birthDate = LocalDate.of(year, month, day);
-
-        Passenger passenger = null;
-        for (Passenger p : this.passengers) {
-            if (p.getId() == id) {
-                passenger = p;
-            }
-        }
-
-        passenger.setFirstname(firstname);
-        passenger.setLastname(lastname);
-        passenger.setBirthDate(birthDate);
-        passenger.setCountryPhoneCode(phoneCode);
-        passenger.setPhone(phone);
-        passenger.setCountry(country);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
@@ -1746,7 +1736,7 @@ public class AirportFrame extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         model.setRowCount(0);
         PassengerStorage storage = PassengerStorage.getInstance();
-         for (Passenger pass : storage.getPassengers()) {
+         for (Passenger pass : organizeList(storage.getPassengers()) ){
             model.addRow(new Object[]{pass.getId(), pass.getFullname(), pass.getBirthDate(), pass.calculateAge(), pass.generateFullPhone(), pass.getCountry(), pass.getNumFlights()});
         }
        /*
@@ -1761,10 +1751,8 @@ public class AirportFrame extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
         model.setRowCount(0);
         FlightStorage storage = FlightStorage.getInstance();
-        for (Flight flight : storage.getAllFlights()) {
+        for (Flight flight : organizeListFlight(storage.getAllFlights())) {
             System.out.println("Flight: " + flight.toString());
-            // Ver porque el flight.getDepartureLocation() = Null
-            //model.addRow(new Object[]{flight.getId(), flight.getDepartureLocation().getAirportId(), flight.getArrivalLocation().getAirportId(), (flight.getScaleLocation() == null ? "-" : flight.getScaleLocation().getAirportId()), flight.getDepartureDate(), flight.calculateArrivalDate(), flight.getPlane().getId(), flight.getNumPassengers()});
             model.addRow(new Object[]{flight.getId(), flight.getDepartureLocation().getAirportId(), flight.getArrivalLocation().getAirportId(), (flight.getScaleLocation() == null ? "-" : flight.getScaleLocation().getAirportId()), flight.getDepartureDate(), flight.calculateArrivalDate(), flight.getPlane().getId(), flight.getNumPassengers()});
 
         }
@@ -1779,7 +1767,7 @@ public class AirportFrame extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
         model.setRowCount(0);
         PlaneStorage storage = PlaneStorage.getInstance();
-        for (Plane plane : storage.getPlanes()) {
+        for (Plane plane : organizeListPlane(storage.getPlanes())) {
             model.addRow(new Object[]{plane.getId(), plane.getBrand(), plane.getModel(), plane.getMaxCapacity(), plane.getAirline(), plane.getNumFlights()});
         }
         /*
@@ -1793,7 +1781,7 @@ public class AirportFrame extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
         model.setRowCount(0);
         LocationStorage storage = LocationStorage.getInstance();
-        for (Location location : storage.getLocations()) {
+        for (Location location : organizeListLoc(storage.getLocations())) {
             model.addRow(new Object[]{location.getAirportId(), location.getAirportName(), location.getAirportCity(), location.getAirportCountry()});
         }
         /*

@@ -24,7 +24,6 @@ import org.json.JSONObject;
 public class LoadJson {
     public static void loadLocations() {
         try {
-            System.out.println("Directorio actual: " + System.getProperty("user.dir"));
             String content = new String(Files.readAllBytes(Paths.get("locations.json")));
             JSONArray array = new JSONArray(content);
             for (int i = 0; i < array.length(); i++) {
@@ -55,7 +54,8 @@ public class LoadJson {
                 String plane = obj.getString("plane");
                 String departureLocation = obj.getString("departureLocation");
                 String arrivalLocation = obj.getString("arrivalLocation");
-                String scaleLocation = obj.getString("scaleLocation");
+               
+                String scaleLocation = obj.isNull("scaleLocation") ? null : obj.getString("scaleLocation");
                 LocalDateTime departureDate = LocalDateTime.parse(obj.getString("departureDate"));
                 int hoursDurationArrival = obj.getInt("hoursDurationArrival");
                 int minutesDurationArrival = obj.getInt("minutesDurationArrival");
@@ -65,7 +65,7 @@ public class LoadJson {
                 FlightStorage flight = FlightStorage.getInstance();
                 PlaneStorage pla = PlaneStorage.getInstance();
                 LocationStorage loc = LocationStorage.getInstance();
-                flight.addFlight(new Flight(id,pla.getPlane(plane), loc.getLocation(departureLocation), loc.getLocation(arrivalLocation), loc.getLocation(scaleLocation), departureDate,hoursDurationArrival, minutesDurationArrival,hoursDurationScale,minutesDurationScale ));
+                flight.addFlight(new Flight(id,pla.getPlane(plane), loc.getLocation(departureLocation), loc.getLocation(scaleLocation),loc.getLocation(arrivalLocation), departureDate,hoursDurationArrival, minutesDurationArrival,hoursDurationScale,minutesDurationScale ));
             }
 
         } catch (Exception e) {
