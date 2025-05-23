@@ -6,6 +6,7 @@ package main;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import javax.swing.UIManager;
+import model.storage.LoadJson;
 import view.AirportFrame;
 
 /**
@@ -18,6 +19,12 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+
+        LoadJson.loadFlight();
+        LoadJson.loadLocations();
+        LoadJson.loadPassenger();
+        LoadJson.loadPlane();
+        
         System.setProperty("flatlaf.useNativeLibrary", "false");
 
         try {

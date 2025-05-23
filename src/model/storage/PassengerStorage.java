@@ -6,12 +6,7 @@ package model.storage;
 
 import java.util.ArrayList;
 import model.Passenger;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import java.time.LocalDate;
+
 
 /**
  *
@@ -26,7 +21,6 @@ public class PassengerStorage {
 
     private PassengerStorage() {
         this.passengers = new ArrayList<>();
-        loadFromJson("C:\\Users\\samuel\\Documents\\GitHub\\Airport\\json\\passengers.json");
     }
 
     public static PassengerStorage getInstance() {
@@ -68,40 +62,6 @@ public class PassengerStorage {
 
     public ArrayList<Passenger> getPassengers() {
         return passengers;
-    }
-
-    public void loadFromJson(String filename) {
-        try {
-            String content = new String(Files.readAllBytes(Paths.get(filename)));
-            JSONArray passengersArray = new JSONArray(content);
-
-            for (int i = 0; i < passengersArray.length(); i++) {
-                JSONObject obj = passengersArray.getJSONObject(i);
-
-                long id = obj.getLong("id");
-                String firstname = obj.getString("firstname");
-                String lastname = obj.getString("lastname");
-
-                String[] dateParts = obj.getString("birthDate").split("-");
-                LocalDate birthDate = LocalDate.of(
-                        Integer.parseInt(dateParts[0]),
-                        Integer.parseInt(dateParts[1]),
-                        Integer.parseInt(dateParts[2])
-                );
-
-                int countryPhoneCode = obj.getInt("countryPhoneCode");
-                long phone = obj.getLong("phone");
-                String country = obj.getString("country");
-
-                Passenger passenger = new Passenger(id, firstname, lastname, birthDate, countryPhoneCode, phone, country);
-                this.addPerson(passenger); // Agrega al ArrayList si no está repetido
-            }
-
-        } catch (IOException e) {
-            System.err.println("Error reading file: " + e.getMessage());
-        } catch (Exception e) {
-            System.err.println("Error parsing JSON: " + e.getMessage());
-        }
     }
 
 }

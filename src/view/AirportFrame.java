@@ -25,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import model.storage.FlightStorage;
+import model.storage.LoadJson;
 import model.storage.LocationStorage;
 import model.storage.PassengerStorage;
 import model.storage.PlaneStorage;
@@ -1745,10 +1746,10 @@ public class AirportFrame extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         model.setRowCount(0);
         PassengerStorage storage = PassengerStorage.getInstance();
-        for (Passenger pass : storage.getPassengers()) {
+         for (Passenger pass : storage.getPassengers()) {
             model.addRow(new Object[]{pass.getId(), pass.getFullname(), pass.getBirthDate(), pass.calculateAge(), pass.generateFullPhone(), pass.getCountry(), pass.getNumFlights()});
         }
-        /*
+       /*
         for (Passenger passenger : this.passengers) {
             model.addRow(new Object[]{passenger.getId(), passenger.getFullname(), passenger.getBirthDate(), passenger.calculateAge(), passenger.generateFullPhone(), passenger.getCountry(), passenger.getNumFlights()});
         }
