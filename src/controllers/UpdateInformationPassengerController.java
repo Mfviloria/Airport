@@ -38,8 +38,8 @@ public class UpdateInformationPassengerController {
                 return new Response("Id must be positive", Status.BAD_REQUEST);
             } else if (id.length() >15){
                 return new Response("Id must have at least 15 digits", Status.BAD_REQUEST);
-            } else if (storage.getPassenger(Integer.parseInt(id)) != null){
-               return new Response("A passenger with that id already exists", Status.BAD_REQUEST);
+            } else if (storage.getPassenger(Integer.parseInt(id)) == null){
+               return new Response("A passenger with that id dosen't exists", Status.BAD_REQUEST);
             }
         } catch (NumberFormatException ex) {
                 return new Response("Id must be numeric", Status.BAD_REQUEST);

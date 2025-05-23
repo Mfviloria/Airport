@@ -6,7 +6,7 @@ package main;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import javax.swing.UIManager;
-import model.storage.LoadJson;
+import Storage.utils.LoadJson;
 import view.AirportFrame;
 
 /**

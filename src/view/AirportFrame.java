@@ -15,6 +15,7 @@ import controllers.LocationController;
 import controllers.FlightController;
 import controllers.PassengerController;
 import controllers.PlaneControllers;
+import controllers.UpdateInformationPassengerController;
 import controllers.utils.Response;
 import controllers.utils.Status;
 import java.awt.Color;
@@ -25,12 +26,12 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import model.storage.FlightStorage;
-import model.storage.LoadJson;
+import Storage.utils.LoadJson;
 import model.storage.LocationStorage;
-import static model.storage.OrganizeLists.organizeList;
-import static model.storage.OrganizeLists.organizeListFlight;
-import static model.storage.OrganizeLists.organizeListLoc;
-import static model.storage.OrganizeLists.organizeListPlane;
+import static Storage.utils.OrganizeLists.organizeList;
+import static Storage.utils.OrganizeLists.organizeListFlight;
+import static Storage.utils.OrganizeLists.organizeListLoc;
+import static Storage.utils.OrganizeLists.organizeListPlane;
 import model.storage.PassengerStorage;
 import model.storage.PlaneStorage;
 
@@ -48,6 +49,7 @@ public class AirportFrame extends javax.swing.JFrame {
     private ArrayList<Plane> planes;
     private ArrayList<Location> locations;
     private ArrayList<Flight> flights;
+    private Passenger CurrentUser;
 
     public AirportFrame() {
         initComponents();
@@ -119,6 +121,7 @@ public class AirportFrame extends javax.swing.JFrame {
         jComboBox2.removeAllItems(); // Departure
         jComboBox3.removeAllItems(); // Arrival
         jComboBox4.removeAllItems(); // Scale
+        userSelect.removeAllItems(); // Usuarios
 
         // Agregar aviones a jComboBox1
         for (Plane plane : this.planes) {
@@ -126,11 +129,18 @@ public class AirportFrame extends javax.swing.JFrame {
         }
 
         // Agregar ubicaciones a jComboBox2, jComboBox3 y jComboBox4
+        jComboBox4.addItem("Ninguna"); // Item inicial (puede ser "Ninguna" o similar)
         for (Location location : this.locations) {
             String id = location.getAirportId();
             jComboBox2.addItem(id); // Departure
             jComboBox3.addItem(id); // Arrival
             jComboBox4.addItem(id); // Scale
+        }
+
+        // Agregar usuarios al comboBox userSelect
+        userSelect.addItem("Seleccione un usuario"); // Opción por defecto
+        for (Passenger passenger : PassengerStorage.getInstance().getPassengers()) {
+            userSelect.addItem(String.valueOf(passenger.getId()));
         }
     }
 
@@ -1659,17 +1669,44 @@ public class AirportFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        long id = Long.parseLong(jTextField20.getText());
-        String firstname = jTextField22.getText();
-        String lastname = jTextField23.getText();
-        int year = Integer.parseInt(jTextField24.getText());
-        int month = Integer.parseInt(MONTH.getItemAt(MONTH5.getSelectedIndex()));
-        int day = Integer.parseInt(DAY.getItemAt(DAY5.getSelectedIndex()));
-        int phoneCode = Integer.parseInt(jTextField26.getText());
-        long phone = Long.parseLong(jTextField25.getText());
-        String country = jTextField27.getText();
+        // Recolectar datos desde los componentes del formulario
+        String id = jTextField20.getText().trim();
+        String firstname = jTextField22.getText().trim();
+        String lastname = jTextField23.getText().trim();
+        String year = jTextField24.getText().trim();
+        String month = MONTH.getItemAt(MONTH5.getSelectedIndex()).trim();
+        String day = DAY.getItemAt(DAY5.getSelectedIndex()).trim();
+        String phoneCode = jTextField26.getText().trim();
+        String phone = jTextField25.getText().trim();
+        String country = jTextField27.getText().trim();
 
-        
+// Llamar al controlador de actualización
+        Response response = UpdateInformationPassengerController.Updateinfo(
+                id, firstname, lastname, year, month, day, phoneCode, phone, country
+        );
+
+// Mostrar mensaje según el resultado
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Advertencia " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Pasajero actualizado", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+// Opcional: limpiar campos si fue exitoso
+        if (response.getStatus() <= 200) {
+            jTextField20.setText("");
+            jTextField22.setText("");
+            jTextField23.setText("");
+            jTextField24.setText("");
+            jTextField25.setText("");
+            jTextField26.setText("");
+            jTextField27.setText("");
+            MONTH5.setSelectedIndex(0);
+            DAY5.setSelectedIndex(0);
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
@@ -1736,10 +1773,10 @@ public class AirportFrame extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         model.setRowCount(0);
         PassengerStorage storage = PassengerStorage.getInstance();
-         for (Passenger pass : organizeList(storage.getPassengers()) ){
+        for (Passenger pass : organizeList(storage.getPassengers())) {
             model.addRow(new Object[]{pass.getId(), pass.getFullname(), pass.getBirthDate(), pass.calculateAge(), pass.generateFullPhone(), pass.getCountry(), pass.getNumFlights()});
         }
-       /*
+        /*
         for (Passenger passenger : this.passengers) {
             model.addRow(new Object[]{passenger.getId(), passenger.getFullname(), passenger.getBirthDate(), passenger.calculateAge(), passenger.generateFullPhone(), passenger.getCountry(), passenger.getNumFlights()});
         }

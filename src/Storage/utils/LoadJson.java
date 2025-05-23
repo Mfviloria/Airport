@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package model.storage;
+package Storage.utils;
 
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -14,6 +14,10 @@ import model.Flight;
 import model.Location;
 import model.Passenger;
 import model.Plane;
+import model.storage.FlightStorage;
+import model.storage.LocationStorage;
+import model.storage.PassengerStorage;
+import model.storage.PlaneStorage;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
