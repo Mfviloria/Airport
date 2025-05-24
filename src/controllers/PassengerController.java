@@ -19,7 +19,7 @@ public class PassengerController {
 
     public static Response createPassenger(String id, String firstname, String lastname, String year, String month, String day, String phoneCode, String phone, String country) {
         PassengerStorage storage = PassengerStorage.getInstance();
-        try {
+       
             if (id.isEmpty()) {
                 return new Response("Id must be not empty", Status.BAD_REQUEST);
             } else if (firstname.isEmpty()) {
@@ -35,17 +35,22 @@ public class PassengerController {
             } else if (country.isEmpty()) {
                 return new Response("Country must be not empty", Status.BAD_REQUEST);
             }
+            try {
             //Id verification
-            if (Integer.parseInt(id) < 0) {
+            int idint = Integer.parseInt(year);
+            if (idint < 0) {
                 return new Response("Id must be positive", Status.BAD_REQUEST);
-            } else if (id.length() > 15) {
-                return new Response("Id must have at least 15 digits", Status.BAD_REQUEST);
-            } else if (storage.getPassenger(Integer.parseInt(id)) != null) {
-                return new Response("A passenger with that id already exists", Status.BAD_REQUEST);
-            }
+            } 
+            
         } catch (NumberFormatException ex) {
             return new Response("Id must be numeric", Status.BAD_REQUEST);
         }
+        if (id.length() > 15) {
+                return new Response("Id must have at least 15 digits", Status.BAD_REQUEST);
+            } 
+        if (storage.getPassenger(Integer.parseInt(id)) != null) {
+                return new Response("A passenger with that id already exists", Status.BAD_REQUEST);
+            }
         // Birth day verification
         try {
             int yearInt = Integer.parseInt(year);
@@ -75,12 +80,14 @@ public class PassengerController {
             long phoneLong = Long.parseLong(phone);
             if (phoneLong < 0) {
                 return new Response("Phone must be positive", Status.BAD_REQUEST);
-            } else if (phone.length() > 12) {
-                return new Response("Phone must have at least 11 digits", Status.BAD_REQUEST);
-            }
+            } 
+            
         } catch (NumberFormatException ex) {
             return new Response("Phone must be numeric", Status.BAD_REQUEST);
         }
+        if (phone.length() > 12) {
+                return new Response("Phone must have at least 11 digits", Status.BAD_REQUEST);
+            }
 
         LocalDate birthDate = LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
         storage.addPerson(new Passenger(Long.parseLong(id), firstname, lastname, birthDate, Integer.parseInt(phoneCode), Long.parseLong(phone), country));

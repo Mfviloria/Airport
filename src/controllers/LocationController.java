@@ -39,7 +39,9 @@ public class LocationController {
         if (storage.getLocation(id) != null) {
             return new Response("A location with that ID already exists", Status.BAD_REQUEST);
         }
-
+        if (!id.matches("[A-Z]{3}")) {
+            return new Response("ID must contain exactly 3 uppercase letters.", Status.BAD_REQUEST);
+        }
         // Validación de latitud y longitud
         double latitude;
         double longitude;

@@ -25,7 +25,9 @@ public class FlightController {
         FlightStorage storage = FlightStorage.getInstance();
         PlaneStorage storagep = PlaneStorage.getInstance();
         LocationStorage storagel = LocationStorage.getInstance();
+       
         try {
+            
             // Validaciones básicas de campos
             if (id.trim().isEmpty()) {
                 return new Response("Flight ID must not be empty", Status.BAD_REQUEST);
@@ -45,9 +47,10 @@ public class FlightController {
                 return new Response("Scale duration must not be empty", Status.BAD_REQUEST);
             }
 
-            if (!id.matches("^[A-Z]{2}\\d{5}$")) {
-                return new Response("Flight ID must follow the format: 2 uppercase letters followed by 5 digits (e.g., AB12345)", Status.BAD_REQUEST);
-            }
+             if (!id.matches("^[A-Z]{3}\\d{5}$")) {
+                    return new Response("Flight ID must follow the format: 3 uppercase letters followed by 5 digits (e.g., ABC12345)", Status.BAD_REQUEST);
+                }
+
 
             if (storage.getFlight(id) != null) {
                 return new Response("A flight with this ID already exists", Status.BAD_REQUEST);
@@ -101,11 +104,11 @@ public class FlightController {
                 return new Response("Departure date must not be empty", Status.BAD_REQUEST);
             } else if (hoursArrival.equals("Hour") || minutesArrival.equals("Minute")) {
                 return new Response("Arrival duration must not be empty", Status.BAD_REQUEST);
-            }
+            } 
 
-            if (!id.matches("^[A-Z]{2}\\d{5}$")) {
-                return new Response("Flight ID must follow the format: 2 uppercase letters followed by 5 digits (e.g., AB12345)", Status.BAD_REQUEST);
-            }
+             if (!id.matches("^[A-Z]{3}\\d{5}$")) {
+                    return new Response("Flight ID must follow the format: 3 uppercase letters followed by 5 digits (e.g., ABC12345)", Status.BAD_REQUEST);
+                }
 
             if (storage.getFlight(id) != null) {
                 return new Response("A flight with this ID already exists", Status.BAD_REQUEST);

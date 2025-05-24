@@ -22,6 +22,11 @@ public class DelayFlightController {
         }else if(minutes.equals("Minute")){
              return new Response("Minutes must not be empty.", Status.BAD_REQUEST);
         }
+        
+        if (hour.equals("0") && minutes.equals("0")){
+            return new Response("Delay time must be greater than 00:00", Status.BAD_REQUEST);
+        }
+        
         FlightStorage storage = FlightStorage.getInstance();
         Flight flight = storage.getFlight(id);
         flight.setDepartureDate(flight.getDepartureDate().plusHours(Long.parseLong(hour)).plusMinutes(Long.parseLong(minutes)));
