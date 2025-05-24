@@ -1,10 +1,10 @@
 package controllers;
 
+import Storage.utils.LoadJson;
 import controllers.utils.Response;
 import controllers.utils.Status;
 import model.Location;
 import model.storage.LocationStorage;
-
 
 /**
  *
@@ -64,6 +64,8 @@ public class LocationController {
         // Crear y almacenar el objeto Location
         Location location = new Location(id, name, city, country, latitude, longitude);
         storage.addLocation(location);
+
+        LoadJson.saveLocations();   // Para guardar las ubicaciones
 
         return new Response("Location added successfully", Status.OK);
     }

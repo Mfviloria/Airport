@@ -1,10 +1,10 @@
 package controllers;
 
+import Storage.utils.LoadJson;
 import controllers.utils.Response;
 import controllers.utils.Status;
 import model.Location;
 import model.storage.LocationStorage;
-
 
 public class AirportController {
 
@@ -20,9 +20,9 @@ public class AirportController {
             return new Response("City must not be empty", Status.BAD_REQUEST);
         } else if (country == null || country.trim().isEmpty()) {
             return new Response("Country must not be empty", Status.BAD_REQUEST);
-        } else if (latitude.isEmpty()){
+        } else if (latitude.isEmpty()) {
             return new Response("Latitude must not be empty", Status.BAD_REQUEST);
-        }else if (longitude.isEmpty()){
+        } else if (longitude.isEmpty()) {
             return new Response("Longitude must not be empty", Status.BAD_REQUEST);
         }
 
@@ -60,6 +60,8 @@ public class AirportController {
         // Crear aeropuerto y agregar al storage
         Location airport = new Location(id, name, city, country, Long.parseLong(latitude), Long.parseLong(longitude));
         storage.addLocation(airport);
+
+        LoadJson.saveLocations();   // Para guardar las ubicaciones
 
         return new Response("Airport added successfully", Status.OK);
     }

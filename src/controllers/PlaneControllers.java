@@ -1,5 +1,6 @@
 package controllers;
 
+import Storage.utils.LoadJson;
 import controllers.utils.Response;
 import controllers.utils.Status;
 import java.time.LocalDateTime;
@@ -8,19 +9,18 @@ import model.Location;
 import model.Plane;
 import model.storage.PlaneStorage;
 
-
 public class PlaneControllers {
 
     public static Response createPlane(String id, String brand, String model, String maxCapacity, String airline) {
         PlaneStorage storage = PlaneStorage.getInstance();
 
-         if (id.isEmpty() || brand.isEmpty() || model.isEmpty() || maxCapacity.isEmpty() || airline.isEmpty()) {
+        if (id.isEmpty() || brand.isEmpty() || model.isEmpty() || maxCapacity.isEmpty() || airline.isEmpty()) {
             return new Response("Por favor, completa todos los campos.", Status.BAD_REQUEST);
-           
+
         }
-            int maxCapacityInt;
+        int maxCapacityInt;
         try {
-             maxCapacityInt = Integer.parseInt(maxCapacity);
+            maxCapacityInt = Integer.parseInt(maxCapacity);
         } catch (NumberFormatException e) {
             return new Response("La capacidad máxima debe ser un número válido.", Status.BAD_REQUEST);
         }
@@ -47,7 +47,10 @@ public class PlaneControllers {
         }
 
         Plane newPlane = new Plane(id, brand, model, maxCapacityInt, airline);
-        storage.addPlane( newPlane);
+        storage.addPlane(newPlane);
+
+        LoadJson.savePlanes();      // Para guardar los aviones
+
         return new Response("Plane added successfully", Status.OK);
     }
 
