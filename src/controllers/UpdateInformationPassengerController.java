@@ -4,7 +4,7 @@
  */
 package controllers;
 
-import Storage.utils.LoadJson;
+import controllers.storage.LoadJson;
 import controllers.utils.Response;
 import controllers.utils.Status;
 import java.time.LocalDate;
@@ -41,7 +41,7 @@ public class UpdateInformationPassengerController {
             } else if (id.length() > 15) {
                 return new Response("Id must have at least 15 digits", Status.BAD_REQUEST);
             } else if (storage.getPassenger(Integer.parseInt(id)) == null) {
-                return new Response("A passenger with that id dosen't exists", Status.BAD_REQUEST);
+                return new Response("A passenger with that id doesn't exist", Status.BAD_REQUEST);
             }
         } catch (NumberFormatException ex) {
             return new Response("Id must be numeric", Status.BAD_REQUEST);

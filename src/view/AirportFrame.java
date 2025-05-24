@@ -10,12 +10,15 @@ import model.Passenger;
 import model.Flight;
 import com.formdev.flatlaf.FlatDarkLaf;
 import controllers.AirportController;
+import controllers.DelayFlightController;
+import static controllers.DelayFlightController.delayFlight;
 import controllers.LocationController;
 
 import controllers.FlightController;
 import controllers.PassengerController;
 import controllers.PlaneControllers;
 import controllers.UpdateInformationPassengerController;
+import controllers.UserSelectedController;
 import controllers.utils.Response;
 import controllers.utils.Status;
 import java.awt.Color;
@@ -26,12 +29,12 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import model.storage.FlightStorage;
-import Storage.utils.LoadJson;
+import controllers.storage.LoadJson;
 import model.storage.LocationStorage;
-import static Storage.utils.OrganizeLists.organizeList;
-import static Storage.utils.OrganizeLists.organizeListFlight;
-import static Storage.utils.OrganizeLists.organizeListLoc;
-import static Storage.utils.OrganizeLists.organizeListPlane;
+import static controllers.storage.OrganizeLists.organizeList;
+import static controllers.storage.OrganizeLists.organizeListFlight;
+import static controllers.storage.OrganizeLists.organizeListLoc;
+import static controllers.storage.OrganizeLists.organizeListPlane;
 import model.storage.PassengerStorage;
 import model.storage.PlaneStorage;
 
@@ -134,11 +137,11 @@ public class AirportFrame extends javax.swing.JFrame {
             String id = location.getAirportId();
             jComboBox2.addItem(id); // Departure
             jComboBox3.addItem(id); // Arrival
-            jComboBox4.addItem(id); // Scale
+            jComboBox4.addItem(id); //Scale
         }
 
         // Agregar usuarios al comboBox userSelect
-        userSelect.addItem("Seleccione un usuario"); // Opción por defecto
+        userSelect.addItem("Select your user"); 
         for (Passenger passenger : PassengerStorage.getInstance().getPassengers()) {
             userSelect.addItem(String.valueOf(passenger.getId()));
         }
@@ -146,7 +149,9 @@ public class AirportFrame extends javax.swing.JFrame {
         // Agregar vuelos a jComboBox5
         for (Flight flight : FlightStorage.getInstance().getAllFlights()) {
             jComboBox5.addItem(flight.getId());
+            jComboBox7.addItem(flight.getId());
         }
+        
     }
 
     /**
@@ -1490,6 +1495,15 @@ public class AirportFrame extends javax.swing.JFrame {
         if (administrator.isSelected()) {
             administrator.setSelected(false);
         }
+        Response response = UserSelectedController.userSelected(user.isSelected());
+            if (response.getStatus() >= 500) {
+                JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+            } else if (response.getStatus() >= 400) {
+                JOptionPane.showMessageDialog(null, response.getMessage(), "Advertencia " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
         for (int i = 1; i < Tabbed.getTabCount(); i++) {
             Tabbed.setEnabledAt(i, false);
         }
@@ -1526,6 +1540,7 @@ public class AirportFrame extends javax.swing.JFrame {
         }
 
         if (response.getStatus() <= 200) {
+            
             userSelect.addItem(id);
             IDPassengerRegis.setText("");
             FirstNamePassengerRegis.setText("");
@@ -1641,7 +1656,7 @@ public class AirportFrame extends javax.swing.JFrame {
         } else {
             response = FlightController.createPlaneFlight(id, planeId, departureLocationId, arrivalLocationId, scaleLocationId, year, month, day, hour, minutes, hoursDurationsArrival, minutesDurationsArrival, hoursDurationsScale, minutesDurationsScale);
         }
-
+        
         if (response.getStatus() >= 500) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         } else if (response.getStatus() >= 400) {
@@ -1651,6 +1666,7 @@ public class AirportFrame extends javax.swing.JFrame {
         }
 
         if (response.getStatus() <= 200) {
+            jComboBox7.addItem(id);
             jComboBox5.addItem(id);
 
             jTextField19.setText("");
@@ -1698,8 +1714,7 @@ public class AirportFrame extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Pasajero actualizado", JOptionPane.INFORMATION_MESSAGE);
         }
-
-// Opcional: limpiar campos si fue exitoso
+        
         if (response.getStatus() <= 200) {
             jTextField20.setText("");
             jTextField22.setText("");
@@ -1743,24 +1758,32 @@ public class AirportFrame extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
         String flightId = jComboBox7.getItemAt(jComboBox7.getSelectedIndex());
-        int hours = Integer.parseInt(jComboBox6.getItemAt(jComboBox6.getSelectedIndex()));
-        int minutes = Integer.parseInt(jComboBox8.getItemAt(jComboBox8.getSelectedIndex()));
+        String hours = jComboBox6.getItemAt(jComboBox6.getSelectedIndex());
+        String minutes = jComboBox8.getItemAt(jComboBox8.getSelectedIndex());
+        
+        
+        Response response = DelayFlightController.delayFlight(flightId, hours, minutes);
 
-        Flight flight = null;
-        for (Flight f : this.flights) {
-            if (flightId.equals(f.getId())) {
-                flight = f;
-            }
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
         }
-
-        flight.delay(hours, minutes);
+        
+        if(response.getStatus() <= 200){
+            jComboBox7.setSelectedIndex(0);
+            jComboBox6.setSelectedIndex(0);
+            jComboBox8.setSelectedIndex(0);
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        long passengerId = Long.parseLong(userSelect.getItemAt(userSelect.getSelectedIndex()));
-
-        Passenger passenger = null;
+       Long passengerId = Long.parseLong(userSelect.getItemAt(userSelect.getSelectedIndex()));
+        
+       Passenger passenger = null;
         for (Passenger p : this.passengers) {
             if (p.getId() == passengerId) {
                 passenger = p;
@@ -1773,6 +1796,8 @@ public class AirportFrame extends javax.swing.JFrame {
         for (Flight flight : flights) {
             model.addRow(new Object[]{flight.getId(), flight.getDepartureDate(), flight.calculateArrivalDate()});
         }
+        
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -1783,11 +1808,6 @@ public class AirportFrame extends javax.swing.JFrame {
         for (Passenger pass : organizeList(storage.getPassengers())) {
             model.addRow(new Object[]{pass.getId(), pass.getFullname(), pass.getBirthDate(), pass.calculateAge(), pass.generateFullPhone(), pass.getCountry(), pass.getNumFlights()});
         }
-        /*
-        for (Passenger passenger : this.passengers) {
-            model.addRow(new Object[]{passenger.getId(), passenger.getFullname(), passenger.getBirthDate(), passenger.calculateAge(), passenger.generateFullPhone(), passenger.getCountry(), passenger.getNumFlights()});
-        }
-         */
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -1800,10 +1820,7 @@ public class AirportFrame extends javax.swing.JFrame {
             model.addRow(new Object[]{flight.getId(), flight.getDepartureLocation().getAirportId(), flight.getArrivalLocation().getAirportId(), (flight.getScaleLocation() == null ? "-" : flight.getScaleLocation().getAirportId()), flight.getDepartureDate(), flight.calculateArrivalDate(), flight.getPlane().getId(), flight.getNumPassengers()});
 
         }
-        /*
-        for (Flight flight : this.flights) {
-            model.addRow(new Object[]{flight.getId(), flight.getDepartureLocation().getAirportId(), flight.getArrivalLocation().getAirportId(), (flight.getScaleLocation() == null ? "-" : flight.getScaleLocation().getAirportId()), flight.getDepartureDate(), flight.calculateArrivalDate(), flight.getPlane().getId(), flight.getNumPassengers()});
-        }*/
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -1814,10 +1831,7 @@ public class AirportFrame extends javax.swing.JFrame {
         for (Plane plane : organizeListPlane(storage.getPlanes())) {
             model.addRow(new Object[]{plane.getId(), plane.getBrand(), plane.getModel(), plane.getMaxCapacity(), plane.getAirline(), plane.getNumFlights()});
         }
-        /*
-        for (Plane plane : this.planes) {
-            model.addRow(new Object[]{plane.getId(), plane.getBrand(), plane.getModel(), plane.getMaxCapacity(), plane.getAirline(), plane.getNumFlights()});
-        }*/
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -1828,10 +1842,7 @@ public class AirportFrame extends javax.swing.JFrame {
         for (Location location : organizeListLoc(storage.getLocations())) {
             model.addRow(new Object[]{location.getAirportId(), location.getAirportName(), location.getAirportCity(), location.getAirportCountry()});
         }
-        /*
-        for (Location location : this.locations) {
-            model.addRow(new Object[]{location.getAirportId(), location.getAirportName(), location.getAirportCity(), location.getAirportCountry()});
-        }*/
+        
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
@@ -1841,6 +1852,8 @@ public class AirportFrame extends javax.swing.JFrame {
     private void userSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userSelectActionPerformed
         try {
             String id = userSelect.getSelectedItem().toString();
+            
+        
             if (!id.equals(userSelect.getItemAt(0))) {
                 jTextField20.setText(id);
                 jTextField28.setText(id);
