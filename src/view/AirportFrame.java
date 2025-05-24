@@ -4,6 +4,7 @@ package view;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+import controllers.AddToFlightController;
 import model.Plane;
 import model.Location;
 import model.Passenger;
@@ -119,12 +120,14 @@ public class AirportFrame extends javax.swing.JFrame {
         FlightCombotext.removeAllItems(); // Vuelos
 
         // Agregar aviones a jComboBox1
+        SelectPlaneCombotext.addItem("Select Plane");
         for (Plane plane : this.planes) {
+            
             SelectPlaneCombotext.addItem(plane.getId());
         }
 
         // Agregar ubicaciones a jComboBox2, jComboBox3 y jComboBox4
-        ScaleLocCombotext.addItem("Ninguna"); // O un valor por defecto si aplica
+        ScaleLocCombotext.addItem("No scale"); 
         for (Location location : this.locations) {
             String id = location.getAirportId();
             SelectDeapartureLocCombotext.addItem(id); // Departure
@@ -139,6 +142,7 @@ public class AirportFrame extends javax.swing.JFrame {
         }
 
         // Agregar vuelos a jComboBox5
+        FlightCombotext.addItem("Select Flight");
         for (Flight flight : FlightStorage.getInstance().getAllFlights()) {
             FlightCombotext.addItem(flight.getId());
             IdCombotext.addItem(flight.getId());
@@ -1725,26 +1729,21 @@ public class AirportFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         long passengerId = Long.parseLong(jTextField28.getText());
         String flightId = FlightCombotext.getItemAt(FlightCombotext.getSelectedIndex());
-
-        Passenger passenger = null;
-        Flight flight = null;
-
-        for (Passenger p : this.passengers) {
-            if (p.getId() == passengerId) {
-                passenger = p;
-            }
+        
+        Response response = AddToFlightController.AddtoFlight(passengerId, flightId);
+        if (response.getStatus() >= 500) {
+                    JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+                } else if (response.getStatus() >= 400) {
+                    JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
+                }
+        
+        if(response.getStatus()<=200){
+            FlightCombotext.setSelectedIndex(0);
         }
-
-        for (Flight f : this.flights) {
-            if (flightId.equals(f.getId())) {
-                flight = f;
-            }
-        }
-
-        passenger.addFlight(flight);
-        flight.addPassenger(passenger);
-        JOptionPane.showMessageDialog(null, "Se ha registrado exitosamente en el vuelo: "+flight.getId(), "Pasajero Registrado", JOptionPane.INFORMATION_MESSAGE);
-
+        
+        
     }//GEN-LAST:event_AddFlightButtonActionPerformed
 
     private void DelayFlightbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelayFlightbuttonActionPerformed
