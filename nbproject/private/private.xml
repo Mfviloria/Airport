@@ -23,7 +23,7 @@
             <file>file:/C:/Users/samuel/Documents/GitHub/Airport-main/Airport/src/model/storage/PlaneStorage.java</file>
             <file>file:/C:/Users/samuel/Documents/GitHub/Airport-main/Airport/src/model/FlightData.java</file>
             <file>file:/C:/Users/samuel/Documents/GitHub/Airport-main/Airport/src/controllers/UpdateInformationPassengerController.java</file>
-            <file>file:/C:/Users/samuel/Documents/GitHub/Airport-main/Airport/src/Storage/utils/LoadJson.java</file>
+            <file>file:/C:/Users/samuel/Documents/GitHub/Airport-main/Airport/src/controllers/storage/LoadJson.java</file>
         </group>
     </open-files>
 </project-private>
