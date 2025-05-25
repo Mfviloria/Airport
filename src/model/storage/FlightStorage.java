@@ -16,7 +16,7 @@ import model.observers.Observer;
 public class FlightStorage extends Storage{
 
     // Instancia Singleton
-     private ArrayList<Observer> observers = new ArrayList<>();
+    private ArrayList<Observer> observers = new ArrayList<>();
     private static FlightStorage instance;
     private ArrayList< Flight> flights;
     private Flight flight;
