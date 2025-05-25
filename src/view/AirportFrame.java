@@ -28,6 +28,9 @@ import static controllers.storage.OrganizeLists.organizeList;
 import static controllers.storage.OrganizeLists.organizeListFlight;
 import static controllers.storage.OrganizeLists.organizeListLoc;
 import static controllers.storage.OrganizeLists.organizeListPlane;
+import model.CalculateAge;
+import model.CalculateArrivalDate;
+import model.GenerateFullName;
 import model.storage.PassengerStorage;
 import model.storage.PlaneStorage;
 
@@ -53,7 +56,7 @@ public class AirportFrame extends javax.swing.JFrame {
         this.passengers = new ArrayList<>(PassengerStorage.getInstance().getPassengers());
         this.planes = new ArrayList<>(PlaneStorage.getInstance().getPlanes());
         this.locations = new ArrayList<>(LocationStorage.getInstance().getLocations());
-        this.flights = new ArrayList<>(FlightStorage.getInstance().getAllFlights()); // Asume que tienes este método
+        this.flights = new ArrayList<>(FlightStorage.getInstance().getFlights()); // Asume que tienes este método
 
         this.setBackground(new Color(0, 0, 0, 0));
         this.setLocationRelativeTo(null);
@@ -145,7 +148,7 @@ public class AirportFrame extends javax.swing.JFrame {
 
         // Agregar vuelos a jComboBox5
         FlightCombotext.addItem("Select Flight");
-        for (Flight flight : FlightStorage.getInstance().getAllFlights()) {
+        for (Flight flight : FlightStorage.getInstance().getFlights()) {
             FlightCombotext.addItem(flight.getId());
             IdCombotext.addItem(flight.getId());
         }
@@ -1787,7 +1790,7 @@ public class AirportFrame extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) MyFlightsTable.getModel();
         model.setRowCount(0);
         for (Flight flight : flights) {
-            model.addRow(new Object[]{flight.getId(), flight.getDepartureDate(), flight.calculateArrivalDate()});
+            model.addRow(new Object[]{flight.getId(), flight.getDepartureDate(), CalculateArrivalDate.calculateArrivalDate( flight.getDepartureDate(), flight.getHoursDurationScale(), flight.getHoursDurationArrival(), flight.getMinutesDurationScale(), flight.getMinutesDurationArrival())});
         }
         
         
@@ -1799,7 +1802,7 @@ public class AirportFrame extends javax.swing.JFrame {
         model.setRowCount(0);
         PassengerStorage storage = PassengerStorage.getInstance();
         for (Passenger pass : organizeList(storage.getPassengers())) {
-            model.addRow(new Object[]{pass.getId(), pass.getFullname(), pass.getBirthDate(), pass.calculateAge(), pass.generateFullPhone(), pass.getCountry(), pass.getNumFlights()});
+            model.addRow(new Object[]{pass.getId(), pass.getFullname(), pass.getBirthDate(), CalculateAge.calculateAge(pass.getBirthDate()),GenerateFullName.generateFullPhone(String.valueOf(pass.getCountryPhoneCode()), String.valueOf(pass.getPhone())) , pass.getCountry(), pass.getNumFlights()});
         }
     }//GEN-LAST:event_RefreshPassengerButtonActionPerformed
 
@@ -1808,9 +1811,9 @@ public class AirportFrame extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) FlightsTable.getModel();
         model.setRowCount(0);
         FlightStorage storage = FlightStorage.getInstance();
-        for (Flight flight : organizeListFlight(storage.getAllFlights())) {
+        for (Flight flight : organizeListFlight(storage.getFlights())) {
             System.out.println("Flight: " + flight.toString());
-            model.addRow(new Object[]{flight.getId(), flight.getDepartureLocation().getAirportId(), flight.getArrivalLocation().getAirportId(), (flight.getScaleLocation() == null ? "-" : flight.getScaleLocation().getAirportId()), flight.getDepartureDate(), flight.calculateArrivalDate(), flight.getPlane().getId(), flight.getNumPassengers()});
+            model.addRow(new Object[]{flight.getId(), flight.getDepartureLocation().getAirportId(), flight.getArrivalLocation().getAirportId(), (flight.getScaleLocation() == null ? "-" : flight.getScaleLocation().getAirportId()), flight.getDepartureDate(), CalculateArrivalDate.calculateArrivalDate( flight.getDepartureDate(), flight.getHoursDurationScale(), flight.getHoursDurationArrival(), flight.getMinutesDurationScale(), flight.getMinutesDurationArrival()), flight.getPlane().getId(), flight.getNumPassengers()});
 
         }
         

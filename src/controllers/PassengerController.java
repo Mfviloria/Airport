@@ -90,7 +90,7 @@ public class PassengerController {
             }
 
         LocalDate birthDate = LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
-        storage.addPerson(new Passenger(Long.parseLong(id), firstname, lastname, birthDate, Integer.parseInt(phoneCode), Long.parseLong(phone), country));
+        storage.addPassenger(new Passenger(Long.parseLong(id), firstname, lastname, birthDate, Integer.parseInt(phoneCode), Long.parseLong(phone), country));
         System.out.println(storage.getPassengers());
 
         LoadJson.savePassengers();  // Para guardar los pasajeros

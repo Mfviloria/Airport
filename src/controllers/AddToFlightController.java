@@ -6,7 +6,6 @@ package controllers;
 
 import controllers.utils.Response;
 import controllers.utils.Status;
-import javax.swing.JOptionPane;
 import model.Flight;
 import model.Passenger;
 import model.storage.FlightStorage;
@@ -27,7 +26,7 @@ public class AddToFlightController {
             }
         }
         Flight flight = null;
-        for (Flight f : storagef.getAllFlights()) {
+        for (Flight f : storagef.getFlights()) {
             if (flightiD.equals(f.getId())) {
                 flight = f;
             }

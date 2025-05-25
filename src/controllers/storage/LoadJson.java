@@ -117,7 +117,7 @@ public class LoadJson {
                 String country = obj.getString("country");
 
                 PassengerStorage pass = PassengerStorage.getInstance();
-                pass.addPerson(new Passenger(
+                pass.addPassenger(new Passenger(
                         id, firstname, lastname, birthDate, countryPhoneCode, phone, country
                 ));
             }
@@ -189,7 +189,7 @@ public class LoadJson {
 
     public static void saveFlights() {
         JSONArray array = new JSONArray();
-        for (Flight f : FlightStorage.getInstance().getAllFlights()) {
+        for (Flight f : FlightStorage.getInstance().getFlights()) {
             JSONObject obj = new JSONObject();
             obj.put("id", f.getId());
             obj.put("plane", f.getPlane().getId());

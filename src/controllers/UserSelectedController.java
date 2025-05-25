@@ -19,6 +19,7 @@ public class UserSelectedController {
         } else if (!userSelected){
             return null;
         }
+        
         return new Response("ID verified successfully!", Status.OK);
         
     }

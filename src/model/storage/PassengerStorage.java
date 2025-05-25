@@ -12,7 +12,7 @@ import model.Passenger;
  *
  * @author edangulo
  */
-public class PassengerStorage {
+public class PassengerStorage  implements IPassengerStorage{
 
     // Instancia Singleton
     private static PassengerStorage instance;
@@ -31,7 +31,7 @@ public class PassengerStorage {
         return instance;
     }
 
-    public boolean addPerson(Passenger passenger) {
+    public boolean addPassenger(Passenger passenger) {
         for (Passenger p : this.passengers) {
             if (p.getId() == passenger.getId()) {
                 return false;

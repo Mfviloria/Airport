@@ -4,24 +4,14 @@
  */
 package model.storage;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import model.Flight;
-import model.Location;
-import model.Plane;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 /**
  *
  * @author edangulo
  */
-public class FlightStorage {
+public class FlightStorage implements IFlightStorage{
 
     // Instancia Singleton
     private static FlightStorage instance;
@@ -29,12 +19,6 @@ public class FlightStorage {
 
     private FlightStorage() {
         this.flights = new ArrayList<>();
-
-        // Cargar vuelos automáticamente al crear la instancia
-        PlaneStorage planes = PlaneStorage.getInstance();
-        LocationStorage locations = LocationStorage.getInstance();
-
-   
     }
 
 
@@ -64,9 +48,9 @@ public class FlightStorage {
         return null;
 
     }
-
-    public ArrayList<Flight> getAllFlights() {
-        return flights;
+    @Override
+    public ArrayList<Flight> getFlights() {
+            return flights;
     }
 
 }

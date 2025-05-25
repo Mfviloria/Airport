@@ -1,15 +1,10 @@
 package model.storage;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import model.Location;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
-public class LocationStorage {
+public class LocationStorage  implements ILocationStorage{
 
     // Instancia Singleton
     private static LocationStorage instance;
@@ -30,9 +25,7 @@ public class LocationStorage {
         return locations;
     }
 
-    public void addLocation(Location location) {
-        this.locations.add(location);
-    }
+    
 
     public Location getLocation(String id) {
         for (Location loc : this.locations) {
@@ -43,12 +36,9 @@ public class LocationStorage {
         return null;
     }
 
-    public HashMap<String, Location> getAllLocationsMap() {
-        HashMap<String, Location> map = new HashMap<>();
-        for (Location loc : this.locations) {
-            map.put(loc.getAirportId(), loc);
-        }
-        return map;
+    @Override
+    public boolean addLocation(Location location) {
+        return this.locations.add(location);
     }
 
  
