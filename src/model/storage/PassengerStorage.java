@@ -14,7 +14,7 @@ import model.observers.Observer;
  *
  * @author edangulo
  */
-public class PassengerStorage  implements Observable{
+public class PassengerStorage  extends Storage{
         
     private ArrayList<Observer> observers = new ArrayList<>();
 
@@ -69,21 +69,5 @@ public class PassengerStorage  implements Observable{
         return passengers;
     }
 
-    @Override
-    public void addObserver(Observer o) {
-        this.observers.add(o);
-    }
-
-    @Override
-    public void deleteObserver(Observer o) {
-        this.observers.remove(o);
-    }
-
-    @Override
-    public void notifyObsevers() {
-        for (Observer o : observers) {
-            o.update();
-        }
-    }
-
+ 
 }

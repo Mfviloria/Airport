@@ -5,7 +5,7 @@ import model.Plane;
 import model.observers.Observable;
 import model.observers.Observer;
 
-public class PlaneStorage implements Observable{
+public class PlaneStorage extends Storage{
 
     // Instancia Singleton
     private static PlaneStorage instance;
@@ -46,23 +46,7 @@ public class PlaneStorage implements Observable{
         return null;
     }
 
-    @Override
-    public void addObserver(Observer o) {
-        this.observers.add(o);
-    }
 
-    @Override
-    public void deleteObserver(Observer o) {
-       this.observers.remove(o);
-    }
-
-    @Override
-    public void notifyObsevers() {
-        for (Observer o : observers) {
-            o.update();
-        }
-    }
-    
 
  
 }

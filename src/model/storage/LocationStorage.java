@@ -7,7 +7,7 @@ import model.observers.Observable;
 import model.observers.Observer;
 
 
-public class LocationStorage implements Observable {
+public class LocationStorage extends Storage {
 
     // Instancia Singleton
     private ArrayList<Observer> observers = new ArrayList<>();
@@ -46,22 +46,7 @@ public class LocationStorage implements Observable {
        return true;
     }
 
-    @Override
-    public void addObserver(Observer o) {
-        this.observers.add(o);
-    }
 
-    @Override
-    public void deleteObserver(Observer o) {
-        this.observers.remove(o);
-    }
-
-    @Override
-    public void notifyObsevers() {
-        for (Observer o : observers) {
-            o.update();
-        }
-    }
 
  
 }

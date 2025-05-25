@@ -2041,7 +2041,7 @@ public class AirportFrame extends javax.swing.JFrame implements Observer {
     private void RefreshFlights(){
         this.flightsTable.setRowCount(0);
         FlightStorage storage = FlightStorage.getInstance();
-        for (Flight f : storage.getFlights()){
+        for (Flight f : organizeListFlight(storage.getFlights())){
              this.flightsTable.addRow(new Object[]{f.getId(), f.getDepartureLocation().getAirportId(), f.getArrivalLocation().getAirportId(), (f.getScaleLocation() == null ? "-" : f.getScaleLocation().getAirportId()), f.getDepartureDate(), CalculateArrivalDate.calculateArrivalDate( f.getDepartureDate(), f.getHoursDurationScale(), f.getHoursDurationArrival(), f.getMinutesDurationScale(), f.getMinutesDurationArrival()), f.getPlane().getId(), f.getNumPassengers()});
         }
     }
@@ -2073,15 +2073,9 @@ public class AirportFrame extends javax.swing.JFrame implements Observer {
             this.myFlightsTable.setRowCount(0);
             String id = this.DefaultIDPassenger.getText();
             PassengerStorage storage = PassengerStorage.getInstance();
-            Passenger selectPass = null;
-            for (Passenger pass : storage.getPassengers()){
-                if(pass.getId() == Long.parseLong(id)){
-                    selectPass = pass;
-                    break;
-                }
-            }
-          
-        for (Flight f : selectPass.getFlights()){
+            Passenger selectPass = storage.getPassenger(Long.parseLong(id));
+
+        for (Flight f : organizeListFlight(selectPass.getFlights())){
              this.myFlightsTable.addRow(new Object[]{f.getId(), f.getDepartureLocation().getAirportId(), f.getArrivalLocation().getAirportId(), (f.getScaleLocation() == null ? "-" : f.getScaleLocation().getAirportId()), f.getDepartureDate(), CalculateArrivalDate.calculateArrivalDate( f.getDepartureDate(), f.getHoursDurationScale(), f.getHoursDurationArrival(), f.getMinutesDurationScale(), f.getMinutesDurationArrival()), f.getPlane().getId(), f.getNumPassengers()});
         }
             

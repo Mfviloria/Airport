@@ -13,7 +13,7 @@ import model.observers.Observer;
  *
  * @author edangulo
  */
-public class FlightStorage implements Observable{
+public class FlightStorage extends Storage{
 
     // Instancia Singleton
      private ArrayList<Observer> observers = new ArrayList<>();
@@ -59,25 +59,7 @@ public class FlightStorage implements Observable{
     public ArrayList<Flight> getFlights() {
         return flights;
     }
-    
-    
 
-    @Override
-    public void addObserver(Observer o) {
-        this.observers.add(o);
-    }
-
-    @Override
-    public void deleteObserver(Observer o) {
-        this.observers.remove(o);
-    }
-
-    @Override
-    public void notifyObsevers() {
-        for (Observer o : observers) {
-                    o.update();
-                }
-    }
     
 
 }
