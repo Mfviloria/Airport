@@ -3,7 +3,7 @@ package model.storage;
 import java.util.ArrayList;
 import model.Plane;
 
-public class PlaneStorage implements IPlaneStorage {
+public class PlaneStorage {
 
     // Instancia Singleton
     private static PlaneStorage instance;

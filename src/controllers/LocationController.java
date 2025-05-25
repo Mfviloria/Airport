@@ -67,7 +67,7 @@ public class LocationController {
         Location location = new Location(id, name, city, country, latitude, longitude);
         storage.addLocation(location);
 
-        LoadJson.saveLocations();   // Para guardar las ubicaciones
+    
 
         return new Response("Location added successfully", Status.OK);
     }

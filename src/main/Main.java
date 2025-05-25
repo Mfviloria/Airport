@@ -7,7 +7,10 @@ package main;
 import com.formdev.flatlaf.FlatDarkLaf;
 import javax.swing.UIManager;
 import controllers.storage.LoadJson;
+import model.storage.FlightStorage;
+import model.storage.PlaneStorage;
 import view.AirportFrame;
+import view.Observer;
 
 /**
  *

@@ -61,8 +61,6 @@ public class AirportController {
         Location airport = new Location(id, name, city, country, Long.parseLong(latitude), Long.parseLong(longitude));
         storage.addLocation(airport);
 
-        LoadJson.saveLocations();   // Para guardar las ubicaciones
-
         return new Response("Airport added successfully", Status.OK);
     }
 }

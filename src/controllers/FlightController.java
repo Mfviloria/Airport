@@ -73,7 +73,6 @@ public class FlightController {
             storage.addFlight(flight);
             System.out.println(flight);
 
-            LoadJson.saveFlights();     // Para guardar los vuelos
 
             return new Response("Flight successfully added (With scale)", Status.OK);
 
@@ -126,7 +125,6 @@ public class FlightController {
             Flight flight = new Flight(id, storagep.getPlane(plane), storagel.getLocation(departure), storagel.getLocation(arrival), departureDate,
                     hoursa, minutesa);
             storage.addFlight(flight);
-            LoadJson.saveFlights();     // Para guardar los vuelos
 
             return new Response("Flight successfully added (No scale)", Status.OK);
 

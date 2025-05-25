@@ -6,13 +6,17 @@ package model.storage;
 
 import java.util.ArrayList;
 import model.Passenger;
+import view.Observable;
+import view.Observer;
 
 
 /**
  *
  * @author edangulo
  */
-public class PassengerStorage  implements IPassengerStorage{
+public class PassengerStorage  implements Observable{
+        
+    private ArrayList<Observer> observers = new ArrayList<>();
 
     // Instancia Singleton
     private static PassengerStorage instance;
@@ -62,6 +66,23 @@ public class PassengerStorage  implements IPassengerStorage{
 
     public ArrayList<Passenger> getPassengers() {
         return passengers;
+    }
+
+    @Override
+    public void addObserver(Observer o) {
+        this.observers.add(o);
+    }
+
+    @Override
+    public void deleteObserver(Observer o) {
+        this.observers.remove(o);
+    }
+
+    @Override
+    public void notifyObsevers() {
+        for (Observer o : observers) {
+            o.updatePassenger(this.getPassengers());
+        }
     }
 
 }

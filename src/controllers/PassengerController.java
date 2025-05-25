@@ -93,7 +93,7 @@ public class PassengerController {
         storage.addPassenger(new Passenger(Long.parseLong(id), firstname, lastname, birthDate, Integer.parseInt(phoneCode), Long.parseLong(phone), country));
         System.out.println(storage.getPassengers());
 
-        LoadJson.savePassengers();  // Para guardar los pasajeros
+      
 
         return new Response("Passenger added succesfully", Status.OK);
     }

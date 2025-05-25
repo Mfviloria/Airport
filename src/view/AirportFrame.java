@@ -38,7 +38,7 @@ import model.storage.PlaneStorage;
  *
  * @author edangulo
  */
-public class AirportFrame extends javax.swing.JFrame {
+public class AirportFrame extends javax.swing.JFrame implements Observer {
 
     /**
      * Creates new form AirportFrame
@@ -51,13 +51,13 @@ public class AirportFrame extends javax.swing.JFrame {
 
     public AirportFrame() {
         initComponents();
-
+        
         // Cargar desde los storage singletons
         this.passengers = new ArrayList<>(PassengerStorage.getInstance().getPassengers());
         this.planes = new ArrayList<>(PlaneStorage.getInstance().getPlanes());
         this.locations = new ArrayList<>(LocationStorage.getInstance().getLocations());
         this.flights = new ArrayList<>(FlightStorage.getInstance().getFlights()); // Asume que tienes este método
-
+        
         this.setBackground(new Color(0, 0, 0, 0));
         this.setLocationRelativeTo(null);
 
@@ -972,6 +972,15 @@ public class AirportFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        FlightsTable.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                FlightsTableAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         jScrollPane3.setViewportView(FlightsTable);
 
         RefreshFlightsButton.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
@@ -1786,58 +1795,31 @@ public class AirportFrame extends javax.swing.JFrame {
             }
         }
 
-        ArrayList<Flight> flights = passenger.getFlights();
-        DefaultTableModel model = (DefaultTableModel) MyFlightsTable.getModel();
-        model.setRowCount(0);
-        for (Flight flight : flights) {
-            model.addRow(new Object[]{flight.getId(), flight.getDepartureDate(), CalculateArrivalDate.calculateArrivalDate( flight.getDepartureDate(), flight.getHoursDurationScale(), flight.getHoursDurationArrival(), flight.getMinutesDurationScale(), flight.getMinutesDurationArrival())});
-        }
+        
         
         
     }//GEN-LAST:event_RefreshMyFlightsButtonActionPerformed
 
     private void RefreshPassengerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshPassengerButtonActionPerformed
-        // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) PassengersTable.getModel();
-        model.setRowCount(0);
-        PassengerStorage storage = PassengerStorage.getInstance();
-        for (Passenger pass : organizeList(storage.getPassengers())) {
-            model.addRow(new Object[]{pass.getId(), pass.getFullname(), pass.getBirthDate(), CalculateAge.calculateAge(pass.getBirthDate()),GenerateFullName.generateFullPhone(String.valueOf(pass.getCountryPhoneCode()), String.valueOf(pass.getPhone())) , pass.getCountry(), pass.getNumFlights()});
-        }
+        updatePassenger(this.passengers);
+       
     }//GEN-LAST:event_RefreshPassengerButtonActionPerformed
 
     private void RefreshFlightsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshFlightsButtonActionPerformed
-        // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) FlightsTable.getModel();
-        model.setRowCount(0);
-        FlightStorage storage = FlightStorage.getInstance();
-        for (Flight flight : organizeListFlight(storage.getFlights())) {
-            System.out.println("Flight: " + flight.toString());
-            model.addRow(new Object[]{flight.getId(), flight.getDepartureLocation().getAirportId(), flight.getArrivalLocation().getAirportId(), (flight.getScaleLocation() == null ? "-" : flight.getScaleLocation().getAirportId()), flight.getDepartureDate(), CalculateArrivalDate.calculateArrivalDate( flight.getDepartureDate(), flight.getHoursDurationScale(), flight.getHoursDurationArrival(), flight.getMinutesDurationScale(), flight.getMinutesDurationArrival()), flight.getPlane().getId(), flight.getNumPassengers()});
-
-        }
+       updateFlight(this.flights);
+        
         
     }//GEN-LAST:event_RefreshFlightsButtonActionPerformed
 
     private void RefreshPlaneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshPlaneButtonActionPerformed
-        // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) PlanesTable.getModel();
-        model.setRowCount(0);
-        PlaneStorage storage = PlaneStorage.getInstance();
-        for (Plane plane : organizeListPlane(storage.getPlanes())) {
-            model.addRow(new Object[]{plane.getId(), plane.getBrand(), plane.getModel(), plane.getMaxCapacity(), plane.getAirline(), plane.getNumFlights()});
-        }
+        updatePlane(this.planes);
+        
         
     }//GEN-LAST:event_RefreshPlaneButtonActionPerformed
 
     private void RefreshLocationsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshLocationsButtonActionPerformed
-        // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) LocationsTable.getModel();
-        model.setRowCount(0);
-        LocationStorage storage = LocationStorage.getInstance();
-        for (Location location : organizeListLoc(storage.getLocations())) {
-            model.addRow(new Object[]{location.getAirportId(), location.getAirportName(), location.getAirportCity(), location.getAirportCountry()});
-        }
+        updateLocation(this.locations);
+        
         
     }//GEN-LAST:event_RefreshLocationsButtonActionPerformed
 
@@ -1868,6 +1850,10 @@ public class AirportFrame extends javax.swing.JFrame {
     private void SelectPlaneCombotextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectPlaneCombotextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SelectPlaneCombotextActionPerformed
+
+    private void FlightsTableAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_FlightsTableAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FlightsTableAncestorAdded
 
     /**
      * @param args the command line arguments
@@ -2014,4 +2000,56 @@ public class AirportFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton user;
     private javax.swing.JComboBox<String> userSelect;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void updateFlight(ArrayList<Flight> flight) {
+        this.flights = flight;
+        DefaultTableModel model = (DefaultTableModel) FlightsTable.getModel();
+        model.setRowCount(0);
+        FlightStorage storage = FlightStorage.getInstance();
+        for (Flight f : organizeListFlight(storage.getFlights())) {
+            System.out.println("Flight: " + f.toString());
+            model.addRow(new Object[]{f.getId(), f.getDepartureLocation().getAirportId(), f.getArrivalLocation().getAirportId(), (f.getScaleLocation() == null ? "-" : f.getScaleLocation().getAirportId()), f.getDepartureDate(), CalculateArrivalDate.calculateArrivalDate( f.getDepartureDate(), f.getHoursDurationScale(), f.getHoursDurationArrival(), f.getMinutesDurationScale(), f.getMinutesDurationArrival()), f.getPlane().getId(), f.getNumPassengers()});
+
+        }
+        
+    }//Add observadores 
+
+    @Override
+    public void updatePassenger(ArrayList<Passenger> passenger) {
+        this.passengers = passenger;
+         DefaultTableModel model = (DefaultTableModel) PassengersTable.getModel();
+        model.setRowCount(0);
+        PassengerStorage storage = PassengerStorage.getInstance();
+        for (Passenger pass : organizeList(storage.getPassengers())) {
+            model.addRow(new Object[]{pass.getId(), pass.getFullname(), pass.getBirthDate(), CalculateAge.calculateAge(pass.getBirthDate()),GenerateFullName.generateFullPhone(String.valueOf(pass.getCountryPhoneCode()), String.valueOf(pass.getPhone())) , pass.getCountry(), pass.getNumFlights()});
+        }
+        
+    }
+
+    @Override
+    public void updatePlane(ArrayList<Plane> plane) {
+        this.planes = plane;
+        DefaultTableModel model = (DefaultTableModel) PlanesTable.getModel();
+        model.setRowCount(0);
+        for (Plane plan : organizeListPlane(this.planes)) {
+            model.addRow(new Object[]{plan.getId(), plan.getBrand(), plan.getModel(), plan.getMaxCapacity(), plan.getAirline(), plan.getNumFlights()});
+        }
+    }
+
+    @Override
+    public void updateLocation(ArrayList<Location> location) {
+       this.locations = location;
+       DefaultTableModel model = (DefaultTableModel) LocationsTable.getModel();
+        model.setRowCount(0);
+        LocationStorage storage = LocationStorage.getInstance();
+        for (Location loc : organizeListLoc(storage.getLocations())) {
+            model.addRow(new Object[]{loc.getAirportId(), loc.getAirportName(), loc.getAirportCity(), loc.getAirportCountry()});
+        }
+    }
+
+    @Override
+    public void updateMyFlights(ArrayList<Flight> flight) {
+        
+    }
 }

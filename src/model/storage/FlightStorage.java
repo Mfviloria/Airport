@@ -6,17 +6,21 @@ package model.storage;
 
 import java.util.ArrayList;
 import model.Flight;
+import view.Observable;
+import view.Observer;
 
 /**
  *
  * @author edangulo
  */
-public class FlightStorage implements IFlightStorage{
+public class FlightStorage implements Observable{
 
     // Instancia Singleton
+     private ArrayList<Observer> observers = new ArrayList<>();
     private static FlightStorage instance;
     private ArrayList< Flight> flights;
-
+    private Flight flight;
+    
     private FlightStorage() {
         this.flights = new ArrayList<>();
     }
@@ -35,8 +39,11 @@ public class FlightStorage implements IFlightStorage{
             return false;
         } else {
             this.flights.add(flight);
+            this.flight = flight;
+            notifyObsevers();
         }
         return true;
+        
     }
 
     public Flight getFlight(String id) {
@@ -48,9 +55,29 @@ public class FlightStorage implements IFlightStorage{
         return null;
 
     }
-    @Override
+
     public ArrayList<Flight> getFlights() {
-            return flights;
+        return flights;
     }
+    
+    
+
+    @Override
+    public void addObserver(Observer o) {
+        this.observers.add(o);
+    }
+
+    @Override
+    public void deleteObserver(Observer o) {
+        this.observers.remove(o);
+    }
+
+    @Override
+    public void notifyObsevers() {
+        for (Observer o : observers) {
+                    o.updateFlight(this.getFlights());
+                }
+    }
+    
 
 }

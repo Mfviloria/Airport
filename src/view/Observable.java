@@ -2,17 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package model.storage;
-
-import java.util.ArrayList;
-import model.Plane;
+package view;
 
 /**
  *
  * @author mariafernandaviloriazapata
  */
-public interface IPlaneStorage {
-    boolean addPlane(Plane plane);
-    Plane getPlane(String id);
-    ArrayList<Plane> getPlanes();
+public interface Observable {
+    void addObserver(Observer o);
+    void deleteObserver(Observer o);
+    void notifyObsevers();
 }

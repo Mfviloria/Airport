@@ -49,7 +49,8 @@ public class PlaneControllers {
         Plane newPlane = new Plane(id, brand, model, maxCapacityInt, airline);
         storage.addPlane(newPlane);
 
-        LoadJson.savePlanes();      // Para guardar los aviones
+      
+        
 
         return new Response("Plane added successfully", Status.OK);
     }

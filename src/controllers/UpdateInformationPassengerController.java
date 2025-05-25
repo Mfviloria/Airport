@@ -99,7 +99,6 @@ public class UpdateInformationPassengerController {
         passenger.setCountry(country);
         System.out.println(passenger.toString());
 
-        LoadJson.savePassengers();  // Para guardar los pasajeros
 
         return new Response("Information updated succesfully", Status.OK);
     }

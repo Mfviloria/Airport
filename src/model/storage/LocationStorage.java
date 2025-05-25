@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import model.Location;
 
-public class LocationStorage  implements ILocationStorage{
+public class LocationStorage  {
 
     // Instancia Singleton
     private static LocationStorage instance;
@@ -36,9 +36,8 @@ public class LocationStorage  implements ILocationStorage{
         return null;
     }
 
-    @Override
-    public boolean addLocation(Location location) {
-        return this.locations.add(location);
+    public boolean addLocation(Location location){
+       return this.locations.add(location);
     }
 
  
