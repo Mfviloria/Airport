@@ -94,11 +94,11 @@ public class FlightController {
             // Validaciones básicas de campos
             if (id.trim().isEmpty()) {
                 return new Response("Flight ID must not be empty", Status.BAD_REQUEST);
-            } else if (plane.trim().equals("Plane")) {
+            } else if (plane.trim().equals("Select Plane")) {
                 return new Response("Plane must not be empty", Status.BAD_REQUEST);
-            } else if (departure.trim().equals("Location")) {
+            } else if (departure.equals("Select Location")) {
                 return new Response("Departure Location must not be empty", Status.BAD_REQUEST);
-            } else if (arrival.trim().equals("Location")) {
+            } else if (arrival.equals("Select Location")) {
                 return new Response("Arrival Location must not be empty", Status.BAD_REQUEST);
             } else if (year.isEmpty() || month.equals("Month") || days.equals("Day") || hours.equals("Hour") || minutes.equals("Minute")) {
                 return new Response("Departure date must not be empty", Status.BAD_REQUEST);

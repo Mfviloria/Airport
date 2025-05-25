@@ -128,6 +128,8 @@ public class AirportFrame extends javax.swing.JFrame {
 
         // Agregar ubicaciones a jComboBox2, jComboBox3 y jComboBox4
         ScaleLocCombotext.addItem("No scale"); 
+        ArrivalLocCombotext.addItem("Select Location"); // Arrival
+        SelectDeapartureLocCombotext.addItem("Select Location"); //Scale
         for (Location location : this.locations) {
             String id = location.getAirportId();
             SelectDeapartureLocCombotext.addItem(id); // Departure
@@ -1644,7 +1646,7 @@ public class AirportFrame extends javax.swing.JFrame {
 
         Response response;
 
-        if (scaleLocationId.equals("Ninguna")) {
+        if (scaleLocationId.equals("No scale")) {
             response = FlightController.createPlaneFlight(id, planeId, departureLocationId, arrivalLocationId, year, month, day, hour, minutes, hoursDurationsArrival, minutesDurationsArrival);
             MONTH4.setSelectedIndex(1);
             DAY4.setSelectedIndex(1);

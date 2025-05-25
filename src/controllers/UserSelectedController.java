@@ -14,7 +14,7 @@ import controllers.utils.Status;
  */
 public class UserSelectedController {
     public static Response userSelected(boolean userSelected){
-        if ( userSelected){
+        if (userSelected){
             return new Response("To view or add flights, please select your user ID first from the box labeled 'Select your user' below.", Status.OK);
         } else if (!userSelected){
             return null;
