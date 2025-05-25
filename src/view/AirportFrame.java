@@ -1751,6 +1751,7 @@ public class AirportFrame extends javax.swing.JFrame implements Observer {
         }
         
         if (response.getStatus() <= 200) {
+            this.RefreshPassenger();
             IdPassenger.setText("");
             Updatefirstname.setText("");
             UpdateLastname.setText("");
