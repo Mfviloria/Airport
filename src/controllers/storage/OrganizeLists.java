@@ -56,9 +56,7 @@ public class OrganizeLists {
         return lista;
     }
     public static ArrayList<Flight> organizeListFlight(ArrayList<Flight> lista){
-       lista.sort((f1, f2) -> f2.getDepartureDate().compareTo(f1.getDepartureDate()));
-
-
+       lista.sort((f1, f2) -> f1.getDepartureDate().compareTo(f2.getDepartureDate()));
         return lista;
     }
 }
