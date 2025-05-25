@@ -90,10 +90,12 @@ public class PassengerController {
             }
 
         LocalDate birthDate = LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
+        if(birthDate.isAfter(LocalDate.now())){
+            return new Response("Birthdate cannot be later than the current date.", Status.BAD_REQUEST);
+        }
         storage.addPassenger(new Passenger(Long.parseLong(id), firstname, lastname, birthDate, Integer.parseInt(phoneCode), Long.parseLong(phone), country));
-        System.out.println(storage.getPassengers());
 
-      
+        
 
         return new Response("Passenger added succesfully", Status.OK);
     }

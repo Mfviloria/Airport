@@ -2,12 +2,14 @@ package model.storage;
 
 import java.util.ArrayList;
 import model.Plane;
+import model.observers.Observable;
+import model.observers.Observer;
 
-public class PlaneStorage {
+public class PlaneStorage implements Observable{
 
     // Instancia Singleton
     private static PlaneStorage instance;
-
+    private ArrayList<Observer> observers = new ArrayList<>();
     private ArrayList<Plane> planes;
 
     private PlaneStorage() {
@@ -31,6 +33,7 @@ public class PlaneStorage {
             return false;
         }
         this.planes.add(plane);
+        this.notifyObsevers();
         return true;
     }
 
@@ -41,6 +44,23 @@ public class PlaneStorage {
             }
         }
         return null;
+    }
+
+    @Override
+    public void addObserver(Observer o) {
+        this.observers.add(o);
+    }
+
+    @Override
+    public void deleteObserver(Observer o) {
+       this.observers.remove(o);
+    }
+
+    @Override
+    public void notifyObsevers() {
+        for (Observer o : observers) {
+            o.update();
+        }
     }
     
 

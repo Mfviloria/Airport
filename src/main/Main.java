@@ -10,7 +10,7 @@ import controllers.storage.LoadJson;
 import model.storage.FlightStorage;
 import model.storage.PlaneStorage;
 import view.AirportFrame;
-import view.Observer;
+import model.observers.Observer;
 
 /**
  *

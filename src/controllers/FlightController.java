@@ -121,7 +121,10 @@ public class FlightController {
             }
 
             LocalDateTime departureDate = LocalDateTime.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(days), Integer.parseInt(hours), Integer.parseInt(minutes));
-            // Crear y guardar vuelo
+            if (departureDate.isBefore(LocalDateTime.now())){
+                return new Response("Departure date can not be earlier than the current date.", Status.BAD_REQUEST);
+            }
+// Crear y guardar vuelo
             Flight flight = new Flight(id, storagep.getPlane(plane), storagel.getLocation(departure), storagel.getLocation(arrival), departureDate,
                     hoursa, minutesa);
             storage.addFlight(flight);

@@ -6,8 +6,8 @@ package model.storage;
 
 import java.util.ArrayList;
 import model.Passenger;
-import view.Observable;
-import view.Observer;
+import model.observers.Observable;
+import model.observers.Observer;
 
 
 /**
@@ -42,6 +42,7 @@ public class PassengerStorage  implements Observable{
             }
         }
         this.passengers.add(passenger);
+        this.notifyObsevers();
         return true;
     }
 
@@ -81,7 +82,7 @@ public class PassengerStorage  implements Observable{
     @Override
     public void notifyObsevers() {
         for (Observer o : observers) {
-            o.updatePassenger(this.getPassengers());
+            o.update();
         }
     }
 

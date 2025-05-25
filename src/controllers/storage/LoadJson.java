@@ -4,12 +4,10 @@
  */
 package controllers.storage;
 
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import model.Flight;
 import model.Location;
 import model.Passenger;

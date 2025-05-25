@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package view;
+package model.observers;
+
+
 
 /**
  *
  * @author mariafernandaviloriazapata
  */
-public interface Observable {
-    void addObserver(Observer o);
-    void deleteObserver(Observer o);
-    void notifyObsevers();
+public interface Observer {
+    void update();
 }

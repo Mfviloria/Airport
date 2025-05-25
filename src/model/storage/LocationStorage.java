@@ -3,10 +3,14 @@ package model.storage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import model.Location;
+import model.observers.Observable;
+import model.observers.Observer;
 
-public class LocationStorage  {
+
+public class LocationStorage implements Observable {
 
     // Instancia Singleton
+    private ArrayList<Observer> observers = new ArrayList<>();
     private static LocationStorage instance;
     private ArrayList<Location> locations;
 
@@ -37,7 +41,26 @@ public class LocationStorage  {
     }
 
     public boolean addLocation(Location location){
-       return this.locations.add(location);
+        this.locations.add(location);
+       this.notifyObsevers();
+       return true;
+    }
+
+    @Override
+    public void addObserver(Observer o) {
+        this.observers.add(o);
+    }
+
+    @Override
+    public void deleteObserver(Observer o) {
+        this.observers.remove(o);
+    }
+
+    @Override
+    public void notifyObsevers() {
+        for (Observer o : observers) {
+            o.update();
+        }
     }
 
  

@@ -4,6 +4,7 @@ package view;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+import model.observers.Observer;
 import controllers.AddToFlightController;
 import model.Plane;
 import model.Location;
@@ -48,15 +49,38 @@ public class AirportFrame extends javax.swing.JFrame implements Observer {
     private ArrayList<Plane> planes;
     private ArrayList<Location> locations;
     private ArrayList<Flight> flights;
-
+    private DefaultTableModel passengersTable;
+    private DefaultTableModel planesTable;
+    private DefaultTableModel locationsTable;
+    private DefaultTableModel flightsTable;
+    private DefaultTableModel myFlightsTable;
+    
     public AirportFrame() {
-        initComponents();
+            initComponents();
+            
+        this.passengersTable = (DefaultTableModel) this.PassengersTable.getModel();
+        this.planesTable = (DefaultTableModel) this.PlanesTable.getModel();
+        this.locationsTable = (DefaultTableModel) this.LocationsTable.getModel();
+        this.flightsTable = (DefaultTableModel) this.FlightsTable.getModel();
+        this.myFlightsTable = (DefaultTableModel) this.MyFlightsTable.getModel();
         
         // Cargar desde los storage singletons
         this.passengers = new ArrayList<>(PassengerStorage.getInstance().getPassengers());
         this.planes = new ArrayList<>(PlaneStorage.getInstance().getPlanes());
         this.locations = new ArrayList<>(LocationStorage.getInstance().getLocations());
         this.flights = new ArrayList<>(FlightStorage.getInstance().getFlights()); // Asume que tienes este método
+        
+        PassengerStorage.getInstance().addObserver(this);
+        PlaneStorage.getInstance().addObserver(this);
+        LocationStorage.getInstance().addObserver(this);
+        FlightStorage.getInstance().addObserver(this);
+        
+        this.RefreshFlights();
+        this.RefreshLocations();
+        this.RefreshPlanes();
+        this.RefreshPassenger();
+        
+        
         
         this.setBackground(new Color(0, 0, 0, 0));
         this.setLocationRelativeTo(null);
@@ -239,7 +263,7 @@ public class AirportFrame extends javax.swing.JFrame implements Observer {
         UpdateCountry = new javax.swing.JTextField();
         UpdateinfoButton = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
-        jTextField28 = new javax.swing.JTextField();
+        DefaultIDPassenger = new javax.swing.JTextField();
         jLabel44 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
         FlightCombotext = new javax.swing.JComboBox<>();
@@ -767,8 +791,8 @@ public class AirportFrame extends javax.swing.JFrame implements Observer {
 
         Tabbed.addTab("Update info", jPanel5);
 
-        jTextField28.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jTextField28.setEnabled(false);
+        DefaultIDPassenger.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        DefaultIDPassenger.setEnabled(false);
 
         jLabel44.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel44.setText("ID:");
@@ -799,7 +823,7 @@ public class AirportFrame extends javax.swing.JFrame implements Observer {
                 .addGap(79, 79, 79)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(FlightCombotext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(DefaultIDPassenger, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(822, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -814,7 +838,7 @@ public class AirportFrame extends javax.swing.JFrame implements Observer {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(jLabel44))
-                    .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(DefaultIDPassenger, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel45)
@@ -1741,7 +1765,7 @@ public class AirportFrame extends javax.swing.JFrame implements Observer {
 
     private void AddFlightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddFlightButtonActionPerformed
         // TODO add your handling code here:
-        long passengerId = Long.parseLong(jTextField28.getText());
+        long passengerId = Long.parseLong(DefaultIDPassenger.getText());
         String flightId = FlightCombotext.getItemAt(FlightCombotext.getSelectedIndex());
         
         Response response = AddToFlightController.AddtoFlight(passengerId, flightId);
@@ -1754,6 +1778,7 @@ public class AirportFrame extends javax.swing.JFrame implements Observer {
                 }
         
         if(response.getStatus()<=200){
+            this.RefreshMyFlights();
             FlightCombotext.setSelectedIndex(0);
         }
         
@@ -1778,6 +1803,7 @@ public class AirportFrame extends javax.swing.JFrame implements Observer {
         }
         
         if(response.getStatus() <= 200){
+            this.RefreshFlights();
             IdCombotext.setSelectedIndex(0);
             HourCombotext.setSelectedIndex(0);
             MinutesComoboText.setSelectedIndex(0);
@@ -1801,24 +1827,25 @@ public class AirportFrame extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_RefreshMyFlightsButtonActionPerformed
 
     private void RefreshPassengerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshPassengerButtonActionPerformed
-        updatePassenger(this.passengers);
+        this.RefreshPassenger();
+        
        
     }//GEN-LAST:event_RefreshPassengerButtonActionPerformed
 
     private void RefreshFlightsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshFlightsButtonActionPerformed
-       updateFlight(this.flights);
+       this.RefreshFlights();
         
         
     }//GEN-LAST:event_RefreshFlightsButtonActionPerformed
 
     private void RefreshPlaneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshPlaneButtonActionPerformed
-        updatePlane(this.planes);
+        this.RefreshPlanes();
         
         
     }//GEN-LAST:event_RefreshPlaneButtonActionPerformed
 
     private void RefreshLocationsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshLocationsButtonActionPerformed
-        updateLocation(this.locations);
+        this.RefreshLocations();
         
         
     }//GEN-LAST:event_RefreshLocationsButtonActionPerformed
@@ -1834,10 +1861,10 @@ public class AirportFrame extends javax.swing.JFrame implements Observer {
         
             if (!id.equals(userSelect.getItemAt(0))) {
                 IdPassenger.setText(id);
-                jTextField28.setText(id);
+                DefaultIDPassenger.setText(id);
             } else {
                 IdPassenger.setText("");
-                jTextField28.setText("");
+                DefaultIDPassenger.setText("");
             }
         } catch (Exception e) {
         }
@@ -1883,6 +1910,7 @@ public class AirportFrame extends javax.swing.JFrame implements Observer {
     private javax.swing.JComboBox<String> DAY3;
     private javax.swing.JComboBox<String> DAY4;
     private javax.swing.JComboBox<String> DAY5;
+    private javax.swing.JTextField DefaultIDPassenger;
     private javax.swing.JButton DelayFlightbutton;
     private javax.swing.JTextField DepartureDateTextField;
     private javax.swing.JComboBox<String> FlightCombotext;
@@ -1993,7 +2021,6 @@ public class AirportFrame extends javax.swing.JFrame implements Observer {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTextField jTextField28;
     private model.PanelRound panelRound1;
     private model.PanelRound panelRound2;
     private model.PanelRound panelRound3;
@@ -2001,55 +2028,63 @@ public class AirportFrame extends javax.swing.JFrame implements Observer {
     private javax.swing.JComboBox<String> userSelect;
     // End of variables declaration//GEN-END:variables
 
+    
+    
     @Override
-    public void updateFlight(ArrayList<Flight> flight) {
-        this.flights = flight;
-        DefaultTableModel model = (DefaultTableModel) FlightsTable.getModel();
-        model.setRowCount(0);
+    public void update() {
+        this.RefreshFlights();
+        this.RefreshLocations();
+        this.RefreshPlanes();
+        this.RefreshPassenger();
+    }
+
+    private void RefreshFlights(){
+        this.flightsTable.setRowCount(0);
         FlightStorage storage = FlightStorage.getInstance();
-        for (Flight f : organizeListFlight(storage.getFlights())) {
-            System.out.println("Flight: " + f.toString());
-            model.addRow(new Object[]{f.getId(), f.getDepartureLocation().getAirportId(), f.getArrivalLocation().getAirportId(), (f.getScaleLocation() == null ? "-" : f.getScaleLocation().getAirportId()), f.getDepartureDate(), CalculateArrivalDate.calculateArrivalDate( f.getDepartureDate(), f.getHoursDurationScale(), f.getHoursDurationArrival(), f.getMinutesDurationScale(), f.getMinutesDurationArrival()), f.getPlane().getId(), f.getNumPassengers()});
-
-        }
-        
-    }//Add observadores 
-
-    @Override
-    public void updatePassenger(ArrayList<Passenger> passenger) {
-        this.passengers = passenger;
-         DefaultTableModel model = (DefaultTableModel) PassengersTable.getModel();
-        model.setRowCount(0);
-        PassengerStorage storage = PassengerStorage.getInstance();
-        for (Passenger pass : organizeList(storage.getPassengers())) {
-            model.addRow(new Object[]{pass.getId(), pass.getFullname(), pass.getBirthDate(), CalculateAge.calculateAge(pass.getBirthDate()),GenerateFullName.generateFullPhone(String.valueOf(pass.getCountryPhoneCode()), String.valueOf(pass.getPhone())) , pass.getCountry(), pass.getNumFlights()});
-        }
-        
-    }
-
-    @Override
-    public void updatePlane(ArrayList<Plane> plane) {
-        this.planes = plane;
-        DefaultTableModel model = (DefaultTableModel) PlanesTable.getModel();
-        model.setRowCount(0);
-        for (Plane plan : organizeListPlane(this.planes)) {
-            model.addRow(new Object[]{plan.getId(), plan.getBrand(), plan.getModel(), plan.getMaxCapacity(), plan.getAirline(), plan.getNumFlights()});
+        for (Flight f : storage.getFlights()){
+             this.flightsTable.addRow(new Object[]{f.getId(), f.getDepartureLocation().getAirportId(), f.getArrivalLocation().getAirportId(), (f.getScaleLocation() == null ? "-" : f.getScaleLocation().getAirportId()), f.getDepartureDate(), CalculateArrivalDate.calculateArrivalDate( f.getDepartureDate(), f.getHoursDurationScale(), f.getHoursDurationArrival(), f.getMinutesDurationScale(), f.getMinutesDurationArrival()), f.getPlane().getId(), f.getNumPassengers()});
         }
     }
-
-    @Override
-    public void updateLocation(ArrayList<Location> location) {
-       this.locations = location;
-       DefaultTableModel model = (DefaultTableModel) LocationsTable.getModel();
-        model.setRowCount(0);
+    private void RefreshLocations(){
+        this.locationsTable.setRowCount(0);
         LocationStorage storage = LocationStorage.getInstance();
         for (Location loc : organizeListLoc(storage.getLocations())) {
-            model.addRow(new Object[]{loc.getAirportId(), loc.getAirportName(), loc.getAirportCity(), loc.getAirportCountry()});
+            this.locationsTable.addRow(new Object[]{loc.getAirportId(), loc.getAirportName(), loc.getAirportCity(), loc.getAirportCountry()});
         }
-    }
-
-    @Override
-    public void updateMyFlights(ArrayList<Flight> flight) {
+        }
+        
+        private void RefreshPlanes(){
+            this.planesTable.setRowCount(0);
+            PlaneStorage storage = PlaneStorage.getInstance();
+            for (Plane plan : organizeListPlane(storage.getPlanes())) {
+            this.planesTable.addRow(new Object[]{plan.getId(), plan.getBrand(), plan.getModel(), plan.getMaxCapacity(), plan.getAirline(), plan.getNumFlights()});
+        }
+            
+        }
+        private void RefreshPassenger(){
+            this.passengersTable.setRowCount(0);
+            PassengerStorage storage = PassengerStorage.getInstance();
+            for (Passenger pass : organizeList(storage.getPassengers())) {
+                this.passengersTable.addRow(new Object[]{pass.getId(), pass.getFullname(), pass.getBirthDate(), CalculateAge.calculateAge(pass.getBirthDate()),GenerateFullName.generateFullPhone(String.valueOf(pass.getCountryPhoneCode()), String.valueOf((int) pass.getPhone())) , pass.getCountry(), pass.getNumFlights()});
+            }
         
     }
+        private void RefreshMyFlights(){
+            this.myFlightsTable.setRowCount(0);
+            String id = this.DefaultIDPassenger.getText();
+            PassengerStorage storage = PassengerStorage.getInstance();
+            Passenger selectPass = null;
+            for (Passenger pass : storage.getPassengers()){
+                if(pass.getId() == Long.parseLong(id)){
+                    selectPass = pass;
+                    break;
+                }
+            }
+          
+        for (Flight f : selectPass.getFlights()){
+             this.myFlightsTable.addRow(new Object[]{f.getId(), f.getDepartureLocation().getAirportId(), f.getArrivalLocation().getAirportId(), (f.getScaleLocation() == null ? "-" : f.getScaleLocation().getAirportId()), f.getDepartureDate(), CalculateArrivalDate.calculateArrivalDate( f.getDepartureDate(), f.getHoursDurationScale(), f.getHoursDurationArrival(), f.getMinutesDurationScale(), f.getMinutesDurationArrival()), f.getPlane().getId(), f.getNumPassengers()});
+        }
+            
+        }
+  
 }

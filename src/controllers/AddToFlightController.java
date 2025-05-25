@@ -17,6 +17,10 @@ import model.storage.PassengerStorage;
  */
 public class AddToFlightController {
     public static Response AddtoFlight(long idPassenger, String flightiD){
+        if (flightiD.equals("Select Flight")){
+            return new Response("Fligh id must not be empty.", Status.OK);
+        }
+        
         PassengerStorage storage = PassengerStorage.getInstance();
         FlightStorage storagef = FlightStorage.getInstance();
         Passenger passenger = null;

@@ -6,8 +6,8 @@ package model.storage;
 
 import java.util.ArrayList;
 import model.Flight;
-import view.Observable;
-import view.Observer;
+import model.observers.Observable;
+import model.observers.Observer;
 
 /**
  *
@@ -75,7 +75,7 @@ public class FlightStorage implements Observable{
     @Override
     public void notifyObsevers() {
         for (Observer o : observers) {
-                    o.updateFlight(this.getFlights());
+                    o.update();
                 }
     }
     
