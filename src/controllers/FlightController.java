@@ -12,6 +12,9 @@ import model.flight.Flight;
 import model.Location.Location;
 import model.plane.Plane;
 import model.storage.FlightStorage;
+import model.storage.IFlightStorage;
+import model.storage.ILocationStorage;
+import model.storage.IPlaneStorage;
 import model.storage.LocationStorage;
 import model.storage.PlaneStorage;
 
@@ -22,9 +25,9 @@ import model.storage.PlaneStorage;
 public class FlightController {
 
     public static Response createPlaneFlight(String id, String plane, String departure, String arrival, String scaleLocation, String year, String month, String days, String hours, String minutes, String hoursDurationArrival, String minutesDurationArrival, String hoursDurationScale, String minutesDurationScale) {
-        FlightStorage storage = FlightStorage.getInstance();
-        PlaneStorage storagep = PlaneStorage.getInstance();
-        LocationStorage storagel = LocationStorage.getInstance();
+        IFlightStorage storage = FlightStorage.getInstance();
+        IPlaneStorage storagep = PlaneStorage.getInstance();
+        ILocationStorage storagel = LocationStorage.getInstance();
        
         try {
             

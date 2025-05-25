@@ -14,7 +14,7 @@ import model.observers.Observer;
  *
  * @author edangulo
  */
-public class PassengerStorage  extends Storage{
+public class PassengerStorage  extends Storage implements IPassengerStorage{
         
     private ArrayList<Observer> observers = new ArrayList<>();
 
@@ -68,6 +68,7 @@ public class PassengerStorage  extends Storage{
     public ArrayList<Passenger> getPassengers() {
         return passengers;
     }
+
 
  
 }

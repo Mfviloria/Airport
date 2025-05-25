@@ -4,6 +4,7 @@ import controllers.storage.LoadJson;
 import controllers.utils.Response;
 import controllers.utils.Status;
 import model.Location.Location;
+import model.storage.ILocationStorage;
 import model.storage.LocationStorage;
 
 /**
@@ -13,7 +14,7 @@ import model.storage.LocationStorage;
 public class LocationController {
 
     public static Response createLocation(String id, String name, String city, String country, String latitudeStr, String longitudeStr) {
-        LocationStorage storage = LocationStorage.getInstance();
+        ILocationStorage storage = LocationStorage.getInstance();
 
         // Validaciones de campos vacíos
         if (id == null || id.trim().isEmpty()) {

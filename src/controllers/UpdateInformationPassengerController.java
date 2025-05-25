@@ -9,6 +9,7 @@ import controllers.utils.Response;
 import controllers.utils.Status;
 import java.time.LocalDate;
 import model.Passenger.Passenger;
+import model.storage.IPassengerStorage;
 import model.storage.PassengerStorage;
 
 /**
@@ -18,7 +19,7 @@ import model.storage.PassengerStorage;
 public class UpdateInformationPassengerController {
 
     public static Response Updateinfo(String id, String firstname, String lastname, String year, String month, String day, String phoneCode, String phone, String country) {
-        PassengerStorage storage = PassengerStorage.getInstance();
+        IPassengerStorage storage = PassengerStorage.getInstance();
         try {
             if (id.isEmpty()) {
                 return new Response("Id must be not empty", Status.BAD_REQUEST);

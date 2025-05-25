@@ -5,7 +5,7 @@ import model.plane.Plane;
 import model.observers.Observable;
 import model.observers.Observer;
 
-public class PlaneStorage extends Storage{
+public class PlaneStorage extends Storage implements IPlaneStorage{
 
     // Instancia Singleton
     private static PlaneStorage instance;

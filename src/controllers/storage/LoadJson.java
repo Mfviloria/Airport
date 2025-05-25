@@ -13,6 +13,9 @@ import model.Location.Location;
 import model.Passenger.Passenger;
 import model.plane.Plane;
 import model.storage.FlightStorage;
+import model.storage.ILocationStorage;
+import model.storage.IPassengerStorage;
+import model.storage.IPlaneStorage;
 import model.storage.LocationStorage;
 import model.storage.PassengerStorage;
 import model.storage.PlaneStorage;
@@ -38,7 +41,7 @@ public class LoadJson {
                 String airportCountry = obj.getString("airportCountry");
                 double airportLatitude = obj.getDouble("airportLatitude");
                 double airportLongitude = obj.getDouble("airportLongitude");
-                LocationStorage loc = LocationStorage.getInstance();
+                ILocationStorage loc = LocationStorage.getInstance();
                 loc.addLocation(new Location(airportId, airportName, airportCity, airportCountry, airportLatitude, airportLongitude));
             }
 
@@ -68,7 +71,7 @@ public class LoadJson {
 
                 FlightStorage flight = FlightStorage.getInstance();
                 PlaneStorage pla = PlaneStorage.getInstance();
-                LocationStorage loc = LocationStorage.getInstance();
+                ILocationStorage loc = LocationStorage.getInstance();
                 flight.addFlight(new Flight(id, pla.getPlane(plane), loc.getLocation(departureLocation), loc.getLocation(scaleLocation), loc.getLocation(arrivalLocation), departureDate, hoursDurationArrival, minutesDurationArrival, hoursDurationScale, minutesDurationScale));
             }
 
@@ -89,7 +92,7 @@ public class LoadJson {
                 String model = obj.getString("model");
                 int maxCapacity = obj.getInt("maxCapacity");
                 String airline = obj.getString("airline");
-                PlaneStorage plane = PlaneStorage.getInstance();
+                IPlaneStorage plane = PlaneStorage.getInstance();
                 plane.addPlane(new Plane(id, brand, model, maxCapacity, airline));
             }
 
@@ -114,7 +117,7 @@ public class LoadJson {
                 int phone = obj.getInt("phone");
                 String country = obj.getString("country");
 
-                PassengerStorage pass = PassengerStorage.getInstance();
+                IPassengerStorage pass = PassengerStorage.getInstance();
                 pass.addPassenger(new Passenger(
                         id, firstname, lastname, birthDate, countryPhoneCode, phone, country
                 ));

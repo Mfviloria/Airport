@@ -7,7 +7,7 @@ import model.observers.Observable;
 import model.observers.Observer;
 
 
-public class LocationStorage extends Storage {
+public class LocationStorage extends Storage implements ILocationStorage{
 
     // Instancia Singleton
     private ArrayList<Observer> observers = new ArrayList<>();

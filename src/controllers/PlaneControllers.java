@@ -7,12 +7,13 @@ import java.time.LocalDateTime;
 import model.flight.Flight;
 import model.Location.Location;
 import model.plane.Plane;
+import model.storage.IPlaneStorage;
 import model.storage.PlaneStorage;
 
 public class PlaneControllers {
 
     public static Response createPlane(String id, String brand, String model, String maxCapacity, String airline) {
-        PlaneStorage storage = PlaneStorage.getInstance();
+        IPlaneStorage storage = PlaneStorage.getInstance();
 
         if (id.isEmpty() || brand.isEmpty() || model.isEmpty() || maxCapacity.isEmpty() || airline.isEmpty()) {
             return new Response("Por favor, completa todos los campos.", Status.BAD_REQUEST);

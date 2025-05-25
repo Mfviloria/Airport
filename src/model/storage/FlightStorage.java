@@ -13,7 +13,7 @@ import model.observers.Observer;
  *
  * @author edangulo
  */
-public class FlightStorage extends Storage{
+public class FlightStorage extends Storage implements IFlightStorage{
 
     // Instancia Singleton
     private ArrayList<Observer> observers = new ArrayList<>();
@@ -34,17 +34,6 @@ public class FlightStorage extends Storage{
         return instance;
     }
 
-    public boolean addFlight(Flight flight) {
-        if (this.getFlight(flight.getId()) != null) {
-            return false;
-        } else {
-            this.flights.add(flight);
-            this.flight = flight;
-            notifyObsevers();
-        }
-        return true;
-        
-    }
 
     public Flight getFlight(String id) {
         for (Flight flight : this.flights) {
@@ -58,6 +47,19 @@ public class FlightStorage extends Storage{
 
     public ArrayList<Flight> getFlights() {
         return flights;
+    }
+
+    @Override
+    public boolean addFlight(Flight flight) {
+        if (this.getFlight(flight.getId()) != null) {
+            return false;
+        } else {
+            this.flights.add(flight);
+            this.flight = flight;
+            notifyObsevers();
+        }
+        return true;
+        
     }
 
     
