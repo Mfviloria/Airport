@@ -24,6 +24,11 @@
             <file>file:/C:/Users/samuel/Documents/GitHub/Airport-main/Airport/src/model/FlightData.java</file>
             <file>file:/C:/Users/samuel/Documents/GitHub/Airport-main/Airport/src/controllers/UpdateInformationPassengerController.java</file>
             <file>file:/C:/Users/samuel/Documents/GitHub/Airport-main/Airport/src/controllers/storage/LoadJson.java</file>
+            <file>file:/C:/Users/samuel/Documents/GitHub/Airport-main/Airport/src/controllers/UserSelectedController.java</file>
+            <file>file:/C:/Users/samuel/Documents/GitHub/Airport-main/Airport/src/controllers/DelayFlightController.java</file>
+            <file>file:/C:/Users/samuel/Documents/GitHub/Airport-main/Airport/src/controllers/AddToFlightController.java</file>
+            <file>file:/C:/Users/samuel/Documents/GitHub/Airport-main/Airport/src/model/storage/Storage.java</file>
+            <file>file:/C:/Users/samuel/Documents/GitHub/Airport-main/Airport/src/model/observers/Observable.java</file>
         </group>
     </open-files>
 </project-private>
