@@ -6,8 +6,8 @@ package controllers;
 
 import controllers.utils.Response;
 import controllers.utils.Status;
-import model.Flight;
-import model.Passenger;
+import model.flight.Flight;
+import model.Passenger.Passenger;
 import model.storage.FlightStorage;
 import model.storage.PassengerStorage;
 

@@ -1,4 +1,4 @@
-package model;
+package model.flight;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -8,6 +8,9 @@ package model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import model.Location.Location;
+import model.Passenger.Passenger;
+import model.plane.Plane;
 
 /**
  *

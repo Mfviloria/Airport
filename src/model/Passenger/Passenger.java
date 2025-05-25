@@ -1,4 +1,4 @@
-package model;
+package model.Passenger;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -6,6 +6,7 @@ package model;
  */
 
 
+import model.flight.Flight;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -94,11 +95,7 @@ public class Passenger {
     public void setCountry(String country) {
         this.country = country;
     }
-    
-    public String getFullname() {
-        return firstname + " " + lastname;
-    }
-    
+
     public int getNumFlights() {
         return flights.size();
     }

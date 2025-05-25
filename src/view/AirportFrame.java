@@ -6,10 +6,10 @@ package view;
  */
 import model.observers.Observer;
 import controllers.AddToFlightController;
-import model.Plane;
-import model.Location;
-import model.Passenger;
-import model.Flight;
+import model.plane.Plane;
+import model.Location.Location;
+import model.Passenger.Passenger;
+import model.flight.Flight;
 import controllers.DelayFlightController;
 import controllers.LocationController;
 
@@ -29,9 +29,10 @@ import static controllers.storage.OrganizeLists.organizeList;
 import static controllers.storage.OrganizeLists.organizeListFlight;
 import static controllers.storage.OrganizeLists.organizeListLoc;
 import static controllers.storage.OrganizeLists.organizeListPlane;
-import model.CalculateAge;
-import model.CalculateArrivalDate;
-import model.GenerateFullName;
+import model.Passenger.CalculateAge;
+import model.flight.CalculateArrivalDate;
+import model.Passenger.GenerateFullName;
+import model.Passenger.GenerateFullPhone;
 import model.storage.PassengerStorage;
 import model.storage.PlaneStorage;
 
@@ -188,8 +189,8 @@ public class AirportFrame extends javax.swing.JFrame implements Observer {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelRound1 = new model.PanelRound();
-        panelRound2 = new model.PanelRound();
+        panelRound1 = new view.PanelRound();
+        panelRound2 = new view.PanelRound();
         jButton13 = new javax.swing.JButton();
         Tabbed = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -326,7 +327,7 @@ public class AirportFrame extends javax.swing.JFrame implements Observer {
         MONTH4 = new javax.swing.JComboBox<>();
         DAY4 = new javax.swing.JComboBox<>();
         CreateFlightButton = new javax.swing.JButton();
-        panelRound3 = new model.PanelRound();
+        panelRound3 = new view.PanelRound();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -2021,9 +2022,9 @@ public class AirportFrame extends javax.swing.JFrame implements Observer {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private model.PanelRound panelRound1;
-    private model.PanelRound panelRound2;
-    private model.PanelRound panelRound3;
+    private view.PanelRound panelRound1;
+    private view.PanelRound panelRound2;
+    private view.PanelRound panelRound3;
     private javax.swing.JRadioButton user;
     private javax.swing.JComboBox<String> userSelect;
     // End of variables declaration//GEN-END:variables
@@ -2065,7 +2066,7 @@ public class AirportFrame extends javax.swing.JFrame implements Observer {
             this.passengersTable.setRowCount(0);
             PassengerStorage storage = PassengerStorage.getInstance();
             for (Passenger pass : organizeList(storage.getPassengers())) {
-                this.passengersTable.addRow(new Object[]{pass.getId(), pass.getFullname(), pass.getBirthDate(), CalculateAge.calculateAge(pass.getBirthDate()),GenerateFullName.generateFullPhone(String.valueOf(pass.getCountryPhoneCode()), String.valueOf((int) pass.getPhone())) , pass.getCountry(), pass.getNumFlights()});
+                this.passengersTable.addRow(new Object[]{pass.getId(), GenerateFullName.getFullname(pass.getFirstname(), pass.getLastname()), pass.getBirthDate(), CalculateAge.calculateAge(pass.getBirthDate()),GenerateFullPhone.generateFullPhone(String.valueOf(pass.getCountryPhoneCode()), String.valueOf((int) pass.getPhone())) , pass.getCountry(), pass.getNumFlights()});
             }
         
     }

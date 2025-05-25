@@ -6,7 +6,7 @@ package controllers;
 
 import controllers.utils.Response;
 import controllers.utils.Status;
-import model.Flight;
+import model.flight.Flight;
 import model.storage.FlightStorage;
 
 /**

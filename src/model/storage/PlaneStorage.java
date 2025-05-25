@@ -1,7 +1,7 @@
 package model.storage;
 
 import java.util.ArrayList;
-import model.Plane;
+import model.plane.Plane;
 import model.observers.Observable;
 import model.observers.Observer;
 
@@ -45,8 +45,5 @@ public class PlaneStorage extends Storage{
         }
         return null;
     }
-
-
-
  
 }

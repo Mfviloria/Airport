@@ -6,10 +6,10 @@ package controllers.storage;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import model.Flight;
-import model.Location;
-import model.Passenger;
-import model.Plane;
+import model.flight.Flight;
+import model.Location.Location;
+import model.Passenger.Passenger;
+import model.plane.Plane;
 
 /**
  *

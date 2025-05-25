@@ -2,7 +2,7 @@ package model.storage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import model.Location;
+import model.Location.Location;
 import model.observers.Observable;
 import model.observers.Observer;
 

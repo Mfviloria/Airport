@@ -5,7 +5,7 @@
 package model.storage;
 
 import java.util.ArrayList;
-import model.Flight;
+import model.flight.Flight;
 import model.observers.Observable;
 import model.observers.Observer;
 

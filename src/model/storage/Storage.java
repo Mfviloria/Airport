@@ -12,21 +12,9 @@ import model.observers.Observer;
  *
  * @author mariafernandaviloriazapata
  */
-public abstract class Storage<T> implements Observable{
-    protected ArrayList<T> items = new ArrayList<>();
+public abstract class Storage implements Observable{
     protected ArrayList<Observer> observers = new ArrayList<>();
-
-    public boolean add(T obj) {
-        this.items.add(obj);
-        this.notifyObsevers();
-        return true;
-    }
-
-    public ArrayList<T> getAll() {
-        return items;
-    }
-
-
+    
     @Override
     public void addObserver(Observer o) {
         observers.add(o);

@@ -8,7 +8,7 @@ import controllers.storage.LoadJson;
 import controllers.utils.Response;
 import controllers.utils.Status;
 import java.time.LocalDate;
-import model.Passenger;
+import model.Passenger.Passenger;
 import model.storage.PassengerStorage;
 
 /**

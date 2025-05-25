@@ -1,4 +1,4 @@
-package model;
+package model.plane;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -6,6 +6,7 @@ package model;
  */
 
 
+import model.flight.Flight;
 import java.util.ArrayList;
 
 /**
