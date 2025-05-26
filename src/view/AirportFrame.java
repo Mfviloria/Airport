@@ -75,12 +75,13 @@ public class AirportFrame extends javax.swing.JFrame implements Observer {
         this.locations = new ArrayList<>(LocationStorage.getInstance().getLocations());
         this.flights = new ArrayList<>(FlightStorage.getInstance().getFlights()); // Asume que tienes este método
         
+        // Patron Observador - Se añaden los observadores
         PassengerStorage.getInstance().addObserver(this);
         PlaneStorage.getInstance().addObserver(this);
         LocationStorage.getInstance().addObserver(this);
         FlightStorage.getInstance().addObserver(this);
         
-        
+        // Patron Observador - Se inicializan las tablas
         this.RefreshFlights();
         this.RefreshLocations();
         this.RefreshPlanes();
@@ -184,7 +185,7 @@ public class AirportFrame extends javax.swing.JFrame implements Observer {
         }
         
     }
-    // Patrón observador
+    // Patrón observador - Se actualiza la información de las tablas automáticamente
        @Override
     public void update() {
         this.RefreshFlights();
