@@ -8,6 +8,7 @@ import controllers.utils.Response;
 import controllers.utils.Status;
 import model.flight.Flight;
 import model.storage.FlightStorage;
+import model.storage.IFlightStorage;
 
 /**
  *
@@ -27,7 +28,7 @@ public class DelayFlightController {
             return new Response("Delay time must be greater than 00:00", Status.BAD_REQUEST);
         }
         
-        FlightStorage storage = FlightStorage.getInstance();
+        IFlightStorage storage = FlightStorage.getInstance();
         Flight flight = storage.getFlight(id);
         flight.setDepartureDate(flight.getDepartureDate().plusHours(Long.parseLong(hour)).plusMinutes(Long.parseLong(minutes)));
         return new Response("Flight delayed succesfully.", Status.OK);

@@ -5,12 +5,12 @@
 package main;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import controllers.storage.LoadJson.FlightsLoad;
 import javax.swing.UIManager;
-import controllers.storage.LoadJson;
-import model.storage.FlightStorage;
-import model.storage.PlaneStorage;
+import controllers.storage.LoadJson.LocationLoad;
+import controllers.storage.LoadJson.PassengerLoad;
+import controllers.storage.LoadJson.PlaneLoad;
 import view.AirportFrame;
-import model.observers.Observer;
 
 /**
  *
@@ -22,10 +22,10 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        LoadJson.loadLocations();
-        LoadJson.loadPassenger();
-        LoadJson.loadPlane();
-        LoadJson.loadFlight();
+        LocationLoad.loadLocations();
+        PassengerLoad.loadPassenger();
+        PlaneLoad.loadPlane();
+        FlightsLoad.loadFlight();
         
         
         System.setProperty("flatlaf.useNativeLibrary", "false");

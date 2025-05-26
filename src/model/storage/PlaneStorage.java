@@ -2,14 +2,12 @@ package model.storage;
 
 import java.util.ArrayList;
 import model.plane.Plane;
-import model.observers.Observable;
-import model.observers.Observer;
+
 
 public class PlaneStorage extends Storage implements IPlaneStorage{
 
     // Instancia Singleton
     private static PlaneStorage instance;
-    private ArrayList<Observer> observers = new ArrayList<>();
     private ArrayList<Plane> planes;
 
     private PlaneStorage() {
@@ -32,7 +30,7 @@ public class PlaneStorage extends Storage implements IPlaneStorage{
         if (getPlane(plane.getId()) != null) {
             return false;
         }
-        this.planes.add(plane);
+        this.planes.add(plane.clone());
         this.notifyObsevers();
         return true;
     }

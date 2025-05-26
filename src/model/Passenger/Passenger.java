@@ -14,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author edangulo
  */
-public class Passenger {
+public class Passenger implements Cloneable{
     
     private final long id;
     private String firstname;
@@ -35,7 +35,17 @@ public class Passenger {
         this.country = country;
         this.flights = new ArrayList<>();
     }
-
+    @Override
+    public Passenger clone() {
+        try {
+            Passenger cloned = (Passenger) super.clone();
+            // Aquí clonamos superficialmente la lista, copiando referencias a los vuelos:
+            cloned.flights = new ArrayList<>(this.flights);
+            return cloned;
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public void addFlight(Flight flight) {
         this.flights.add(flight);
     }

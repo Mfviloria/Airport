@@ -1,11 +1,7 @@
 package controllers;
 
-import controllers.storage.LoadJson;
 import controllers.utils.Response;
 import controllers.utils.Status;
-import java.time.LocalDateTime;
-import model.flight.Flight;
-import model.Location.Location;
 import model.plane.Plane;
 import model.storage.IPlaneStorage;
 import model.storage.PlaneStorage;
@@ -46,14 +42,11 @@ public class PlaneControllers {
         if (maxCapacityInt <= 0) {
             return new Response("Max capacity must be positive", Status.BAD_REQUEST);
         }
-
+        // Crear y almacenar aviones
         Plane newPlane = new Plane(id, brand, model, maxCapacityInt, airline);
         storage.addPlane(newPlane);
 
-      
-        
-
-        return new Response("Plane added successfully", Status.OK);
+        return new Response("Plane added successfully", Status.OK, newPlane.clone());
     }
 
 }

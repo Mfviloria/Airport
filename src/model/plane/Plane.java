@@ -13,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author edangulo
  */
-public class Plane {
+public class Plane implements Cloneable{
     
     private final String id;
     private String brand;
@@ -30,6 +30,19 @@ public class Plane {
         this.airline = airline;
         this.flights = new ArrayList<>();
     }
+    
+    @Override
+        public Plane clone() {
+            try {
+                Plane cloned = (Plane) super.clone();
+                cloned.flights = new ArrayList<>(); // Clonación superficial: NO copiamos los vuelos originales
+                return cloned;
+            } catch (CloneNotSupportedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+    
 
     public void addFlight(Flight flight) {
         this.flights.add(flight);

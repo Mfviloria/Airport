@@ -4,7 +4,6 @@
  */
 package controllers;
 
-import controllers.storage.LoadJson;
 import controllers.utils.Response;
 import controllers.utils.Status;
 import java.time.LocalDate;
@@ -98,7 +97,7 @@ public class UpdateInformationPassengerController {
         passenger.setCountryPhoneCode(Integer.parseInt(phoneCode));
         passenger.setPhone(Long.parseLong(phone));
         passenger.setCountry(country);
-        System.out.println(passenger.toString());
+        
 
 
         return new Response("Information updated succesfully", Status.OK);

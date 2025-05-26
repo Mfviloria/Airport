@@ -7,4 +7,5 @@ public interface IFlightStorage {
     boolean addFlight(Flight flight);
     Flight getFlight(String id);
     List<Flight> getFlights();
+    
 }

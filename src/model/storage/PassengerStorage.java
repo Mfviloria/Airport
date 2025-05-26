@@ -41,7 +41,7 @@ public class PassengerStorage  extends Storage implements IPassengerStorage{
                 return false;
             }
         }
-        this.passengers.add(passenger);
+        this.passengers.add(passenger.clone());
         this.notifyObsevers();
         return true;
     }

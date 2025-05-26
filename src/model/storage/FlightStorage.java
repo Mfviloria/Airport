@@ -54,7 +54,7 @@ public class FlightStorage extends Storage implements IFlightStorage{
         if (this.getFlight(flight.getId()) != null) {
             return false;
         } else {
-            this.flights.add(flight);
+            this.flights.add(flight.clone());
             this.flight = flight;
             notifyObsevers();
         }

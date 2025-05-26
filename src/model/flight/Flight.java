@@ -16,7 +16,7 @@ import model.plane.Plane;
  *
  * @author edangulo
  */
-public class Flight {
+public class Flight implements Cloneable{
     
     private final String id;
     private ArrayList<Passenger> passengers;
@@ -59,6 +59,32 @@ public class Flight {
         
         this.plane.addFlight(this);
     }
+    
+    @Override
+    public Flight clone() {
+        try {
+            Flight copy = (Flight) super.clone();
+
+            // Clonar lista de pasajeros (si necesitas que no sea la misma referencia)
+            ArrayList<Passenger> clonedPassengers = new ArrayList<>();
+            for (Passenger p : this.passengers) {
+                clonedPassengers.add(p.clone()); // Necesita que Passenger implemente Cloneable
+            }
+            copy.passengers = clonedPassengers;
+
+            // IMPORTANTE: Si Plane o Location son mutables y compartidas, clónalas también
+            copy.plane = this.plane.clone(); // si Plane implementa Cloneable
+            copy.departureLocation = this.departureLocation.clone(); // si Location también lo hace
+            if (this.scaleLocation != null)
+                copy.scaleLocation = this.scaleLocation.clone();
+            copy.arrivalLocation = this.arrivalLocation.clone();
+
+            return copy;
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
     
     public void addPassenger(Passenger passenger) {
         this.passengers.add(passenger);

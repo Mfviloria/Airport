@@ -4,13 +4,10 @@
  */
 package controllers;
 
-import controllers.storage.LoadJson;
 import controllers.utils.Response;
 import controllers.utils.Status;
 import java.time.LocalDateTime;
 import model.flight.Flight;
-import model.Location.Location;
-import model.plane.Plane;
 import model.storage.FlightStorage;
 import model.storage.IFlightStorage;
 import model.storage.ILocationStorage;
@@ -71,13 +68,12 @@ public class FlightController {
                 return new Response("Scale duration must be greater than 00:00", Status.BAD_REQUEST);
             }
             LocalDateTime departureDate = LocalDateTime.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(days), Integer.parseInt(hours), Integer.parseInt(minutes));
+            
             // Crear y guardar vuelo
             Flight flight = new Flight(id, storagep.getPlane(plane), storagel.getLocation(departure), storagel.getLocation(arrival), storagel.getLocation(arrival), departureDate, hoursArrival, minutesArrival, hoursScale, minutesScale);
             storage.addFlight(flight);
-            System.out.println(flight);
-
-
-            return new Response("Flight successfully added (With scale)", Status.OK);
+            
+            return new Response("Flight successfully added (With scale)", Status.OK, flight.clone());
 
         } catch (NumberFormatException ex) {
             return new Response("Numeric value expected in time fields: " + ex.getMessage(), Status.BAD_REQUEST);
@@ -89,9 +85,9 @@ public class FlightController {
 
     public static Response createPlaneFlight(String id, String plane, String departure, String arrival,
             String year, String month, String days, String hours, String minutes, String hoursArrival, String minutesArrival) {
-        FlightStorage storage = FlightStorage.getInstance();
-        PlaneStorage storagep = PlaneStorage.getInstance();
-        LocationStorage storagel = LocationStorage.getInstance();
+        IFlightStorage storage = FlightStorage.getInstance();
+        IPlaneStorage storagep = PlaneStorage.getInstance();
+        ILocationStorage storagel = LocationStorage.getInstance();
         try {
             // Validaciones básicas de campos
             if (id.trim().isEmpty()) {
@@ -127,12 +123,12 @@ public class FlightController {
             if (departureDate.isBefore(LocalDateTime.now())){
                 return new Response("Departure date can not be earlier than the current date.", Status.BAD_REQUEST);
             }
-// Crear y guardar vuelo
+            // Crear y guardar vuelo
             Flight flight = new Flight(id, storagep.getPlane(plane), storagel.getLocation(departure), storagel.getLocation(arrival), departureDate,
                     hoursa, minutesa);
             storage.addFlight(flight);
 
-            return new Response("Flight successfully added (No scale)", Status.OK);
+            return new Response("Flight successfully added (No scale)", Status.OK, flight.clone());
 
         } catch (NumberFormatException ex) {
             return new Response("Numeric value expected in time fields: " + ex.getMessage(), Status.BAD_REQUEST);

@@ -1,6 +1,5 @@
 package controllers;
 
-import controllers.storage.LoadJson;
 import controllers.utils.Response;
 import controllers.utils.Status;
 import model.Location.Location;

@@ -1,6 +1,5 @@
 package controllers;
 
-import controllers.storage.LoadJson;
 import controllers.utils.Response;
 import controllers.utils.Status;
 import model.Location.Location;
@@ -70,6 +69,6 @@ public class LocationController {
 
     
 
-        return new Response("Location added successfully", Status.OK);
+        return new Response("Location added successfully", Status.OK, location.clone());
     }
 }

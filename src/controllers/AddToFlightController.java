@@ -18,7 +18,7 @@ import model.storage.PassengerStorage;
 public class AddToFlightController {
     public static Response AddtoFlight(long idPassenger, String flightiD){
         if (flightiD.equals("Select Flight")){
-            return new Response("Fligh id must not be empty.", Status.OK);
+            return new Response("Fligh id must not be empty.", Status.BAD_REQUEST);
         }
         
         PassengerStorage storage = PassengerStorage.getInstance();
@@ -35,9 +35,16 @@ public class AddToFlightController {
                 flight = f;
             }
         }
-
-        passenger.addFlight(flight);
+        if (passenger == null) {
+            return new Response("Passenger not found.", Status.NOT_FOUND);
+        }
+        if (flight == null) {
+            return new Response("Flight not found.", Status.NOT_FOUND);
+        }
+        
         flight.addPassenger(passenger);
+        passenger.addFlight(flight);
+        
         
         return new Response("You have been successfully added to this flight.", Status.OK);
 

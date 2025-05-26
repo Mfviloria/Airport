@@ -10,7 +10,7 @@ package model.Location;
  *
  * @author edangulo
  */
-public class Location {
+public class Location implements Cloneable{
     
     private final String airportId;
     private String airportName;
@@ -27,7 +27,14 @@ public class Location {
         this.airportLatitude = airportLatitude;
         this.airportLongitude = airportLongitude;
     }
-
+@Override
+    public Location clone() {
+        try {
+            return (Location) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+    }
     @Override
     public String toString() {
         return "Location{" + "airportId=" + airportId + ", airportName=" + airportName + ", airportCity=" + airportCity + ", airportCountry=" + airportCountry + ", airportLatitude=" + airportLatitude + ", airportLongitude=" + airportLongitude + '}';

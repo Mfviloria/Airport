@@ -41,7 +41,7 @@ public class LocationStorage extends Storage implements ILocationStorage{
     }
 
     public boolean addLocation(Location location){
-        this.locations.add(location);
+        this.locations.add(location.clone());
        this.notifyObsevers();
        return true;
     }

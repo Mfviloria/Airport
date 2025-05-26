@@ -4,21 +4,23 @@
  */
 package controllers;
 
-import controllers.storage.LoadJson;
+
 import controllers.utils.Response;
 import controllers.utils.Status;
 import java.time.LocalDate;
 import model.Passenger.Passenger;
+import model.storage.IPassengerStorage;
 import model.storage.PassengerStorage;
 
 /**
  *
  * @author mariafernandaviloriazapata
  */
-public class PassengerController {
 
+public class PassengerController {
+    
     public static Response createPassenger(String id, String firstname, String lastname, String year, String month, String day, String phoneCode, String phone, String country) {
-        PassengerStorage storage = PassengerStorage.getInstance();
+        IPassengerStorage storage = PassengerStorage.getInstance();
        
             if (id.isEmpty()) {
                 return new Response("Id must be not empty", Status.BAD_REQUEST);
@@ -93,10 +95,13 @@ public class PassengerController {
         if(birthDate.isAfter(LocalDate.now())){
             return new Response("Birthdate cannot be later than the current date.", Status.BAD_REQUEST);
         }
-        storage.addPassenger(new Passenger(Long.parseLong(id), firstname, lastname, birthDate, Integer.parseInt(phoneCode), Long.parseLong(phone), country));
 
-        
+        Passenger pass = new Passenger(Long.parseLong(id), firstname, lastname, birthDate, Integer.parseInt(phoneCode), Long.parseLong(phone), country);
+        storage.addPassenger(pass);
 
-        return new Response("Passenger added succesfully", Status.OK);
+        Passenger passengerCopy = pass.clone();
+
+        return new Response("Passenger created succesfully", Status.OK, passengerCopy);
     }
+    
 }
