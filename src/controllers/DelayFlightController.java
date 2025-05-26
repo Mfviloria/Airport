@@ -16,6 +16,7 @@ import model.storage.IFlightStorage;
 */
 public class DelayFlightController {
     public static Response delayFlight(String id, String hour, String minutes){
+        //Validación de campos vacíos
         if (id.equals("ID")){
             return new Response("Id flight must not be empty.", Status.BAD_REQUEST);
         }else if(hour.equals("Hour")){

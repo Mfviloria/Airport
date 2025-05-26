@@ -59,7 +59,7 @@ public class Flight implements Cloneable{
         
         this.plane.addFlight(this);
     }
-    
+    // Función para clonar el objeto
     @Override
     public Flight clone() {
         try {

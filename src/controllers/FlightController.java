@@ -46,7 +46,7 @@ public class FlightController {
             } else if (hoursDurationScale.equals("Hour") || minutesDurationScale.equals("Minute")) {
                 return new Response("Scale duration must not be empty", Status.BAD_REQUEST);
             }
-
+            // Validar el formato del ID
              if (!id.matches("^[A-Z]{3}\\d{5}$")) {
                     return new Response("Flight ID must follow the format: 3 uppercase letters followed by 5 digits (e.g., ABC12345)", Status.BAD_REQUEST);
                 }

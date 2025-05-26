@@ -16,6 +16,7 @@ import model.plane.Plane;
  * @author mariafernandaviloriazapata
  */
 public class OrganizeLists {
+    // Organiza Lista dependiendo del id de los pasajeros
     public static ArrayList<Passenger> organizeList(ArrayList<Passenger> lista){
         for (int i = 0; i < lista.size() - 1; i++) {
             for (int j = 0; j < lista.size() - i - 1; j++) {
@@ -29,6 +30,7 @@ public class OrganizeLists {
         }
         return lista;
     }
+    //Organiza la lista dependiendo del ID de las locaciones
     public static ArrayList<Location> organizeListLoc(ArrayList<Location> lista){
         for (int i = 0; i < lista.size() - 1; i++) {
             for (int j = 0; j < lista.size() - i - 1; j++) {
@@ -42,6 +44,7 @@ public class OrganizeLists {
         }
         return lista;
     }
+    //Organiza la lista de los aviones dependiendo de su id
     public static ArrayList<Plane> organizeListPlane(ArrayList<Plane> lista){
         for (int i = 0; i < lista.size() - 1; i++) {
             for (int j = 0; j < lista.size() - i - 1; j++) {
@@ -55,6 +58,7 @@ public class OrganizeLists {
         }
         return lista;
     }
+    //Organiza la lista de los vuelos dependiendo de la fecha en la que parten.
     public static ArrayList<Flight> organizeListFlight(ArrayList<Flight> lista){
        lista.sort((f1, f2) -> f1.getDepartureDate().compareTo(f2.getDepartureDate()));
         return lista;
