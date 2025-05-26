@@ -184,6 +184,58 @@ public class AirportFrame extends javax.swing.JFrame implements Observer {
         }
         
     }
+    // Patrón observador
+       @Override
+    public void update() {
+        this.RefreshFlights();
+        this.RefreshLocations();
+        this.RefreshPlanes();
+        this.RefreshPassenger();
+    }
+
+    private void RefreshFlights(){
+        this.flightsTable.setRowCount(0);
+        IFlightStorage storage = FlightStorage.getInstance();
+        
+        for (Flight f : organizeListFlight((ArrayList<Flight>) storage.getFlights())){
+             this.flightsTable.addRow(new Object[]{f.getId(), f.getDepartureLocation().getAirportId(), f.getArrivalLocation().getAirportId(), (f.getScaleLocation() == null ? "-" : f.getScaleLocation().getAirportId()), f.getDepartureDate(), CalculateArrivalDate.calculateArrivalDate( f.getDepartureDate(), f.getHoursDurationScale(), f.getHoursDurationArrival(), f.getMinutesDurationScale(), f.getMinutesDurationArrival()), f.getPlane().getId(),  f.getNumPassengers() });
+        }
+    }
+    private void RefreshLocations(){
+        this.locationsTable.setRowCount(0);
+        ILocationStorage storage = LocationStorage.getInstance();
+        for (Location loc : organizeListLoc((ArrayList<Location>) storage.getLocations())) {
+            this.locationsTable.addRow(new Object[]{loc.getAirportId(), loc.getAirportName(), loc.getAirportCity(), loc.getAirportCountry()});
+        }
+        }
+        
+        private void RefreshPlanes(){
+            this.planesTable.setRowCount(0);
+            IPlaneStorage storage = PlaneStorage.getInstance();
+            for (Plane plan : organizeListPlane((ArrayList<Plane>) storage.getPlanes())) {
+            this.planesTable.addRow(new Object[]{plan.getId(), plan.getBrand(), plan.getModel(), plan.getMaxCapacity(), plan.getAirline(), plan.getNumFlights()});
+        }
+            
+        }
+        private void RefreshPassenger(){
+            this.passengersTable.setRowCount(0);
+            IPassengerStorage storage = PassengerStorage.getInstance();
+            for (Passenger pass : organizeList((ArrayList<Passenger>) storage.getPassengers())) {
+                this.passengersTable.addRow(new Object[]{pass.getId(), GenerateFullName.getFullname(pass.getFirstname(), pass.getLastname()), pass.getBirthDate(), CalculateAge.calculateAge(pass.getBirthDate()),GenerateFullPhone.generateFullPhone(String.valueOf(pass.getCountryPhoneCode()), String.valueOf((int) pass.getPhone())) , pass.getCountry(), pass.getNumFlights()});
+            }
+        
+    }
+        private void RefreshMyFlights(){
+            this.myFlightsTable.setRowCount(0);
+            String id = this.DefaultIDPassenger.getText();
+            IPassengerStorage storage = PassengerStorage.getInstance();
+            Passenger selectPass = storage.getPassenger(Long.parseLong(id));
+            
+        for (Flight f : organizeListFlight(selectPass.getFlights())){
+             this.myFlightsTable.addRow(new Object[]{f.getId(), f.getDepartureDate(), CalculateArrivalDate.calculateArrivalDate( f.getDepartureDate(), f.getHoursDurationScale(), f.getHoursDurationArrival(), f.getMinutesDurationScale(), f.getMinutesDurationArrival())});
+        }
+            
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -2025,56 +2077,6 @@ public class AirportFrame extends javax.swing.JFrame implements Observer {
 
     
     
-    @Override
-    public void update() {
-        this.RefreshFlights();
-        this.RefreshLocations();
-        this.RefreshPlanes();
-        this.RefreshPassenger();
-    }
-
-    private void RefreshFlights(){
-        this.flightsTable.setRowCount(0);
-        IFlightStorage storage = FlightStorage.getInstance();
-        
-        for (Flight f : organizeListFlight((ArrayList<Flight>) storage.getFlights())){
-             this.flightsTable.addRow(new Object[]{f.getId(), f.getDepartureLocation().getAirportId(), f.getArrivalLocation().getAirportId(), (f.getScaleLocation() == null ? "-" : f.getScaleLocation().getAirportId()), f.getDepartureDate(), CalculateArrivalDate.calculateArrivalDate( f.getDepartureDate(), f.getHoursDurationScale(), f.getHoursDurationArrival(), f.getMinutesDurationScale(), f.getMinutesDurationArrival()), f.getPlane().getId(),  f.getNumPassengers() });
-        }
-    }
-    private void RefreshLocations(){
-        this.locationsTable.setRowCount(0);
-        ILocationStorage storage = LocationStorage.getInstance();
-        for (Location loc : organizeListLoc((ArrayList<Location>) storage.getLocations())) {
-            this.locationsTable.addRow(new Object[]{loc.getAirportId(), loc.getAirportName(), loc.getAirportCity(), loc.getAirportCountry()});
-        }
-        }
-        
-        private void RefreshPlanes(){
-            this.planesTable.setRowCount(0);
-            IPlaneStorage storage = PlaneStorage.getInstance();
-            for (Plane plan : organizeListPlane((ArrayList<Plane>) storage.getPlanes())) {
-            this.planesTable.addRow(new Object[]{plan.getId(), plan.getBrand(), plan.getModel(), plan.getMaxCapacity(), plan.getAirline(), plan.getNumFlights()});
-        }
-            
-        }
-        private void RefreshPassenger(){
-            this.passengersTable.setRowCount(0);
-            IPassengerStorage storage = PassengerStorage.getInstance();
-            for (Passenger pass : organizeList((ArrayList<Passenger>) storage.getPassengers())) {
-                this.passengersTable.addRow(new Object[]{pass.getId(), GenerateFullName.getFullname(pass.getFirstname(), pass.getLastname()), pass.getBirthDate(), CalculateAge.calculateAge(pass.getBirthDate()),GenerateFullPhone.generateFullPhone(String.valueOf(pass.getCountryPhoneCode()), String.valueOf((int) pass.getPhone())) , pass.getCountry(), pass.getNumFlights()});
-            }
-        
-    }
-        private void RefreshMyFlights(){
-            this.myFlightsTable.setRowCount(0);
-            String id = this.DefaultIDPassenger.getText();
-            IPassengerStorage storage = PassengerStorage.getInstance();
-            Passenger selectPass = storage.getPassenger(Long.parseLong(id));
-            
-        for (Flight f : organizeListFlight(selectPass.getFlights())){
-             this.myFlightsTable.addRow(new Object[]{f.getId(), f.getDepartureDate(), CalculateArrivalDate.calculateArrivalDate( f.getDepartureDate(), f.getHoursDurationScale(), f.getHoursDurationArrival(), f.getMinutesDurationScale(), f.getMinutesDurationArrival())});
-        }
-            
-        }
+ 
   
 }
